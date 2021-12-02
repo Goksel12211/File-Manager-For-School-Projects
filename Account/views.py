@@ -21,19 +21,9 @@ def register(request):
             #şifreler aynı mı
                 if password1!= password2:
                         messages.info(request,'Password Does not Match ! ')
-                        return redirect('http://127.0.0.1:8000/register/')
+                        return redirect('http://127.0.0.1:8000/')
         else:
                 
                 return render(request,'register.html')
 
         return redirect('http://127.0.0.1:8000/')
-
-def home(request):
-
-
- 
-        kullanıcı1=Kullanıcı()
-        kullanıcı1.Isım="goks"
-        kullanıcı1.soyisim="umut oyunda 1221"
-
-        return render(request,'index.html',{'göstermelik':kullanıcı1})

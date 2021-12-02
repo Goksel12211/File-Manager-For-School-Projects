@@ -1,22 +1,93 @@
 {% load static%}
+ 
 
-<!DOCTYPE html>
-<html lang="en">
+   <!DOCTYPE html>
+<html lang="tr">
+
 <head>
-    <link rel="stylesheet"type="text/css" href="{% static  'home/css/bootstrap.css'%}">
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
+    <title>Kayıt ekranı</title>
+    <link rel="stylesheet"type="text/css" href="{% static  'home/css/bootstrap.css'%}">
+    <script type="text/javascript" src="{% static 'js/jquery.js'%}"></script>
+   </head>
+
 <body>
-    <div class="mb-3">
-        <label for="exampleFormControlInput1" class="form-label">Email address</label>
-        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
-      </div>
-      <div class="mb-3">
-        <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
-        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-      </div>
+    <div class="container">
+
+        <form action="index.html" method="post" class="mt-2">
+            <div class="row mt-2">
+                <div class="col-md-2">
+                    <label for="first_name" class="form-check-label">Ad : </label>
+                </div>
+                <div class="col-md-9">
+                    <input type="text" name="first_name" id="first_name" placeholder="firstname" class="form-control">
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-md-2">
+                    <label for="last_name">Soyad : </label>
+
+                </div>
+                <div class="col-md-9">
+                    <input type="text" name="last_name" id="last_name" placeholder="lastname" class="form-control">
+
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-md-2 ">
+                    <label for="username">Kullanıcı Ad:</label>
+
+                </div>
+                <div class="col-md-9">
+                    <input type="text" name="username" id="username" placeholder="username" class="form-control">
+
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-md-2">
+                    <label for="email">Email : </label>
+
+                </div>
+                <div class="col-md-9">
+                    <input type="email" name="email" id="email" placeholder="mail" class="form-control">
+
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-md-2">
+                    <label for="password1">Şifre : </label>
+
+                </div>
+                <div class="col-md-9">
+                    <input type="password" name="password1" id="password1" placeholder="Pass" class="form-control">
+
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-md-2">
+                    <label for="password2">Şifre Tekrar : </label>
+
+                </div>
+                <div class="col-md-9">
+                    <input type="password" name="password2" id="password2" placeholder="Confirm Pass" class="form-control">
+
+                </div>
+
+            </div>
+            <div class="row mt-3">
+                <div class="col-3"></div>
+                <div class="col-3"> <button type="submit" class="btn-outline-success w-100">Kayıt Ol</button></div>
+                <div class="col-3"></div>
+               
+            </div>
+
+
+        </form>
+    </div>
+
+
+
+
 </body>
+
 </html>

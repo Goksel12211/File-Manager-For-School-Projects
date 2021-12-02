@@ -1,18 +1,16 @@
+{% load static%}
+
 <!DOCTYPE html>
 <html lang="tr">
 
 <head>
     <meta charset="UTF-8">
-    <title>Kayıt ekranı</title>
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <script type="text/javascript" src="js/jquery.js"></script>
-    <script type="text/javascript" src="js/popper.min.js"></script>
-    <style>
-        * {
-            margin: 0px;
-        }
-    </style>
+    <title>Kayıt ekranı</title>  
+    <link rel="stylesheet"type="text/css" href="{% static  'home/css/bootstrap.css'%}">
+    <script type="text/javascript" src="{% static  'home/js/jquery.js'%}" ></script>
+    <script type="text/javascript" src="{% static  'home/js/popper.min.js'%}" ></script>
 </head>
+
 
 <body>
     <div class="container-fluid">
@@ -144,5 +142,4 @@
 
 
 </body>
-
 </html>
