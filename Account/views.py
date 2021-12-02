@@ -9,6 +9,8 @@ from Account.models import Kullanicilar
 class Kullanıcı:
     Isım=str
     soyisim=str
+def secim(request):
+        return render(request,'Anasayfa.html')
 
 def register(request):
     
@@ -23,7 +25,7 @@ def register(request):
             #şifreler aynı mı
                 if password1!= password2:
                         messages.info(request,'Password Does not Match ! ')
-                        return redirect('http://127.0.0.1:8000/')
+                        return redirect('http://127.0.0.1:8000/register')
         else:
                 
                 return render(request,'register.html')
@@ -31,4 +33,4 @@ def register(request):
         Kullanicilar.objects.create(first_name=firstname,last_name=lastname,password=password1,username=username,email=email)
         messages.info(request,'Succesfully user created ! ')
 
-        return redirect('http://127.0.0.1:8000/')
+        return redirect('http://127.0.0.1:8000/register')
