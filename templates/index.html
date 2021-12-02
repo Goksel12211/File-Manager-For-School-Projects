@@ -9,11 +9,19 @@
     <title>Document</title>
 </head>
 <body>
+    {%for message in messages%}
+    <div>{{message}}</div>
+    {%endfor%}
     <h1>asdsads</h1>
-    <form action="http://127.0.0.1:8000/" method="POST">
-      
-        <input type="text" id="xxx">
-        <input type="text" id="yyy">
+    <form action="register" method="POST">
+    {%csrf_token%}
+        <input type="text" name="first_name" placeholder="firstname">
+        <input type="text" name="last_name" placeholder="lastname">
+        <input type="text" name="username" placeholder="username">
+        <input type="email" name="email" placeholder="mail">
+        <input type="password" name="password1" placeholder="Pass">
+        <input type="password" name="password2" placeholder="Confirm Pass">
+        
         <input type="submit">
     </form>
 </body>
