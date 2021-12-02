@@ -4,20 +4,12 @@ from django.shortcuts import redirect, render
 from django.contrib import messages
 
 from Account.models import Kullanicilar
-
+isLogin=False
 # Create your views here.
-def authx( request):
-
-        if request.method == 'POST':
-                username=request.POST['loginusername']
-                password=request.POST['loginpassword']
-                if Kullanicilar.objects.filter(username=username,password=password):
-                        return render(request,'kullaniciEkrani.html')        
+def content(request):
         
-                
-        return render(request,'register.html')
-
-
+                return render(request,"kullaniciEkrani.html")
+        
 def secim(request):
         return render(request,'Anasayfa.html')
 
@@ -39,11 +31,10 @@ def register(request):
                                 username=request.POST['loginusername']
                                 password=request.POST['loginpassword']
                                 if Kullanicilar.objects.filter(username=username,password=password):
-                                        return render(request,'kullaniciEkrani.html')        
-                                else:
-                                        messages.info(request,"Invalid Password or Username ! . ")
-                                return redirect('http://127.0.0.1:8000/register')
-                        
+                                        id=Kullanicilar.objects.get(username=username).id
+                                        return render(request,"kullaniciEkrani.html",{"id":id})
+    
+                                
                         
                         #şifreler aynı mı
                         else:
