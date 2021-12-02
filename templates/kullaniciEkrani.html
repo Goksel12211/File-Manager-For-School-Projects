@@ -1,35 +1,105 @@
-{%load static%}
 <!DOCTYPE html>
+{%load static%}
 <html lang="tr">
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/84ce144c0a.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=MonteCarlo&display=swap" rel="stylesheet">
     <title>Kullanıcı Ekranı</title>
-    <link rel="stylesheet"type="text/css" href="{% static  'home/css/bootstrap.css'%}">
-    <script type="text/javascript" src="{% static  'home/js/jquery.js'%}" ></script>
-    <script type="text/javascript" src="{% static  'home/js/popper.min.js'%}" ></script>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+    <style>
+        h1 {
+            font-weight: bolder;
+            font-family: 'MonteCarlo', cursive;
+            font-size: 50px;
+        }
 
+        .bulut {
+            top: -30px;
+            font-size: 450px;
+            position: relative;
+            color: aqua;
+
+        }
+
+        .file {
+            position: absolute;
+            top: 170px;
+            font-size: 45px;
+            color: black;
+            left: 75px;
+
+        }
+        .file1 {
+            position: absolute;
+            top: 325px;
+            font-size: 35px;
+            color: black;
+            left: 60px;
+
+        }
+        .file1,button{
+            padding: 0px;
+            width: 180px;
+            height: 45px;
+            
+        }
+        .susyalanci{
+            font-size: 27px;
+        }
+        .label{
+            
+            margin-left: 100px;
+            font-size: 50px;
+        }
+        
+        .filee {
+            font-family: 'MonteCarlo', cursive;
+        }
+
+        .filee2 {
+            font-family: 'MonteCarlo', cursive;
+        }
+        
+    </style>
 </head>
 
 <body>
     {{id}}
     <div class="container">
-        <h1>Kullanıcı ekranınına hoşgeldiniz</h1>
+        <h1 class="text-center">Kullanıcı ekranınına hoşgeldiniz</h1>
         <form class="">
             <div class="row">
-                <div class="col-md-6">
-                    <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="customFile" multiple lang="ar" dir="rtl">
-                        <label class="custom-file-label text-left" for="customFile">Dosya Sec</label>
+                <i class="fas fa-cloud bulut m-auto">
+                    <div class="row file">
+                        <div class=" ">
+                            <label for="formFileLg" class="form-label filee label mb-4">Dosya seçiniz</label>
+                            <input class="form-control form-control-lg filee2" id="formFileLg" type="file">
+                        </div>
                     </div>
-                </div>
+                    <div class="row file1">
+                        <div class="col-md-2"></div>
+                        <div class="col-md-4">
+                            <button class="btn btn-warning susyalanci" type="submit">Kayıt ol</button>
+                        </div>
+                        <div class="col-md-4">
+                            <button class="btn btn-warning susyalanci" style="margin-left: 150px;" type="button">Tablo getir</button>
+                        </div>
+                        <div class="col-md-2"></div>
+                    </div>
+
+                </i>
+
+
             </div>
-            
+
         </form>
     </div>
-
 </body>
 
 </html>
