@@ -13,6 +13,9 @@
 
 
 <body>
+    {% for  message in messages%}
+    <div>{{message}}</div>
+    {%endfor%}
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-1 col-1 col-lg-1 " style="height: 400px;"></div>
@@ -21,7 +24,8 @@
                 <div class="row">
                     <div class="col-md-5 mt-2">
                         <h2>Giriş Yap</h2>
-                        <form action="index.html" method="post" class="mt-2">
+                        <form action="" method="post" class="mt-2">
+                            {%csrf_token%}
                             <div class="row mt-2">
                                 <div class="col-md-3 mt-2">
                                     <label for="username">Kullanıcı Ad :</label>
@@ -55,7 +59,8 @@
                     </div>
                     <div class="col-md-7 mt-2">
                         <h2>Kayıt OL</h2>
-                        <form action="index.html" method="post" class="mt-2">
+                        <form action="" method="post" class="mt-2">
+                            {%csrf_token%}
                             <div class="row mt-2">
                                 <div class="col-md-3 mt-2">
                                     <label for="first_name" class="form-check-label">Ad : </label>

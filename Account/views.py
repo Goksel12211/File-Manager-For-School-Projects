@@ -2,6 +2,8 @@ from django.http.response import HttpResponse
 from django.shortcuts import redirect, render
 from django.contrib import messages
 
+from Account.models import Kullanicilar
+
 # Create your views here.
 
 class Kullanıcı:
@@ -25,5 +27,8 @@ def register(request):
         else:
                 
                 return render(request,'register.html')
+
+        Kullanicilar.objects.create(first_name=firstname,last_name=lastname,password=password1,username=username,email=email)
+        messages.info(request,'Succesfully user created ! ')
 
         return redirect('http://127.0.0.1:8000/')
