@@ -11,19 +11,22 @@ class Kullanıcı:
 def register(request):
     
         if request.method == 'POST':
-            firstname=request.POST['first_name']
-            lastname=request.POST['last_name']
-            password1=request.POST['password1']
-            password2=request.POST['password2']
-            username=request.POST['username']
-            email=request.POST['email']
+                firstname=request.POST['first_name']
+                lastname=request.POST['last_name']
+                password1=request.POST['password1']
+                password2=request.POST['password2']
+                username=request.POST['username']
+                email=request.POST['email']
 
             #şifreler aynı mı
-            if password1!= password2:
-                    messages.info(request,'Password Does not Match ! ')
-            return redirect('http://127.0.0.1:8000/')
+                if password1!= password2:
+                        messages.info(request,'Password Does not Match ! ')
+                        return redirect('http://127.0.0.1:8000/register/')
+        else:
+                
+                return render(request,'register.html')
 
-        return render(request,'register.html')
+        return redirect('http://127.0.0.1:8000/')
 
 def home(request):
 
