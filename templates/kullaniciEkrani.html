@@ -79,23 +79,28 @@
     {{id}}
     <div class="container">
         <h1 class="text-center ">Kullanıcı ekranınına hoşgeldiniz</h1>
-        <form class="">
+        <form  method ="post"  enctype="multipart/form-data"   class="">
+            {%csrf_token%}
             <div class="row "  >     
                            
                                 <i class="fas fa-cloud bulut ">
                     <div class="row file">
                         <div class=" ">
                             <label for="formFileLg" class="form-label filee label mb-4">Dosya seçiniz</label>
-                            <input class="form-control form-control-lg filee2" id="formFileLg" type="file">
+                            <input  class="form-control form-control-lg filee2" id="formFileLg" name="FOX" type="file">
                         </div>
                     </div>
                     <div class="row file1">
                         <div class="col-md-2"></div>
                         <div class="col-md-4">
-                            <button class="btn btn-warning susyalanci" type="submit">Kayıt ol</button>
+                            
+                                <button   class="btn btn-warning susyalanci"  type="submit">Güncelle</button>
+                        
                         </div>
                         <div class="col-md-4">
-                            <button class="btn btn-warning susyalanci" style="margin-left: 150px;" type="button">Tablo getir</button>
+                           
+                               <button class="btn btn-warning susyalanci" style="margin-left: 150px;"  type="submit">Tablo getir</button>
+                           
                         </div>
                         <div class="col-md-2"></div>
                     </div>

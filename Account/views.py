@@ -7,9 +7,24 @@ from Account.models import Kullanicilar
 isLogin=False
 # Create your views here.
 def content(request):
+
+
+        try:
+                print(request.session["id"])
+        except:
+                print("GERI AL GERI AL")  
+
+
+
+        try:        
+                print(request.FILES['FOX'].name)
+                
+        except:
+                print("yok")
+
+        return render(request,"kullaniciEkrani.html")
         
-                return render(request,"kullaniciEkrani.html")
-        
+
 def secim(request):
         return render(request,'Anasayfa.html')
 
@@ -32,7 +47,8 @@ def register(request):
                                 password=request.POST['loginpassword']
                                 if Kullanicilar.objects.filter(username=username,password=password):
                                         id=Kullanicilar.objects.get(username=username).id
-                                        return render(request,"kullaniciEkrani.html",{"id":id})
+                                        request.session['id']=id
+                                        return redirect("http://127.0.0.1:8000/content/?id="+str(id))
     
                                 
                         
