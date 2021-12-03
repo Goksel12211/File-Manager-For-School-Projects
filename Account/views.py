@@ -4,7 +4,14 @@ from django.shortcuts import redirect, render
 from django.contrib import messages
 import tika
 from Account.models import Kullanicilar,File
+import pdfminer
+import pdfminer.high_level
 isLogin=False
+
+def digestResume(resume): #resume is a pdf file (as str)
+    text = pdfminer.high_level.extract_text(resume)
+    print(text)
+    
 # Create your views here.
 def content(request):
         userid=None
@@ -14,24 +21,16 @@ def content(request):
         except:
                 print("GERI AL GERI AL")  
 
-
-
         file=request.FILES.get('FOX',"")
         if file!="" and  id:    
                 print("xxxxxx")
-                print(str(request.FILES['FOX'].name))
+                digestResume("1.pdf")
+                
                 print(str(request.FILES['FOX'].size))
-                
-
-
-                
                 File.objects.create(file=file,userid=userid)
 
-                
-        
         return render(request,"kullaniciEkrani.html")
         
-
 def secim(request):
         return render(request,'Anasayfa.html')
 
