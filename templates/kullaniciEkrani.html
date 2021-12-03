@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 
 {%load static%}
@@ -14,9 +12,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=MonteCarlo&display=swap" rel="stylesheet">
     <title>Kullanıcı Ekranı</title>
-    <link rel="stylesheet"type="text/css" href="{% static  'home/css/bootstrap.css'%}">
-    <script type="text/javascript" src="{% static  'home/js/jquery.js'%}" ></script>
-    <script type="text/javascript" src="{% static  'home/js/popper.min.js'%}" ></script>
+    <link rel="stylesheet" type="text/css" href="{% static  'home/css/bootstrap.css'%}">
+    <script type="text/javascript" src="{% static  'home/js/jquery.js'%}"></script>
+    <script type="text/javascript" src="{% static  'home/js/popper.min.js'%}"></script>
     <style>
         h1 {
             font-weight: bolder;
@@ -25,45 +23,48 @@
         }
 
         .bulut {
-            top: -30px;
-            font-size: 450px;
+            font-size: 500px;
             position: relative;
             color: aqua;
-            margin-left: 25%;
 
         }
 
         .file {
             position: absolute;
             top: 170px;
-            font-size: 45px;
+            font-size: 40px;
             color: black;
-            left: 75px;
+   
 
         }
+
         .file1 {
             position: absolute;
             top: 325px;
             font-size: 35px;
             color: black;
-            left: 60px;
+            left: 70px;
 
         }
-        .file1,button{
+
+        .file1,
+        button {
             padding: 0px;
             width: 180px;
             height: 45px;
-            
+
         }
-        .susyalanci{
+
+        .susyalanci {
             font-size: 27px;
         }
-        .label{
-            
+
+        .label {
+
             margin-left: 100px;
             font-size: 50px;
         }
-        
+
         .filee {
             font-family: 'MonteCarlo', cursive;
         }
@@ -71,45 +72,74 @@
         .filee2 {
             font-family: 'MonteCarlo', cursive;
         }
-        
     </style>
 </head>
 
 <body>
     {{id}}
     <div class="container">
-        <h1 class="text-center ">Kullanıcı ekranınına hoşgeldiniz</h1>
-        <form  method ="post"  enctype="multipart/form-data"   class="">
-            {%csrf_token%}
-            <div class="row "  >     
-                           
-                                <i class="fas fa-cloud bulut ">
-                    <div class="row file">
-                        <div class=" ">
-                            <label for="formFileLg" class="form-label filee label mb-4">Dosya seçiniz</label>
-                            <input  class="form-control form-control-lg filee2" id="formFileLg" name="FOX" type="file">
-                        </div>
-                    </div>
-                    <div class="row file1">
-                        <div class="col-md-2"></div>
-                        <div class="col-md-4">
-                            
-                                <button   class="btn btn-warning susyalanci"  type="submit">Güncelle</button>
-                        
-                        </div>
-                        <div class="col-md-4">
-                           
-                               <button class="btn btn-warning susyalanci" style="margin-left: 150px;"  type="submit">Tablo getir</button>
-                           
-                        </div>
-                        <div class="col-md-2"></div>
+
+        <form method="post" enctype="multipart/form-data" class="">
+            <div class="row">
+        
+                    <h1 class="text-center ">Kullanıcı ekranınına hoşgeldiniz</h1>
+                    {%csrf_token%}
+
+      
+            </div>
+            <div class="row ">
+                <div class="col-md-2 col-12">
+
+                </div>
+                <div class="col-md-8 col-12">
+                    <div class="d-flex align-items-center justify-content-center">
+                        <i class="fas fa-cloud bulut ">
+                            <div class="row file">
+                                <div class="row mb-4">
+                                    <div class="col-md-2 col-sm-2 col-2"></div>
+                                    <div class="col-md-8 col-sm-8 col-8">
+                                        <label for="formFileLg" class="form-label filee label">Dosya
+                                            seçiniz</label>
+
+                                    </div>
+                                    <div class="col-md-2 col-sm-2 col-2"></div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-2 col-sm-2 col-2"></div>
+                                    <div class="col-md-8 col-sm-8 col-8">
+                                        <input class="form-control form-control-lg filee2 " id="formFileLg" name="FOX"
+                                            type="file">
+                                    </div>
+                                    <div class="col-md-2 col-sm-2 col-2"></div>
+                                </div>
+
+
+                            </div>
+                            <div class="row file1">
+                                <div class="col-md-2 col-sm-2 col-2"></div>
+                                <div class="col-md-4 col-sm-4 col-4">
+                                    <button class="btn btn-warning susyalanci" type="submit">Dosya Yükle</button>
+                                </div>
+                                <div class="col-md-4 col-sm-4 col-4">
+
+                                    <button class="btn btn-warning susyalanci" style="margin-left: 150px;"
+                                        type="submit">Tablo
+                                        getir</button>
+
+                                </div>
+                                <div class="col-md-2 col-sm-2 col-2"></div>
+                            </div>
+                        </i>
                     </div>
 
-                </i>
+                </div>
+                <div class="col-md-2 col-12">
 
+                </div>
 
             </div>
-    
+
         </form>
     </div>
 </body>
