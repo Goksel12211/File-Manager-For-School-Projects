@@ -2,26 +2,33 @@ from django import http
 from django.http.response import HttpResponse
 from django.shortcuts import redirect, render
 from django.contrib import messages
-
-from Account.models import Kullanicilar
+import tika
+from Account.models import Kullanicilar,File
 isLogin=False
 # Create your views here.
 def content(request):
-
-
+        userid=None
         try:
-                print(request.session["id"])
+                
+               userid=request.session["id"]
         except:
                 print("GERI AL GERI AL")  
 
 
 
-        try:        
-                print(request.FILES['FOX'].name)
+        file=request.FILES.get('FOX',"")
+        if file!="" and  id:    
+                print("xxxxxx")
+                print(str(request.FILES['FOX'].name))
+                print(str(request.FILES['FOX'].size))
                 
-        except:
-                print("yok")
 
+
+                
+                File.objects.create(file=file,userid=userid)
+
+                
+        
         return render(request,"kullaniciEkrani.html")
         
 
@@ -30,9 +37,6 @@ def secim(request):
 
 
 def register(request):
-        
-        
-        
         if request.method == 'POST':
                 
                         firstname=request.POST.get('first_name',False)
