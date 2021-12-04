@@ -6,7 +6,8 @@ import tika
 from Account.models import Kullanicilar,File
 import pdfminer
 import pdfminer.high_level
-isLogin=False
+
+import os
 
 def digestResume(resume): #resume is a pdf file (as str)
     text = pdfminer.high_level.extract_text(resume)
@@ -23,11 +24,24 @@ def content(request):
 
         file=request.FILES.get('FOX',"")
         if file!="" and  id:    
-                print("xxxxxx")
-                digestResume("1.pdf")
                 
-                print(str(request.FILES['FOX'].size))
-                File.objects.create(file=file,userid=userid)
+                #digestResume(file)
+                
+                newFileID= File.objects.create(file=file,userid=userid).id
+                
+                newFile=File.objects.filter(id=newFileID)[0]
+                print(newFile.file.name)
+                digestResume(newFile.file.name)
+                """ oldFileName=file.name
+                
+               file.name=str(fileID)+ ".pdf"
+                obj.file =file 
+                obj.save()
+                """
+                
+
+
+                
 
         return render(request,"kullaniciEkrani.html")
         
