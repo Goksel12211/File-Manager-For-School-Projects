@@ -20,5 +20,6 @@ from django.urls.conf import include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',include('Account.urls'))
+    path('',include('Account.urls')),
+    #path('jet',include('jet.urls','jet'))
 ]

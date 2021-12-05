@@ -9,10 +9,137 @@ import pdfminer.high_level
 
 import os
 
+
+
+def listele(request):
+        userid=request.session["id"]
+        return render ( request, "listele.html",{"userid":userid})
+
+import re
 def digestResume(resume): #resume is a pdf file (as str)
-    text = pdfminer.high_level.extract_text(resume)
-    print(text)
-    
+        text = pdfminer.high_level.extract_text(resume,codec='utf-8',caching =True)
+        f = open("test.txt", "w",encoding="utf-8")
+        f.write(text)
+        f.close()
+        txtSatırlarım=[]
+        fread = open("test.txt", "r",encoding="utf-8")
+        txtSatırlarım=fread.readlines()
+        anahtar_kelimeler=[]
+        anahtar_kelime_listesi=[]
+        keywords=[]
+        keywords_listesi=[]
+        proje_adi=str
+        yazar_ismi=str
+        ders_adi=str
+        teslimDönemi=str
+        ozetSatirlari=str
+        bilgisayar_mühendisliği_sayac=0
+        önsöz_ve_tesekkurler_sayac=0
+        özet_sayaci=0
+        
+        for i in range(0,len(txtSatırlarım)):
+                #print("  " + txtSatırlarım[i] + "  ")
+                if txtSatırlarım[i].__contains__("LİSANS TEZİ"):
+                        for k in range(i+1,len(txtSatırlarım)): 
+                                if re.search('[a-zA-Z]+',txtSatırlarım[k]) :
+                                        
+                                        for t in range(k+2,len(txtSatırlarım)): 
+                                                if re.search('[a-zA-Z]+',txtSatırlarım[t]) :
+                                                        
+                                                        yazar_ismi=txtSatırlarım[t]
+                                                        break
+                                        break
+                 
+                if txtSatırlarım[i].__contains__("BİLGİSAYAR MÜHENDİSLİĞİ BÖLÜMÜ"):
+                        bilgisayar_mühendisliği_sayac+=1
+                        if bilgisayar_mühendisliği_sayac==2:
+                                for k in range(i+1,len(txtSatırlarım)): 
+                                        if re.search('[a-zA-Z]+',txtSatırlarım[k]) :
+                                                ders_adi=txtSatırlarım[k]
+                                                for t in range(k+2,len(txtSatırlarım)): 
+                                                        if re.search('[a-zA-Z]+',txtSatırlarım[t]) :
+                                                        
+                                                                proje_adi=txtSatırlarım[t]
+                                                                break
+                                                
+                                                break
+                
+                if txtSatırlarım[i].__contains__("ÖNSÖZ VE TEŞEKKÜR"):
+                        for k in range(i-1,0,-1): 
+                                if re.search('[a-zA-Z]+',txtSatırlarım[k]) :
+                                        önsöz_ve_tesekkurler_sayac+=1
+                                        if önsöz_ve_tesekkurler_sayac ==1:
+                                                
+                                                teslimDönemi=tarihtenDöneme(txtSatırlarım[k][25:])
+                                                break
+                if txtSatırlarım[i].__contains__("ÖZET"):
+                        
+                        özet_sayaci+=1
+                        for k in range(i+1,len(txtSatırlarım)):
+                                if re.search('[a-zA-Z]+',txtSatırlarım[k]) :
+                                        
+                                        if özet_sayaci ==2:
+                                                
+
+                                                for t in range(k+1,len(txtSatırlarım)): 
+                                                        if  not( txtSatırlarım[t].__contains__("Anahtar  kelimeler") ):
+                                                                tempSatir=txtSatırlarım[t]
+                                                                tempSatir=tempSatir.replace("\n",'')
+                                                                ozetSatirlari=str(ozetSatirlari) + str(tempSatir)
+                                                        
+                                                        else:
+                                                                break
+                                                break
+                if txtSatırlarım[i].__contains__("Keywords") :
+                        for k in range(i,len(txtSatırlarım)):
+                                 if re.search('[a-zA-Z]+',txtSatırlarım[k]) :
+                                        if(txtSatırlarım[k].__contains__(".")):
+                                                
+                                             
+                                                keywords= str(keywords) +  txtSatırlarım[k]
+                                                break
+                                        else :
+                                                keywords= str(keywords) +  txtSatırlarım[k]
+       
+
+        #ANAHATAR 
+        #BAK NOKTA VAR SONDA ONU AL  BI ARA 
+        for keyworddds in keywords[11:].split(","):
+                x=keyworddds[2:]
+                x=x.replace("\n","")
+                keywords_listesi.append(x)
+        
+        print(keywords_listesi)
+
+
+
+                                               
+
+
+
+
+                                                
+                                             
+                               
+                
+        
+       
+def tarihtenDöneme(cümle):
+        ay=cümle[3:5]
+        yil=cümle[6:10]
+
+        if int(ay) <9:
+                #İlkbahar
+                cümle="İlkbahar Dönemi" + str(yil) + " -- " + str(int(yil)+1)
+        else:
+                cümle="Sonbahar Dönemi" + str(int(yil)-1) + " -- " + str(yil)
+        return cümle
+        
+        
+
+
+
+
 # Create your views here.
 def content(request):
         userid=None
@@ -32,15 +159,7 @@ def content(request):
                 newFile=File.objects.filter(id=newFileID)[0]
                 print(newFile.file.name)
                 digestResume(newFile.file.name)
-                """ oldFileName=file.name
-                
-               file.name=str(fileID)+ ".pdf"
-                obj.file =file 
-                obj.save()
-                """
-                
-
-
+               
                 
 
         return render(request,"kullaniciEkrani.html")

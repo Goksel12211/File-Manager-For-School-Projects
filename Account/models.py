@@ -23,3 +23,4 @@ class File(models.Model):
     file=FileField(upload_to=generate_unique_name("pics"))
     userid=IntegerField()
     
+    

@@ -7,4 +7,6 @@ urlpatterns = [
     path('register/',views.register,name="register"),
     path('',views.secim),
     path("content/",views.content,name="content"),
+    path("content/listele",views.listele,name="listele"),
+    
     ]
