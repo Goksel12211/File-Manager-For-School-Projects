@@ -32,10 +32,13 @@ def digestResume(resume): #resume is a pdf file (as str)
         yazar_ismi=str
         ders_adi=str
         teslimDönemi=str
+        danışman_ünvanı=str
+        danışmanadı,danışmansoyad=str
         ozetSatirlari=str
         bilgisayar_mühendisliği_sayac=0
         önsöz_ve_tesekkurler_sayac=0
         özet_sayaci=0
+        danışman_sayaci=0
         
         for i in range(0,len(txtSatırlarım)):
                 #print("  " + txtSatırlarım[i] + "  ")
@@ -108,21 +111,47 @@ def digestResume(resume): #resume is a pdf file (as str)
                                                 break
                                         else :
                                                 anahtar_kelimeler= str(anahtar_kelimeler) +  txtSatırlarım[k]
+        
+        
+                if txtSatırlarım[i].__contains__("Danışman") :
+                        danışman_sayaci+=1
+                        for k in range(i-1,0,-1):
+
+                                if re.search('[a-zA-Z]+',txtSatırlarım[k]) :
+                                        if danışman_sayaci==1:  
+                                                danışmanünvanı=txtSatırlarım[k]
+                                                break
+        
+        
+        
+        
+        
+        
+        
         #ANAHATAR 
         for anahtarlar in anahtar_kelimeler[21:].split(","):
                 y=anahtarlar[2:]
                 y=y.replace("\n","")
                 anahtar_kelime_listesi.append(y)
         
-        print(keywords_listesi)
         #Keywords
         for keyworddds in keywords[11:].split(","):
                 x=keyworddds[2:]
                 x=x.replace("\n","")
                 keywords_listesi.append(x)
+
+        #DANIŞMAN
         
-        print("Anahtar kelimeler : ",anahtar_kelime_listesi)
-        print("keywordsler : ",keywords_listesi)
+      
+        danışman_ünvanı,danışmanisim=danışmanünvanı.split(" ",1)
+        ad=danışmanisim.rsplit(" ",1)
+        danışmanadı,danışmansoyad=ad[0].rsplit(" ",1)
+        print(danışmanadı)
+        print(danışmansoyad)
+
+        
+       # print("Anahtar kelimeler : ",anahtar_kelime_listesi)
+        #print("keywordsler : ",keywords_listesi)
 
 
 
