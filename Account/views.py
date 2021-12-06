@@ -9,6 +9,7 @@ import pdfminer.high_level
 
 import os
 
+from string import printable
 
 def listele(request):
         userid=request.session["id"]
@@ -17,10 +18,11 @@ def listele(request):
 import re
 def digestResume(resume,fileid): #resume is a pdf file (as str)
         text = pdfminer.high_level.extract_text(resume,codec='utf-8',caching =True)
-        f = open("test.txt", "w",encoding="utf-8")
-        f.write(text)
-        f.close()
+        #f = open("test.txt", "w",encoding="utf-8")
+        #f.write(text)
+       # f.close()
         txtSatırlarım=[]
+        aldimknk=str
         fread = open("test.txt", "r",encoding="utf-8")
         txtSatırlarım=fread.readlines()
         anahtar_kelimeler=[]
@@ -40,7 +42,9 @@ def digestResume(resume,fileid): #resume is a pdf file (as str)
         özet_sayaci=0
         danışman_sayaci=0
         juri_sayaci=0
-        
+        gökselinsayac=0
+        ogrecinno=str
+        ogretimTuru=str
         for i in range(0,len(txtSatırlarım)):
                 #print("  " + txtSatırlarım[i] + "  ")
                 if txtSatırlarım[i].__contains__("LİSANS TEZİ"):
@@ -143,6 +147,53 @@ def digestResume(resume,fileid): #resume is a pdf file (as str)
                                         if juri_sayaci==2:
                                                 juri2ünvanı=txtSatırlarım[k]
                                                 break
+                if txtSatırlarım[i].__contains__("Öğrenci No:") :
+                        gökselinsayac+=1
+                       
+                        
+                        for k  in range(i +1 ,len(txtSatırlarım)):
+                                if re.search('[a-zA-Z]+',txtSatırlarım[k]) :   
+                                        content=txtSatırlarım[k][11:]
+                                        content=content.lower()
+                                        tempyazarismi=yazar_ismi[:-2]
+                                        
+                                        tempyazarismi=tempyazarismi.lower()
+                                        #print("Yazar ismi uzunluk:",len(tempyazarismi),"Bitiş")
+                                        #print("Yazar ismi İçerik:"+str(tempyazarismi)+ "Bitiş")
+                                        
+                                        if(gökselinsayac==1):
+                                                for key in tempyazarismi:
+                                                        if not (key == "ç" or  key == "ğ" or key == "ö" or key == "ü" or key == "ş" or key == "ı") :
+                                                                
+                                                                if not set(key).difference(printable):
+                                                                        aldimknk=  str(aldimknk) +str(key)
+                                                        else:
+                                                                aldimknk= str(aldimknk) +str(key)
+                                        tempyazarismi=aldimknk   
+                                   
+                                        tempyazarismi=   str(str(aldimknk)[13:])
+                                        
+                                        
+                                         
+                                        print("yazar ismi" + str(tempyazarismi))
+                                        print("cümle" + str(content))
+                                        if content.__contains__(tempyazarismi)  :
+                                                xxxxxx=txtSatırlarım[i][12:]
+                                                ogrecinno=xxxxxx[:9]
+                                                if int(ogrecinno[5]) ==1:
+                                                        ogretimTuru="1.Ogretim"
+                                                        
+                                                else:
+                                                        ogretimTuru="2.Ogretim"
+                                                
+                                                
+                                        break
+                              
+                                                 
+                                        
+                                #print(len(yazar_ismi))
+
+                        
 
 
         
@@ -206,17 +257,11 @@ def digestResume(resume,fileid): #resume is a pdf file (as str)
                 ad=juri2isim.rsplit(" ",1)  # \n yok edildi.
                 juri2ad,juri2soyad=ad[0].rsplit(" ",1) # soy isimle diğer isimler ayrıldı    
                 juri2ünvanı=juri2ünvanı+juri2ünvanı2+juri2ünvanı3
-        print(danışmanünvanı)
-        print(danışmanadı)
-        print(danışmansoyad)
-        print("++++++++++++")
-        print(juri1ünvanı)
-        print(juriad)
-        print(jurisoyad)
-        print("++++++++++++")
-        print(juri2ünvanı)
-        print(juri2ad)
-        print(juri2soyad)
+        
+
+
+
+        #DB ISLEMLERI
         Danisman.objects.create(file_id=fileid,first_name=danışmanadı,last_name=danışmansoyad,unvan=danışmanünvanı)
         Juri.objects.create(file_id=fileid,first_name=juriad,last_name=jurisoyad,unvan=juri1ünvanı)
         Juri.objects.create(file_id=fileid,first_name=juri2ad,last_name=juri2soyad,unvan=juri2ünvanı)
@@ -226,7 +271,10 @@ def digestResume(resume,fileid): #resume is a pdf file (as str)
                 Anahtar_Kelimeler.objects.create(file_id=fileid,anahtar_kelime=kelime)
 
         Proje_Ozellikleri.objects.create(file_id=fileid,özet=ozetSatirlari[13:],teslim_dönemi=teslimDönemi,proje_basligi=proje_adi,ders_adi=ders_adi)
-        Yazar.objects.create(file_id=fileid , first_name=yazar_ismi , last_name = "x" , ogrenci_numarasi="x " , ogretim_turu="x")
+        print()
+  
+     
+        Yazar.objects.create(file_id=fileid , first_name=yazar_ismi[:-2].rsplit(" ",1)[0] , last_name =yazar_ismi[:-2].rsplit(" ",1)[1], ogrenci_numarasi=ogrecinno , ogretim_turu=ogretimTuru)
 
 
 
