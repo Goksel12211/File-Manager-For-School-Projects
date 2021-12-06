@@ -94,22 +94,35 @@ def digestResume(resume): #resume is a pdf file (as str)
                         for k in range(i,len(txtSatırlarım)):
                                  if re.search('[a-zA-Z]+',txtSatırlarım[k]) :
                                         if(txtSatırlarım[k].__contains__(".")):
-                                                
-                                             
-                                                keywords= str(keywords) +  txtSatırlarım[k]
+                                                                                      
+                                                keywords= str(keywords) +  txtSatırlarım[k][:len(txtSatırlarım[k])-3]
                                                 break
                                         else :
                                                 keywords= str(keywords) +  txtSatırlarım[k]
        
-
+                if txtSatırlarım[i].__contains__("Anahtar  kelimeler:") :
+                        for k in range(i,len(txtSatırlarım)):
+                                 if re.search('[a-zA-Z]+',txtSatırlarım[k]) :
+                                        if(txtSatırlarım[k].__contains__(".")):
+                                                anahtar_kelimeler= str(anahtar_kelimeler) +  txtSatırlarım[k][:len(txtSatırlarım[k])-3]
+                                                break
+                                        else :
+                                                anahtar_kelimeler= str(anahtar_kelimeler) +  txtSatırlarım[k]
         #ANAHATAR 
-        #BAK NOKTA VAR SONDA ONU AL  BI ARA 
+        for anahtarlar in anahtar_kelimeler[21:].split(","):
+                y=anahtarlar[2:]
+                y=y.replace("\n","")
+                anahtar_kelime_listesi.append(y)
+        
+        print(keywords_listesi)
+        #Keywords
         for keyworddds in keywords[11:].split(","):
                 x=keyworddds[2:]
                 x=x.replace("\n","")
                 keywords_listesi.append(x)
         
-        print(keywords_listesi)
+        print("Anahtar kelimeler : ",anahtar_kelime_listesi)
+        print("keywordsler : ",keywords_listesi)
 
 
 
