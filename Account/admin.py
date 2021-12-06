@@ -6,8 +6,8 @@ from .models import Kullanicilar,File
 admin.site.register(Kullanicilar)
 admin.site.register(File)
 
-admin.site.site_title="NABIONUZ LAN EŞŞEKLER"
+admin.site.site_title="TEK ADMIN UMUTTUR"
 
-admin.site.site_header="anaskm"
+admin.site.site_header="ADMIN PANELI"
 
-admin.site.index_title="NABIONUZ LAN EŞŞEKLER"
+admin.site.index_title="Islemler"
