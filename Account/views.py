@@ -129,6 +129,8 @@ def digestResume(resume): #resume is a pdf file (as str)
                                 if re.search('[a-zA-Z]+',txtSatırlarım[k]) :
                                         if danışman_sayaci==1:  
                                                 danışmanünvanı=txtSatırlarım[k]
+                                           
+
                                                 break
 
                 if txtSatırlarım[i].__contains__("Jüri Üyesi") :
@@ -136,11 +138,11 @@ def digestResume(resume): #resume is a pdf file (as str)
                         for k in range(i-1,0,-1):
                                 if re.search('[a-zA-Z]+',txtSatırlarım[k]) :
                                         if juri_sayaci==1:  
-                                                juri1=txtSatırlarım[k]
+                                                juri1ünvanı=txtSatırlarım[k]
                                                 break
                                                 
                                         if juri_sayaci==2:
-                                                juri2=txtSatırlarım[k]
+                                                juri2ünvanı=txtSatırlarım[k]
                                                 break
 
 
@@ -161,18 +163,61 @@ def digestResume(resume): #resume is a pdf file (as str)
                 x=keyworddds[2:]
                 x=x.replace("\n","")
                 keywords_listesi.append(x)
-
+        
         #DANIŞMAN
         
-      
-        danışman_ünvanı,danışmanisim=danışmanünvanı.split(" ",1) # danışman ünvanı aldındı.
-        ad=danışmanisim.rsplit(" ",1)  # \n yok edildi.
-        danışmanadı,danışmansoyad=ad[0].rsplit(" ",1) # soy isimle diğer isimler ayrıldı        
-        #print(danışman_ünvanı)
-       # print(danışmanadı)
-        #print(danışmansoyad)
-        print(juri1)
-        print(juri2)
+
+        if not  danışmanünvanı.__contains__("Üyesi"):
+                danışmanünvanı,danışmanisim=danışmanünvanı.split(" ",1) # danışman ünvanı aldındı.
+                ad=danışmanisim.rsplit(" ",1)  # \n yok edildi.
+                danışmanadı,danışmansoyad=ad[0].rsplit(" ",1) # soy isimle diğer isimler ayrıldı    
+        else:
+                danışmanünvanı,danışmanünvanı2,danışmanünvanı3,danışmanisim=danışmanünvanı.split(" ",3) # danışman ünvanı aldındı.
+                ad=danışmanisim.rsplit(" ",1)  # \n yok edildi.
+                danışmanadı,danışmansoyad=ad[0].rsplit(" ",1) # soy isimle diğer isimler ayrıldı    
+                danışmanünvanı=danışmanünvanı+danışmanünvanı2+danışmanünvanı3
+
+
+        #JURI 1
+        juriisim=str
+        juriad=str
+        jurisoyad=str
+        if not  juri1ünvanı.__contains__("Üyesi"):
+                juri1ünvanı,juriisim=juri1ünvanı.split(" ",1) # danışman ünvanı aldındı.
+                juriad=juriisim.rsplit(" ",1)  # \n yok edildi.
+                juriad,jurisoyad=juriad[0].rsplit(" ",1) # soy isimle diğer isimler ayrıldı    
+        else:
+                juri1ünvanı,juriünvanı2,juriünvanı3,juriisim=juri1ünvanı.split(" ",3) # danışman ünvanı aldındı.
+                ad=juriisim.rsplit(" ",1)  # \n yok edildi.
+                juriad,jurisoyad=ad[0].rsplit(" ",1) # soy isimle diğer isimler ayrıldı    
+                juri1ünvanı=juri1ünvanı+juriünvanı2+juriünvanı3
+
+
+
+        # JURI 2 
+        juri2isim=str
+        juri2ad=str
+        juri2soyad=str
+        if not  juri2ünvanı.__contains__("Üyesi"):
+                juri2ünvanı,juri2isim=juri2ünvanı.split(" ",1) # danışman ünvanı aldındı.
+                juri2ad=juri2isim.rsplit(" ",1)  # \n yok edildi.
+                juri2ad,juri2soyad=juri2ad[0].rsplit(" ",1) # soy isimle diğer isimler ayrıldı    
+        else:
+                juri2ünvanı,juri2ünvanı2,juri2ünvanı3,juri2isim=juri2ünvanı.split(" ",3) # danışman ünvanı aldındı.
+                ad=juri2isim.rsplit(" ",1)  # \n yok edildi.
+                juri2ad,juri2soyad=ad[0].rsplit(" ",1) # soy isimle diğer isimler ayrıldı    
+                juri2ünvanı=juri2ünvanı+juri2ünvanı2+juri2ünvanı3
+        print(danışmanünvanı)
+        print(danışmanadı)
+        print(danışmansoyad)
+        print("++++++++++++")
+        print(juri1ünvanı)
+        print(juriad)
+        print(jurisoyad)
+        print("++++++++++++")
+        print(juri2ünvanı)
+        print(juri2ad)
+        print(juri2soyad)
 
 
             
@@ -224,7 +269,6 @@ def secim(request):
 
 def register(request):
         if request.method == 'POST':
-                
                         firstname=request.POST.get('first_name',False)
                         lastname=request.POST.get('last_name',False)
                         password1=request.POST.get('password1',False)
@@ -239,9 +283,6 @@ def register(request):
                                         id=Kullanicilar.objects.get(username=username).id
                                         request.session['id']=id
                                         return redirect("http://127.0.0.1:8000/content/?id="+str(id))
-    
-                                
-                        
                         #şifreler aynı mı
                         else:
                                 if password1!= password2:
