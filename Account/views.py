@@ -33,12 +33,14 @@ def digestResume(resume): #resume is a pdf file (as str)
         ders_adi=str
         teslimDönemi=str
         danışman_ünvanı=str
-        danışmanadı,danışmansoyad=str
+        danışmanadı=str
+        danışmansoyad=str
         ozetSatirlari=str
         bilgisayar_mühendisliği_sayac=0
         önsöz_ve_tesekkurler_sayac=0
         özet_sayaci=0
         danışman_sayaci=0
+        juri_sayaci=0
         
         for i in range(0,len(txtSatırlarım)):
                 #print("  " + txtSatırlarım[i] + "  ")
@@ -121,7 +123,27 @@ def digestResume(resume): #resume is a pdf file (as str)
                                         if danışman_sayaci==1:  
                                                 danışmanünvanı=txtSatırlarım[k]
                                                 break
-        
+                if txtSatırlarım[i].__contains__("Danışman") :
+                        danışman_sayaci+=1
+                        for k in range(i-1,0,-1):
+                                if re.search('[a-zA-Z]+',txtSatırlarım[k]) :
+                                        if danışman_sayaci==1:  
+                                                danışmanünvanı=txtSatırlarım[k]
+                                                break
+
+                if txtSatırlarım[i].__contains__("Jüri Üyesi") :
+                        juri_sayaci+=1
+                        for k in range(i-1,0,-1):
+                                if re.search('[a-zA-Z]+',txtSatırlarım[k]) :
+                                        if juri_sayaci==1:  
+                                                juri1=txtSatırlarım[k]
+                                                break
+                                                
+                                        if juri_sayaci==2:
+                                                juri2=txtSatırlarım[k]
+                                                break
+
+
         
         
         
@@ -143,27 +165,17 @@ def digestResume(resume): #resume is a pdf file (as str)
         #DANIŞMAN
         
       
-        danışman_ünvanı,danışmanisim=danışmanünvanı.split(" ",1)
-        ad=danışmanisim.rsplit(" ",1)
-        danışmanadı,danışmansoyad=ad[0].rsplit(" ",1)
-        print(danışmanadı)
-        print(danışmansoyad)
-
-        
-       # print("Anahtar kelimeler : ",anahtar_kelime_listesi)
-        #print("keywordsler : ",keywords_listesi)
-
+        danışman_ünvanı,danışmanisim=danışmanünvanı.split(" ",1) # danışman ünvanı aldındı.
+        ad=danışmanisim.rsplit(" ",1)  # \n yok edildi.
+        danışmanadı,danışmansoyad=ad[0].rsplit(" ",1) # soy isimle diğer isimler ayrıldı        
+        #print(danışman_ünvanı)
+       # print(danışmanadı)
+        #print(danışmansoyad)
+        print(juri1)
+        print(juri2)
 
 
-                                               
-
-
-
-
-                                                
-                                             
-                               
-                
+            
         
        
 def tarihtenDöneme(cümle):
