@@ -3,12 +3,11 @@ from django.http.response import HttpResponse
 from django.shortcuts import redirect, render
 from django.contrib import messages
 import tika
-from Account.models import Kullanicilar,File
+from Account.models import Kullanicilar,File,Danisman,Yazar,Proje_Ozellikleri,Juri,Anahtar_Kelimeler
 import pdfminer
 import pdfminer.high_level
 
 import os
-
 
 
 def listele(request):
@@ -16,7 +15,7 @@ def listele(request):
         return render ( request, "listele.html",{"userid":userid})
 
 import re
-def digestResume(resume): #resume is a pdf file (as str)
+def digestResume(resume,fileid): #resume is a pdf file (as str)
         text = pdfminer.high_level.extract_text(resume,codec='utf-8',caching =True)
         f = open("test.txt", "w",encoding="utf-8")
         f.write(text)
@@ -86,7 +85,7 @@ def digestResume(resume): #resume is a pdf file (as str)
                                         if özet_sayaci ==2:
                                                 
 
-                                                for t in range(k+1,len(txtSatırlarım)): 
+                                                for t in range(k,len(txtSatırlarım)): 
                                                         if  not( txtSatırlarım[t].__contains__("Anahtar  kelimeler") ):
                                                                 tempSatir=txtSatırlarım[t]
                                                                 tempSatir=tempSatir.replace("\n",'')
@@ -218,6 +217,17 @@ def digestResume(resume): #resume is a pdf file (as str)
         print(juri2ünvanı)
         print(juri2ad)
         print(juri2soyad)
+        Danisman.objects.create(file_id=fileid,first_name=danışmanadı,last_name=danışmansoyad,unvan=danışmanünvanı)
+        Juri.objects.create(file_id=fileid,first_name=juriad,last_name=jurisoyad,unvan=juri1ünvanı)
+        Juri.objects.create(file_id=fileid,first_name=juri2ad,last_name=juri2soyad,unvan=juri2ünvanı)
+        for kelime in anahtar_kelime_listesi:
+                Anahtar_Kelimeler.objects.create(file_id=fileid,anahtar_kelime=kelime)
+        for kelime in keywords_listesi : 
+                Anahtar_Kelimeler.objects.create(file_id=fileid,anahtar_kelime=kelime)
+
+        Proje_Ozellikleri.objects.create(file_id=fileid,özet=ozetSatirlari[13:],teslim_dönemi=teslimDönemi,proje_basligi=proje_adi,ders_adi=ders_adi)
+        Yazar.objects.create(file_id=fileid , first_name=yazar_ismi , last_name = "x" , ogrenci_numarasi="x " , ogretim_turu="x")
+
 
 
             
@@ -251,13 +261,14 @@ def content(request):
         file=request.FILES.get('FOX',"")
         if file!="" and  id:    
                 
-                #digestResume(file)
                 
                 newFileID= File.objects.create(file=file,userid=userid).id
+               # digestResume(file,newFileID)
+
                 
                 newFile=File.objects.filter(id=newFileID)[0]
                 print(newFile.file.name)
-                digestResume(newFile.file.name)
+                digestResume(newFile.file.name , newFileID)
                
                 
 
