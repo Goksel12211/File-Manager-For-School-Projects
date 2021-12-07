@@ -1,79 +1,460 @@
-<!DOCTYPE html>
-{%load static%}
+<!doctype html>
+{% load static%}
+<html lang="tr">
 
-<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    
-   
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"></link>
+    <meta charset="utf-8">
 
 
-    
+    <link rel="stylesheet" type="text/css" href="{% static  'home/css/bootstrap.css'%}">
 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+    <title>Listemiz</title>
+    <style>
+        #yazar .modal-header {
+            background: darkblue;
+            color: #fff;
+        }
+
+        #yazar .modal-body {
+            background-color: wheat;
+        }
+
+        #yazar .modal-footer {
+            background: darkblue;
+            color: #fff;
+        }
+
+        #ders .modal-header {
+            background: rgb(255, 255, 115);
+            color: black;
+        }
+
+        #ders .modal-body {
+            background-color: rgb(164, 142, 164);
+        }
+
+        #ders .modal-footer {
+            background: rgb(255, 255, 115);
+            color: black;
+        }
+
+        #proje .modal-header {
+            background: darkgreen;
+            color: #fff;
+        }
+
+        #proje .modal-body {
+            background-color: wheat;
+        }
+
+        #proje .modal-footer {
+            background: darkgreen;
+            color: #fff;
+        }
+
+        #anahtar .modal-header {
+            background: rgb(32, 30, 30);
+            color: #fff;
+        }
+
+        #anahtar .modal-body {
+            background-color: wheat;
+        }
+
+        #anahtar .modal-footer {
+            background: rgb(32, 30, 30);
+            color: #fff;
+        }
+
+        #donem .modal-header {
+            background: red;
+            color: #fff;
+        }
+
+        #donem .modal-body {
+            background-color: wheat;
+        }
+
+        #donem .modal-footer {
+            background: red;
+            color: #fff;
+        }
+    </style>
 </head>
-<style>
-   
-body {
-    background-color: #eee;
-    font-family: "Poppins", sans-serif;
-    font-weight: 300
-}
 
-.height {
-    height: 100vh
-}
 
-.search {
-    position: relative;
-    box-shadow: 0 0 40px rgba(51, 51, 51, .1)
-}
-
-.search input {
-    height: 60px;
-    text-indent: 25px;
-    border: 2px solid #d6d4d4
-}
-
-.search input:focus {
-    box-shadow: none;
-    border: 2px solid blue
-}
-
-.search .fa-search {
-    position: absolute;
-    top: 20px;
-    left: 16px
-}
-
-.search button {
-    position: absolute;
-    top: 5px;
-    right: 5px;
-    height: 50px;
-    width: 110px;
-    background: blue
-}
-</style>
 <body>
+    <div class="container-fluid">
+        <h1 class="text-center">Sorgu Ekranına Hoş Geldiniz</h1>
+        <div class="row mt-5">
+            <div class="col-md-1"></div>
+            <div class="col-md-2">
+                <button type="button" class="btn btn-outline-primary px-0 w-100" data-bs-toggle="modal"
+                    data-bs-target="#yazar">Yazar</button>
+            </div>
+            <div class="col-md-2 col-12">
+                <button type="button" class="btn btn-outline-warning px-0 w-100" data-bs-toggle="modal"
+                    data-bs-target="#ders">Ders</button>
 
-   
+            </div>
+            <div class=" col-md-2 col-12">
+                <button type="button" class="btn btn-outline-success px-0 w-100" data-bs-toggle="modal"
+                    data-bs-target="#proje">Proje</button>
 
-       <!-- Search Box -->
+            </div>
+            <div class=" col-md-2 col-12">
+                <button type="button" class="btn btn-outline-dark w-100 px-0" data-bs-toggle="modal"
+                    data-bs-target="#anahtar">Anahtar kelime</button>
 
-        <div class="row mt-4 d-flex justify-content-center align-items-center">
-            <div class="col-md-8">
-                <div class="search"> <i class="fa fa-search"></i> <input type="text" class="form-control" placeholder="Have a question? Ask Now"> <a href="result"><button class="btn btn-primary">Search</button></a> </div>
+            </div>
+            <div class=" col-md-2 col-12">
+                <button type="button" class="btn btn-outline-danger  w-100 px-0" data-bs-toggle="modal"
+                    data-bs-target="#donem">Dönem</button>
+
+            </div>
+            <div class=" col-md-1">
+            </div>
+
+        </div>
+        <div class="modal" id="yazar">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Yazar sorguları : </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="" method="">
+                            <div class="row mb-3">
+                                <div class="col-md-1"></div>
+                                <div class="col-md-5 ">
+                                    <label class="form-label ">Ad :</label>
+                                    <input type="text" class="form-control">
+                                </div>
+                                <div class="col-md-5 ">
+                                    <label class="form-label ">Soyad :</label>
+                                    <input type="text" class="form-control">
+                                </div>
+                                <div class="col-md-1"></div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-md-3"></div>
+
+                                <div class="col-md-6 ">
+                                    <label class="form-label ">No :</label>
+                                    <input type="email" class="form-control">
+                                </div>
+                                <div class="col-md-3"></div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-md-3"></div>
+                                <div class="col-md-6 ">
+                                    <label class="form-label ">Öğr. Tür :</label>
+                                    <input class="form-control"></input>
+                                </div>
+                                <div class="col-md-3"></div>
+                            </div>
+
+                        </form>
+                    </div>
+
+                    <div class="modal-footer">
+                        <div class="row w-100">
+                            <div class="col-sm-2"></div>
+
+                            <div class="col-sm-4"><button onclick="ac()" type="button"
+                                    class="btn btn-warning w-100">Ara</button>
+                            </div>
+                            <div class="col-sm-4"> <button onclick="kapat()" type="button" class="btn btn-success w-100"
+                                    data-bs-dismiss="modal">İptal</button>
+                            </div>
+                            <div class="col-sm-2"></div>
+
+                        </div>
+
+
+                    </div>
+                </div>
             </div>
         </div>
+        <div class="modal" id="ders">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Ders sorguları : </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="" method="">
+                            <div class="row mb-3">
+                                <div class="col-md-1"></div>
+                                <div class="col-md-5 ">
+                                    <label class="form-label ">Ad :</label>
+                                    <input type="text" class="form-control">
+                                </div>
+                                <div class="col-md-5 ">
+                                    <label class="form-label ">Soyad :</label>
+                                    <input type="text" class="form-control">
+                                </div>
+                                <div class="col-md-1"></div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-md-3"></div>
 
-        
- 
-    
-    
+                                <div class="col-md-6 ">
+                                    <label class="form-label ">No :</label>
+                                    <input type="email" class="form-control">
+                                </div>
+                                <div class="col-md-3"></div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-md-3"></div>
+                                <div class="col-md-6 ">
+                                    <label class="form-label ">Öğr. Tür :</label>
+                                    <input class="form-control"></input>
+                                </div>
+                                <div class="col-md-3"></div>
+                            </div>
 
+                        </form>
+                    </div>
+
+                    <div class="modal-footer">
+                        <div class="row w-100">
+                            <div class="col-sm-2"></div>
+
+                            <div class="col-sm-4"><button onclick="ac()" type="button"
+                                    class="btn btn-primary w-100">Ara</button>
+                            </div>
+                            <div class="col-sm-4"> <button onclick="kapat()" type="button" class="btn btn-danger w-100"
+                                    data-bs-dismiss="modal">İptal</button>
+                            </div>
+                            <div class="col-sm-2"></div>
+
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal" id="proje">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Proje sorguları : </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="" method="">
+                            <div class="row mb-3">
+                                <div class="col-md-1"></div>
+                                <div class="col-md-5 ">
+                                    <label class="form-label ">Proje ad :</label>
+                                    <input type="text" class="form-control">
+                                </div>
+                                <div class="col-md-5 ">
+                                    <label class="form-label ">Ders ad :</label>
+                                    <input type="text" class="form-control">
+                                </div>
+                                <div class="col-md-1"></div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-md-3"></div>
+
+                                <div class="col-md-6 ">
+                                    <label class="form-label ">Teslim dönemi :</label>
+                                    <input type="email" class="form-control">
+                                </div>
+                                <div class="col-md-3"></div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-md-3"></div>
+                                <div class="col-md-6 ">
+                                    <label class="form-label ">Özet :</label>
+                                    <textarea class="form-control form-textarea" maxlength="500" rows="15"
+                                        style="overflow:auto; resize: none;"></textarea>
+                                </div>
+                                <div class="col-md-3"></div>
+                            </div>
+
+                        </form>
+                    </div>
+
+                    <div class="modal-footer">
+                        <div class="row w-100">
+                            <div class="col-sm-2"></div>
+
+                            <div class="col-sm-4"><button onclick="ac()" type="button"
+                                    class="btn btn-primary w-100">Ara</button>
+                            </div>
+                            <div class="col-sm-4"> <button onclick="kapat()" type="button"
+                                    class="btn btn-secondary w-100" data-bs-dismiss="modal">İptal</button>
+                            </div>
+                            <div class="col-sm-2"></div>
+
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal" id="anahtar">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Anahtar kelime sorguları : </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="" method="">
+                            <div class="row mb-3">
+                                <div class="col-md-1"></div>
+                                <div class="col-md-5 ">
+                                    <label class="form-label ">Ad :</label>
+                                    <input type="text" class="form-control">
+                                </div>
+                                <div class="col-md-5 ">
+                                    <label class="form-label ">Soyad :</label>
+                                    <input type="text" class="form-control">
+                                </div>
+                                <div class="col-md-1"></div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-md-3"></div>
+
+                                <div class="col-md-6 ">
+                                    <label class="form-label ">No :</label>
+                                    <input type="email" class="form-control">
+                                </div>
+                                <div class="col-md-3"></div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-md-3"></div>
+                                <div class="col-md-6 ">
+                                    <label class="form-label ">Öğr. Tür :</label>
+                                    <input class="form-control"></input>
+                                </div>
+                                <div class="col-md-3"></div>
+                            </div>
+
+                        </form>
+                    </div>
+
+                    <div class="modal-footer">
+                        <div class="row w-100">
+                            <div class="col-sm-2"></div>
+
+                            <div class="col-sm-4"><button onclick="ac()" type="button"
+                                    class="btn btn-primary w-100">Ara</button>
+                            </div>
+                            <div class="col-sm-4"> <button onclick="kapat()" type="button" class="btn btn-danger w-100"
+                                    data-bs-dismiss="modal">İptal</button>
+                            </div>
+                            <div class="col-sm-2"></div>
+
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal" id="donem">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Dönem sorguları : </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="" method="">
+                            <div class="row mb-3">
+                                <div class="col-md-3"></div>
+                                <div class="col-md-6 ">
+                                    <label class="form-label ">Dönemi girin :</label>
+                                    <input type="text" class="form-control">
+                                </div>
+
+                                <div class="col-md-3"></div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-md-3"></div>
+
+                                <div class="col-md-6 ">
+                                    <label class="form-label ">No :</label>
+                                    <input type="email" class="form-control">
+                                </div>
+                                <div class="col-md-3"></div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-md-3"></div>
+                                <div class="col-md-6 ">
+                                    <label class="form-label ">Öğr. Tür :</label>
+                                    <input class="form-control"></input>
+                                </div>
+                                <div class="col-md-3"></div>
+                            </div>
+
+                        </form>
+                    </div>
+
+                    <div class="modal-footer">
+                        <div class="row w-100">
+                            <div class="col-sm-2"></div>
+
+                            <div class="col-sm-4"><button onclick="ac()" type="button"
+                                    class="btn btn-info w-100">Ara</button>
+                            </div>
+                            <div class="col-sm-4"> <button onclick="kapat()" type="button"
+                                    class="btn btn-secondary w-100" data-bs-dismiss="modal">İptal</button>
+                            </div>
+                            <div class="col-sm-2"></div>
+
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row bg-dark" id="gizli" style="display: hidden; height: 550px;">
+
+        </div>
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <button onclick="kapat()" class="btn btn-outline-info w-100" >İçeriği kapat</button>
+            </div>
+            <div class="col-md-4"></div>
+        </div>
+    </div>
+    </div>
+
+    </div>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+        crossorigin="anonymous"></script>
+    <script>
+        var alan = document.getElementById('gizli');
+        window.onload = function () {
+            alan.style.visibility = "hidden";
+        };
+
+        function ac() {
+            alan.style.visibility = "visible";
+        }
+        function kapat() {
+            alan.style.visibility = "hidden";
+        }
+    </script>
 </body>
+
 </html>
