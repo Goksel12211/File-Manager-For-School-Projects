@@ -10,7 +10,10 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-
+    <!--<link rel="stylesheet" type="text/css" href="{% static  'home/css/blur.css'%}">-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=MonteCarlo&display=swap" rel="stylesheet">
     <title>Listemiz</title>
     <style>
         #yazar .modal-header {
@@ -82,37 +85,52 @@
             background: red;
             color: #fff;
         }
+
+        body {
+            font-family: 'MonteCarlo', cursive;
+            font-weight: bolder;
+            background-color: white;
+        }
+
+        h1 {
+            font-size: 70px;
+        }
+        .modal> *{
+            font-size: 22px;
+        }
+
+       
     </style>
 </head>
 
 
 <body>
-    <div class="container-fluid">
-        <h1 class="text-center">Sorgu Ekranına Hoş Geldiniz</h1>
+    <div class="container-fluid" id="icerik">
+        <h1 class="text-center mt-2">Sorgu Ekranına Hoş Geldiniz</h1>
         <div class="row mt-5">
             <div class="col-md-1"></div>
             <div class="col-md-2">
                 <button type="button" class="btn btn-outline-primary px-0 w-100" data-bs-toggle="modal"
-                    data-bs-target="#yazar">Yazar</button>
+                    data-bs-target="#yazar" style="font-size: 23px;">Yazar</button>
             </div>
             <div class="col-md-2 col-12">
                 <button type="button" class="btn btn-outline-warning px-0 w-100" data-bs-toggle="modal"
-                    data-bs-target="#ders">Ders</button>
+                    data-bs-target="#ders" style="font-size: 23px;">Ders</button>
 
             </div>
             <div class=" col-md-2 col-12">
                 <button type="button" class="btn btn-outline-success px-0 w-100" data-bs-toggle="modal"
-                    data-bs-target="#proje">Proje</button>
+                    data-bs-target="#proje" style="font-size: 23px;">Proje</button>
 
             </div>
             <div class=" col-md-2 col-12">
                 <button type="button" class="btn btn-outline-dark w-100 px-0" data-bs-toggle="modal"
-                    data-bs-target="#anahtar">Anahtar kelime</button>
+                    data-bs-target="#anahtar" style="font-size: 23px;">Anahtar kelime</button>
 
             </div>
             <div class=" col-md-2 col-12">
                 <button type="button" class="btn btn-outline-danger  w-100 px-0" data-bs-toggle="modal"
-                    data-bs-target="#donem">Dönem</button>
+                    data-bs-target="#donem" style="font-size: 23px;">Dönem</button>
 
             </div>
             <div class=" col-md-1">
@@ -166,10 +184,10 @@
                             <div class="col-sm-2"></div>
 
                             <div class="col-sm-4"><button onclick="ac()" type="button"
-                                    class="btn btn-warning w-100">Ara</button>
+                                    class="btn btn-warning w-100" style="font-size: 22px;">Ara</button>
                             </div>
                             <div class="col-sm-4"> <button onclick="kapat()" type="button" class="btn btn-success w-100"
-                                    data-bs-dismiss="modal">İptal</button>
+                                    data-bs-dismiss="modal" style="font-size: 22px;">İptal</button>
                             </div>
                             <div class="col-sm-2"></div>
 
@@ -226,11 +244,11 @@
                         <div class="row w-100">
                             <div class="col-sm-2"></div>
 
-                            <div class="col-sm-4"><button onclick="ac()" type="button"
-                                    class="btn btn-primary w-100">Ara</button>
+                            <div class="col-sm-4"><button onclick="ac1()" type="button"
+                                    class="btn btn-primary w-100" style="font-size: 22px;">Ara</button>
                             </div>
                             <div class="col-sm-4"> <button onclick="kapat()" type="button" class="btn btn-danger w-100"
-                                    data-bs-dismiss="modal">İptal</button>
+                                    data-bs-dismiss="modal" style="font-size: 22px;">İptal</button>
                             </div>
                             <div class="col-sm-2"></div>
 
@@ -288,11 +306,11 @@
                         <div class="row w-100">
                             <div class="col-sm-2"></div>
 
-                            <div class="col-sm-4"><button onclick="ac()" type="button"
-                                    class="btn btn-primary w-100">Ara</button>
+                            <div class="col-sm-4"><button onclick="ac2()" type="button"
+                                    class="btn btn-primary w-100" style="font-size: 22px;">Ara</button>
                             </div>
                             <div class="col-sm-4"> <button onclick="kapat()" type="button"
-                                    class="btn btn-secondary w-100" data-bs-dismiss="modal">İptal</button>
+                                    class="btn btn-secondary w-100" data-bs-dismiss="modal" style="font-size: 22px;">İptal</button>
                             </div>
                             <div class="col-sm-2"></div>
 
@@ -308,7 +326,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title">Anahtar kelime sorguları : </h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        <button type="button" class="btn-close btn-light" data-bs-dismiss="modal"></button>
                     </div>
                     <div class="modal-body">
                         <form action="" method="">
@@ -349,11 +367,11 @@
                         <div class="row w-100">
                             <div class="col-sm-2"></div>
 
-                            <div class="col-sm-4"><button onclick="ac()" type="button"
-                                    class="btn btn-primary w-100">Ara</button>
+                            <div class="col-sm-4"><button onclick="ac3()" type="button"
+                                    class="btn btn-primary w-100" style="font-size: 22px;">Ara</button>
                             </div>
                             <div class="col-sm-4"> <button onclick="kapat()" type="button" class="btn btn-danger w-100"
-                                    data-bs-dismiss="modal">İptal</button>
+                                    data-bs-dismiss="modal" style="font-size: 22px;">İptal</button>
                             </div>
                             <div class="col-sm-2"></div>
 
@@ -394,7 +412,7 @@
                             <div class="row mb-3">
                                 <div class="col-md-3"></div>
                                 <div class="col-md-6 ">
-                                    <label class="form-label ">Öğr. Tür :</label>
+                                    <label class="form-label">Öğr. Tür :</label>
                                     <input class="form-control"></input>
                                 </div>
                                 <div class="col-md-3"></div>
@@ -407,11 +425,11 @@
                         <div class="row w-100">
                             <div class="col-sm-2"></div>
 
-                            <div class="col-sm-4"><button onclick="ac()" type="button"
-                                    class="btn btn-info w-100">Ara</button>
+                            <div class="col-sm-4"><button onclick="ac4()" type="button"
+                                    class="btn btn-info w-100" style="font-size: 22px;">Ara</button>
                             </div>
                             <div class="col-sm-4"> <button onclick="kapat()" type="button"
-                                    class="btn btn-secondary w-100" data-bs-dismiss="modal">İptal</button>
+                                    class="btn btn-secondary w-100" data-bs-dismiss="modal" style="font-size: 22px;">İptal</button>
                             </div>
                             <div class="col-sm-2"></div>
 
@@ -428,7 +446,7 @@
         <div class="row">
             <div class="col-md-4"></div>
             <div class="col-md-4">
-                <button onclick="kapat()" class="btn btn-outline-info w-100" >İçeriği kapat</button>
+                <button onclick="kapat()" class="btn btn-outline-info w-100" style="font-size: 23px;">İçeriği kapat</button>
             </div>
             <div class="col-md-4"></div>
         </div>
@@ -450,6 +468,38 @@
 
         function ac() {
             alan.style.visibility = "visible";
+            var blur = document.getElementById('icerik');
+            blur.classList.toggle('active')
+            var popup = document.getElementById('yazar');
+            popup.classList.toggle('active')
+        }
+        function ac1() {
+            alan.style.visibility = "visible";
+            var blur = document.getElementById('icerik');
+            blur.classList.toggle('active')
+            var popup = document.getElementById('ders');
+            popup.classList.toggle('active')
+        }
+        function ac2() {
+            alan.style.visibility = "visible";
+            var blur = document.getElementById('icerik');
+            blur.classList.toggle('active')
+            var popup = document.getElementById('proje');
+            popup.classList.toggle('active')
+        }
+        function ac3() {
+            alan.style.visibility = "visible";
+            var blur = document.getElementById('icerik');
+            blur.classList.toggle('active')
+            var popup = document.getElementById('anahtar');
+            popup.classList.toggle('active')
+        }
+        function ac4() {
+            alan.style.visibility = "visible";
+            var blur = document.getElementById('icerik');
+            blur.classList.toggle('active')
+            var popup = document.getElementById('donem');
+            popup.classList.toggle('active')
         }
         function kapat() {
             alan.style.visibility = "hidden";
