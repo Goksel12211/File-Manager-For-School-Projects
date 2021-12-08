@@ -207,7 +207,7 @@ def listele(request):
                         }
                         posts.append(post)
                 context={
-                        "context":posts
+                        "posts":posts
                 }
                 print(context)
 

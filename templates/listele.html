@@ -380,10 +380,30 @@
         
 
 
-            {% for value ,key  in context.0.items %}
-            
-                <p> {{key}}</p>
+            {% for post  in posts %}
+            <hr>
+            <br>
+            <div>
+                <p> {{post.yazar_isim_list}}</p>
+                <p> {{post.yazar_soy_isim_list}}</p>
+                <p> {{post.yazar_no_list}}</p>
+                <p> {{post.yazar_ogretim_turu_list}}</p>
+                <p> {{post.ders_adi_list}}</p>
+                <p> {{post.proje_baslik_list}}</p>
+                <p> {{post.teslim_donem_list}}</p>
+                <p> {{post.ozet_list}}</p>
+                <p> {{post.danisman_isim_list}}</p>
+                <p> {{post.danisman_soyisim_list}}</p>
+                <p> {{post.danisman_unvan_list}}</p>
+                <p> {{post.anahtar_kelimeler_list}}</p>
+                <p> {{post.juri_isim_list}}</p>
+                <p> {{post.juri_soyisim_list}}</p>
+                <p> {{post.juri_unvan_list}}</p>
 
+
+            </div>
+            <br>
+            <hr>
             {% endfor %}
 
 
