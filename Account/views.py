@@ -80,15 +80,15 @@ def sorgulama_yapcam_ben(userid,yazar_ismi,yazar_soyismi,yazar_no,yazar_ogretim_
                         for proje_ayari in proje_ayarlari:
                                 proje_ayarindan_file_id_list.append(proje_ayari.file_id)
                         file_id_list=intersection(file_id_list,proje_ayarindan_file_id_list)
-                """if anahtar_kelime!="":
+                if anahtar_kelime!="":
                         nelergeldi=anahtar_kelime.split(",")
                         proje_ayarindan_file_id_list=[]
                         for negeldi in nelergeldi:
-                                proje_ayarlari=Anahtar_Kelimeler.objects.filter(anahtar_kelime=anahtar_kelime)
+                                proje_ayarlari=Anahtar_Kelimeler.objects.filter(anahtar_kelime=negeldi)
                                 
                                 for proje_ayari in proje_ayarlari:
                                         proje_ayarindan_file_id_list.append(proje_ayari.file_id)
-                        file_id_list=intersection(file_id_list,proje_ayarindan_file_id_list)"""
+                        file_id_list=intersection(file_id_list,proje_ayarindan_file_id_list)
                 
                 
                 
