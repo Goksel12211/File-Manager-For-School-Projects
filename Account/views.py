@@ -82,14 +82,14 @@ def sorgulama_yapcam_ben(userid,yazar_ismi,yazar_soyismi,yazar_no,yazar_ogretim_
                         file_id_list=intersection(file_id_list,proje_ayarindan_file_id_list)
                 """if anahtar_kelime!="":
                         nelergeldi=anahtar_kelime.split(",")
-                        anahtar_kelimeden_file_id_list=[]
+                        proje_ayarindan_file_id_list=[]
                         for negeldi in nelergeldi:
                                 proje_ayarlari=Anahtar_Kelimeler.objects.filter(anahtar_kelime=anahtar_kelime)
-                                proje_ayarindan_file_id_list=[]
+                                
                                 for proje_ayari in proje_ayarlari:
                                         proje_ayarindan_file_id_list.append(proje_ayari.file_id)
-                        file_id_list=intersection(file_id_list,proje_ayarindan_file_id_list)
-                """
+                        file_id_list=intersection(file_id_list,proje_ayarindan_file_id_list)"""
+                
                 
                 
                 return file_id_list                  
@@ -97,17 +97,17 @@ def sorgulama_yapcam_ben(userid,yazar_ismi,yazar_soyismi,yazar_no,yazar_ogretim_
 
 
 def verileri_al_ve_Sorgula(request,userid):
-        if request.method == 'GET':
-                yazar_ismi=request.GET.get("yazar_isim","")
-                yazar_soyismi=request.GET.get("yazar_soyad","")
-                yazar_no=request.GET.get("yazar_numarasi","")
-                yazar_ogretim_turu=request.GET.get("yazar_ogretim_turu","")
-                teslim_tarihi=request.GET.get("teslim_donemi","")
-                ders_adi=  request.GET.get("ders_adi","")
-                print(ders_adi)
-                proje_basligi=request.GET.get("proje_basligi","")
-                ozet=request.GET.get("ozet","")
-                anahtar_kelime=request.GET.get("anahatar_kelimeler","")
+        if request.method == 'POST':
+                yazar_ismi=request.POST.get("yazar_isim","")
+                yazar_soyismi=request.POST.get("yazar_soyad","")
+                yazar_no=request.POST.get("yazar_numarasi","")
+                yazar_ogretim_turu=request.POST.get("yazar_ogretim_turu","")
+                teslim_tarihi=request.POST.get("teslim_donemi","")
+                ders_adi=  request.POST.get("ders_adi","")
+                
+                proje_basligi=request.POST.get("proje_basligi","")
+                ozet=request.POST.get("ozet","")
+                anahtar_kelime=request.POST.get("anahatar_kelimeler","")
                 print(teslim_tarihi)
                 files_id_list=sorgulama_yapcam_ben(userid,yazar_ismi,yazar_soyismi,yazar_no,yazar_ogretim_turu,teslim_tarihi,ders_adi,proje_basligi,ozet,anahtar_kelime)
                 return files_id_list
@@ -116,12 +116,104 @@ def verileri_al_ve_Sorgula(request,userid):
 def listele(request):
         userid=request.session["id"]
         file_id_list=verileri_al_ve_Sorgula(request,userid)
-        """
-        for file_id in file_id_list:
-                for yazar in Yazar.objects.filter(file_id=file_id):
-                        print(yazar.first_name)
-        """
-        return render ( request, "listele.html",{"file_id_list":file_id_list})
+        sorgulanan_yazar_isim_list=[]
+        sorgulanan_yazar_soyisim_list=[]
+        sorgulanan_yazar_no_list=[]
+        sorgulanan_yazar_ogretim_turu=[]
+        sorgulanan_ders_adi_list=[]
+        sorgulanan_proje_baslik_list=[]
+        sorgulanan_teslim_dönemi_list=[]
+        sorgulanan_ozet_list=[]
+        sorgulanan_danisman_isim_list=[]
+        sorgulanan_danisman_soyisim_list=[]
+        sorgulanan_danisman_unvan_list=[]
+        sorgulanan_juri_isim_list=[]
+        sorgulanan_juri_soyisim_list=[]
+        sorgulanan_juri_unvan_list=[]
+        sorgulanan_anahtar_kelimeler_list=[]
+        context=None
+        if request.method=="POST":
+                posts=[]
+                for file_id in file_id_list:
+                        for yazar in Yazar.objects.filter(file_id=file_id):
+                                sorgulanan_yazar_isim_list.append(yazar.first_name)
+                                sorgulanan_yazar_soyisim_list.append(yazar.last_name)
+                                sorgulanan_yazar_ogretim_turu.append(yazar.ogretim_turu)
+                                sorgulanan_yazar_no_list.append(yazar.ogrenci_numarasi)
+
+                        for ayar in Proje_Ozellikleri.objects.filter(file_id=file_id):
+                                sorgulanan_ders_adi_list.append(ayar.ders_adi)
+                                sorgulanan_proje_baslik_list.append(ayar.proje_basligi)
+                                sorgulanan_ozet_list.append(ayar.özet)
+                                sorgulanan_teslim_dönemi_list.append(ayar.teslim_dönemi)
+                        
+                        
+                        for danisman in Danisman.objects.filter(file_id=file_id):
+                                sorgulanan_danisman_isim_list.append(danisman.first_name)
+                                sorgulanan_danisman_soyisim_list.append(danisman.last_name)
+                                sorgulanan_danisman_unvan_list.append(danisman.unvan)
+              
+
+                        temp_juri_ad=[]
+                        temp_juri_soyad=[]
+                        temp_juri_unvan=[]
+                        for juri in Juri.objects.filter(file_id=file_id):
+                                temp_juri_ad.append(juri.first_name)
+                                temp_juri_soyad.append(juri.last_name)
+                                temp_juri_unvan.append(juri.unvan)
+                        sorgulanan_juri_isim_list.append(temp_juri_ad)
+                        sorgulanan_juri_soyisim_list.append(temp_juri_soyad)
+                        sorgulanan_juri_unvan_list.append(temp_juri_unvan)
+
+                        temp_anahtar_kelime_list=[]
+                        for anahtar_kelime in Anahtar_Kelimeler.objects.filter(file_id=file_id):
+                                temp_anahtar_kelime_list.append(anahtar_kelime.anahtar_kelime)
+                        sorgulanan_anahtar_kelimeler_list.append(temp_anahtar_kelime_list)
+                        context =  { 
+                        'yazar_isim_list':sorgulanan_yazar_isim_list,
+                        'yazar_soy_isim_list':sorgulanan_yazar_soyisim_list,
+                        'yazar_no_list':sorgulanan_yazar_no_list,
+                        'yazar_ogretim_turu_list':sorgulanan_yazar_ogretim_turu,
+                        'ders_adi_list':sorgulanan_ders_adi_list,
+                        'proje_baslik_list':sorgulanan_proje_baslik_list,
+                        'teslim_donem_list':sorgulanan_teslim_dönemi_list,
+                        'ozet_list':sorgulanan_ozet_list,
+                        'danisman_isim_list':sorgulanan_danisman_isim_list,
+                        'danisman_soyisim_list':sorgulanan_danisman_soyisim_list,
+                        'danisman_unvan_list':sorgulanan_danisman_unvan_list,
+                        'anahtar_kelimeler_list':sorgulanan_anahtar_kelimeler_list,
+                        'juri_isim_list':sorgulanan_juri_isim_list,
+                        'juri_soyisim_list':sorgulanan_juri_soyisim_list,
+                        'juri_unvan_list':sorgulanan_juri_unvan_list,
+                        } 
+               
+                for count, value in enumerate(file_id_list):
+                        post={
+                        'yazar_isim_list':sorgulanan_yazar_isim_list[count],
+                        'yazar_soy_isim_list':sorgulanan_yazar_soyisim_list[count],
+                        'yazar_no_list':sorgulanan_yazar_no_list[count],
+                        'yazar_ogretim_turu_list':sorgulanan_yazar_ogretim_turu[count],
+                        'ders_adi_list':sorgulanan_ders_adi_list[count],
+                        'proje_baslik_list':sorgulanan_proje_baslik_list[count],
+                        'teslim_donem_list':sorgulanan_teslim_dönemi_list[count],
+                        'ozet_list':sorgulanan_ozet_list[count],
+                        'danisman_isim_list':sorgulanan_danisman_isim_list[count],
+                        'danisman_soyisim_list':sorgulanan_danisman_soyisim_list[count],
+                        'danisman_unvan_list':sorgulanan_danisman_unvan_list[count],
+                        'anahtar_kelimeler_list':sorgulanan_anahtar_kelimeler_list[count],
+                        'juri_isim_list':sorgulanan_juri_isim_list[count],
+                        'juri_soyisim_list':sorgulanan_juri_soyisim_list[count],
+                        'juri_unvan_list':sorgulanan_juri_unvan_list[count],      
+                        }
+                        posts.append(post)
+                context={
+                        "context":posts
+                }
+                print(context)
+
+                # COK ONEMLI  JURI VE ANAHTAR KELIMELER  IC ICE  2D LİSTELER TEKRAR FOR AÇMALISIN HTML DE 
+                return render ( request, "listele.html",context=context)
+        return render ( request, "listele.html")
 
 import re
 def digestResume(resume,fileid): #resume is a pdf file (as str)

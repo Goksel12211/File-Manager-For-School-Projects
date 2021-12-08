@@ -57,7 +57,8 @@
     }
 </style>
 <body>
-<form  id ="gizliform" action="http://127.0.0.1:8000/content/listele" method="GET">
+<form  id ="gizliform" action="http://127.0.0.1:8000/content/listele" method="POST">
+    {%csrf_token%}
     <!-- AGA YAZAR BURDA -->
     <input type="text" name="yazar_isim">
     <input type="text" name="yazar_soyad">
@@ -376,16 +377,17 @@
             </div>
         </div>
 
+        
 
 
-        {%for file_id in file_id_list %}
+            {% for value ,key  in context.0.items %}
+            
+                <p> {{key}}</p>
 
-        <div>{{file_id}}</div>
-        <div></div>
-        
-        {%endfor%}
-        
-        
+            {% endfor %}
+
+
+
         <div class="row bg-dark" id="gizli" style="display: hidden; height: 550px;">
             BURA GIDDIP GELİO
             dfafds
@@ -402,7 +404,7 @@
     </div>
 
     </div>
-    <button onclick="inputlariYollucamBen;">qweqweq</button>
+   
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
