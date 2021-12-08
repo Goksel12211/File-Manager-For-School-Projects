@@ -1,0 +1,72 @@
+#gizliform {
+    display: none;
+}
+#yazar .modal-header {
+    background: darkblue;
+    color: #fff;
+}
+
+#yazar .modal-body {
+    background-color: wheat;
+}
+
+#yazar .modal-footer {
+    background: darkblue;
+    color: #fff;
+}
+
+#ders .modal-header {
+    background: rgb(255, 255, 115);
+    color: black;
+}
+
+#ders .modal-body {
+    background-color: rgb(164, 142, 164);
+}
+
+#ders .modal-footer {
+    background: rgb(255, 255, 115);
+    color: black;
+}
+
+#proje .modal-header {
+    background: darkgreen;
+    color: #fff;
+}
+
+#proje .modal-body {
+    background-color: wheat;
+}
+
+#proje .modal-footer {
+    background: darkgreen;
+    color: #fff;
+}
+
+#anahtar .modal-header {
+    background: rgb(32, 30, 30);
+    color: #fff;
+}
+
+#anahtar .modal-body {
+    background-color: wheat;
+}
+
+#anahtar .modal-footer {
+    background: rgb(32, 30, 30);
+    color: #fff;
+}
+
+#donem .modal-header {
+    background: red;
+    color: #fff;
+}
+
+#donem .modal-body {
+    background-color: wheat;
+}
+
+#donem .modal-footer {
+    background: red;
+    color: #fff;
+}

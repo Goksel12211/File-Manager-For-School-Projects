@@ -7,86 +7,80 @@
 
 
     <link rel="stylesheet" type="text/css" href="{% static  'home/css/bootstrap.css'%}">
+    <link rel="stylesheet" type="text/css" href="{% static  'listele.css'%}">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 
     <title>Listemiz</title>
+
     <style>
-        #yazar .modal-header {
-            background: darkblue;
-            color: #fff;
-        }
-
-        #yazar .modal-body {
-            background-color: wheat;
-        }
-
-        #yazar .modal-footer {
-            background: darkblue;
-            color: #fff;
-        }
-
-        #ders .modal-header {
-            background: rgb(255, 255, 115);
-            color: black;
-        }
-
-        #ders .modal-body {
-            background-color: rgb(164, 142, 164);
-        }
-
-        #ders .modal-footer {
-            background: rgb(255, 255, 115);
-            color: black;
-        }
-
-        #proje .modal-header {
-            background: darkgreen;
-            color: #fff;
-        }
-
-        #proje .modal-body {
-            background-color: wheat;
-        }
-
-        #proje .modal-footer {
-            background: darkgreen;
-            color: #fff;
-        }
-
-        #anahtar .modal-header {
-            background: rgb(32, 30, 30);
-            color: #fff;
-        }
-
-        #anahtar .modal-body {
-            background-color: wheat;
-        }
-
-        #anahtar .modal-footer {
-            background: rgb(32, 30, 30);
-            color: #fff;
-        }
-
-        #donem .modal-header {
-            background: red;
-            color: #fff;
-        }
-
-        #donem .modal-body {
-            background-color: wheat;
-        }
-
-        #donem .modal-footer {
-            background: red;
-            color: #fff;
-        }
+       
     </style>
 </head>
 
+<script>
+    function inputlariYollucamBen(){
+        yazar_ismi=document.getElementById("real-yazar-isim").value
+        yazar_soyismi=document.getElementById("real-yazar-soyad").value
+        yazar_no=document.getElementById("real-yazar-no").value
+        yazar_ogretim_turu=document.getElementById("real-yazar-ogretim-turu").value
+        teslim_tarihi=document.getElementById("real-teslim-donem").value
+        ders_adi=  document.getElementById("real-teslim-donem").value 
+        proje_basligi=document.getElementById("real-ders-ad").value
+        ozet=document.getElementById("real-ozet").value
+        anahtar_kelime=document.getElementById("real-anahtar_kelimeler").value
+        
+        
+        document.getElementsByName("yazar_isim")[0].value=yazar_ismi
+        document.getElementsByName("yazar_soyad")[0].value=yazar_soyismi
+        document.getElementsByName("yazar_numarasi")[0].value=yazar_no
+        document.getElementsByName("yazar_ogretim_turu")[0].value=yazar_ogretim_turu
+        document.getElementsByName("teslim_donemi")[0].value=teslim_tarihi
+        document.getElementsByName("ders_adi")[0].value=ders_adi
+        document.getElementsByName("proje_basligi")[0].value=proje_basligi
+        document.getElementsByName("ozet")[0].value=ozet
+        document.getElementsByName("anahatar_kelimeler")[0].value=anahtar_kelime
+      
 
+        document.getElementById("gizliform").submit()
+
+
+    }
+</script>
+
+<style>
+
+</style>
 <body>
+<form  id ="gizliform" action="http://127.0.0.1:8000/content/listele" method="GET">
+    <!-- AGA YAZAR BURDA -->
+    <input type="text" name="yazar_isim">
+    <input type="text" name="yazar_soyad">
+    <input type="text" name="yazar_numarasi">
+    <input type="text" name="yazar_ogretim_turu">
+    <!-- AGA PROJE OZELLIKLERI BURDA -->
+    <input type="text" name="ozet">
+    <input type="text" name="proje_basligi">
+    <!-- Dersin İsmi BURDA -->
+    <input type="text" name="ders_adi">
+    <!-- Dönem BURDA -->
+    <input type="text" name="teslim_donemi">   
+    <!-- Anahtar Kelimeler  BURDA -->
+    <input type="text" name="anahatar_kelimeler">   
+
+
+
+
+
+    <input type="submit">
+
+
+
+
+</form>
+
+
     <div class="container-fluid">
         <h1 class="text-center">Sorgu Ekranına Hoş Geldiniz</h1>
         <div class="row mt-5">
@@ -132,11 +126,11 @@
                                 <div class="col-md-1"></div>
                                 <div class="col-md-5 ">
                                     <label class="form-label ">Ad :</label>
-                                    <input type="text" class="form-control">
+                                    <input type="text" id="real-yazar-isim" class="form-control">
                                 </div>
                                 <div class="col-md-5 ">
                                     <label class="form-label ">Soyad :</label>
-                                    <input type="text" class="form-control">
+                                    <input type="text" id="real-yazar-soyad"class="form-control">
                                 </div>
                                 <div class="col-md-1"></div>
                             </div>
@@ -145,7 +139,7 @@
 
                                 <div class="col-md-6 ">
                                     <label class="form-label ">No :</label>
-                                    <input type="email" class="form-control">
+                                    <input type="text" id="real-yazar-no" class="form-control">
                                 </div>
                                 <div class="col-md-3"></div>
                             </div>
@@ -153,7 +147,7 @@
                                 <div class="col-md-3"></div>
                                 <div class="col-md-6 ">
                                     <label class="form-label ">Öğr. Tür :</label>
-                                    <input class="form-control"></input>
+                                    <input class="form-control" id="real-yazar-ogretim-turu"></input>
                                 </div>
                                 <div class="col-md-3"></div>
                             </div>
@@ -165,7 +159,7 @@
                         <div class="row w-100">
                             <div class="col-sm-2"></div>
 
-                            <div class="col-sm-4"><button onclick="ac()" type="button"
+                            <div class="col-sm-4"><button onclick="ac() ,inputlariYollucamBen()" type="button"
                                     class="btn btn-warning w-100">Ara</button>
                             </div>
                             <div class="col-sm-4"> <button onclick="kapat()" type="button" class="btn btn-success w-100"
@@ -190,32 +184,22 @@
                     <div class="modal-body">
                         <form action="" method="">
                             <div class="row mb-3">
-                                <div class="col-md-1"></div>
-                                <div class="col-md-5 ">
-                                    <label class="form-label ">Ad :</label>
-                                    <input type="text" class="form-control">
+                                <div class="col-md-3"></div>
+                                <div class="col-md-6 ">
+                                    <label class="form-label ">Dersin Adı: :</label>
+                                    <input type="text" id="real-ders-ad" class="form-control">
                                 </div>
-                                <div class="col-md-5 ">
-                                    <label class="form-label ">Soyad :</label>
-                                    <input type="text" class="form-control">
-                                </div>
-                                <div class="col-md-1"></div>
+                              
+                                <div class="col-md-3"></div>
                             </div>
                             <div class="row mb-3">
                                 <div class="col-md-3"></div>
 
-                                <div class="col-md-6 ">
-                                    <label class="form-label ">No :</label>
-                                    <input type="email" class="form-control">
-                                </div>
                                 <div class="col-md-3"></div>
                             </div>
                             <div class="row mb-3">
                                 <div class="col-md-3"></div>
-                                <div class="col-md-6 ">
-                                    <label class="form-label ">Öğr. Tür :</label>
-                                    <input class="form-control"></input>
-                                </div>
+                           
                                 <div class="col-md-3"></div>
                             </div>
 
@@ -226,7 +210,7 @@
                         <div class="row w-100">
                             <div class="col-sm-2"></div>
 
-                            <div class="col-sm-4"><button onclick="ac()" type="button"
+                            <div class="col-sm-4"><button onclick="ac()" type="submit"
                                     class="btn btn-primary w-100">Ara</button>
                             </div>
                             <div class="col-sm-4"> <button onclick="kapat()" type="button" class="btn btn-danger w-100"
@@ -251,31 +235,20 @@
                     <div class="modal-body">
                         <form action="" method="">
                             <div class="row mb-3">
-                                <div class="col-md-1"></div>
-                                <div class="col-md-5 ">
-                                    <label class="form-label ">Proje ad :</label>
-                                    <input type="text" class="form-control">
-                                </div>
-                                <div class="col-md-5 ">
-                                    <label class="form-label ">Ders ad :</label>
-                                    <input type="text" class="form-control">
-                                </div>
-                                <div class="col-md-1"></div>
-                            </div>
-                            <div class="row mb-3">
                                 <div class="col-md-3"></div>
-
                                 <div class="col-md-6 ">
-                                    <label class="form-label ">Teslim dönemi :</label>
-                                    <input type="email" class="form-control">
+                                    <label class="form-label ">Proje Baslığı :</label>
+                                    <input type="text" class="form-control">
                                 </div>
+                           
                                 <div class="col-md-3"></div>
                             </div>
+                        
                             <div class="row mb-3">
                                 <div class="col-md-3"></div>
                                 <div class="col-md-6 ">
                                     <label class="form-label ">Özet :</label>
-                                    <textarea class="form-control form-textarea" maxlength="500" rows="15"
+                                    <textarea id="real-ozet" class="form-control form-textarea" maxlength="500" rows="15"
                                         style="overflow:auto; resize: none;"></textarea>
                                 </div>
                                 <div class="col-md-3"></div>
@@ -313,34 +286,16 @@
                     <div class="modal-body">
                         <form action="" method="">
                             <div class="row mb-3">
-                                <div class="col-md-1"></div>
-                                <div class="col-md-5 ">
-                                    <label class="form-label ">Ad :</label>
-                                    <input type="text" class="form-control">
-                                </div>
-                                <div class="col-md-5 ">
-                                    <label class="form-label ">Soyad :</label>
-                                    <input type="text" class="form-control">
-                                </div>
-                                <div class="col-md-1"></div>
-                            </div>
-                            <div class="row mb-3">
-                                <div class="col-md-3"></div>
-
-                                <div class="col-md-6 ">
-                                    <label class="form-label ">No :</label>
-                                    <input type="email" class="form-control">
-                                </div>
-                                <div class="col-md-3"></div>
-                            </div>
-                            <div class="row mb-3">
                                 <div class="col-md-3"></div>
                                 <div class="col-md-6 ">
-                                    <label class="form-label ">Öğr. Tür :</label>
-                                    <input class="form-control"></input>
+                                    <label class="form-label ">Anahtar Kelimeler :</label>
+                                    <input id="real-anahtar_kelimeler"type="text" class="form-control">
                                 </div>
+                                
                                 <div class="col-md-3"></div>
                             </div>
+                         
+                        
 
                         </form>
                     </div>
@@ -377,7 +332,7 @@
                                 <div class="col-md-3"></div>
                                 <div class="col-md-6 ">
                                     <label class="form-label ">Dönemi girin :</label>
-                                    <input type="text" class="form-control">
+                                    <input type="text"id="real-teslim-donem" class="form-control">
                                 </div>
 
                                 <div class="col-md-3"></div>
@@ -385,18 +340,12 @@
                             <div class="row mb-3">
                                 <div class="col-md-3"></div>
 
-                                <div class="col-md-6 ">
-                                    <label class="form-label ">No :</label>
-                                    <input type="email" class="form-control">
-                                </div>
+                           
                                 <div class="col-md-3"></div>
                             </div>
                             <div class="row mb-3">
                                 <div class="col-md-3"></div>
-                                <div class="col-md-6 ">
-                                    <label class="form-label ">Öğr. Tür :</label>
-                                    <input class="form-control"></input>
-                                </div>
+                               
                                 <div class="col-md-3"></div>
                             </div>
 
@@ -436,7 +385,7 @@
     </div>
 
     </div>
-
+    <button onclick="inputlariYollucamBen;">qweqweq</button>
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"

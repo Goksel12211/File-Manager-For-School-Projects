@@ -13,6 +13,7 @@ from string import printable
 
 def listele(request):
         userid=request.session["id"]
+        print(request.POST.get("yazar_ismi",False))
         return render ( request, "listele.html",{"userid":userid})
 
 import re
@@ -276,11 +277,6 @@ def digestResume(resume,fileid): #resume is a pdf file (as str)
      
         Yazar.objects.create(file_id=fileid , first_name=yazar_ismi[:-2].rsplit(" ",1)[0] , last_name =yazar_ismi[:-2].rsplit(" ",1)[1], ogrenci_numarasi=ogrecinno , ogretim_turu=ogretimTuru)
 
-
-
-            
-        
-       
 def tarihtenDöneme(cümle):
         ay=cümle[3:5]
         yil=cümle[6:10]
@@ -292,10 +288,6 @@ def tarihtenDöneme(cümle):
                 cümle="Sonbahar Dönemi" + str(int(yil)-1) + " -- " + str(yil)
         return cümle
         
-        
-
-
-
 
 # Create your views here.
 def content(request):
