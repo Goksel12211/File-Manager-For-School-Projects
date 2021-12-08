@@ -30,7 +30,6 @@
         }
 
         body {
-            /*background-color:rgba(200, 255, 0, 0.483);*/
             background-color: rgb(243, 243, 243);
         }
 
@@ -58,10 +57,16 @@
 </head>
 
 <body>
-   
     {% for  message in messages%}
-    <div>{{message}}</div>
-    {%endfor%} 
+   
+   <div id="mesaj" style="display: none;"> 
+    {{message}}
+   </div>
+   <script>
+       var alan=document.getElementById('mesaj').innerHTML
+   alert(alan);
+   </script>
+   {%endfor%} 
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-1 col-1 col-lg-1 " style="height: 400px;"></div>

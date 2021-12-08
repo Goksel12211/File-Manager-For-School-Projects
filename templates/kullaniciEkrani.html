@@ -12,9 +12,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=MonteCarlo&display=swap" rel="stylesheet">
     <title>Kullanıcı Ekranı</title>
-    <link rel="stylesheet" type="text/css" href="{% static  'home/css/bootstrap.css'%}">
+    <link rel="stylesheet" type="text/css" href="{% static  'home/css/bootstrap.min.css'%}">
  
     <style>
+        body{
+            background-color: rgb(199, 249, 255);
+        }
         h1 {
             font-weight: bolder;
             font-family: 'MonteCarlo', cursive;
@@ -24,7 +27,7 @@
         .bulut {
             font-size: 500px;
             position: relative;
-            color: aqua;
+            color: rgb(35, 235, 235);
 
         }
 
@@ -55,6 +58,7 @@
 
         .susyalanci {
             font-size: 27px;
+            
         }
 
         .label {
@@ -156,6 +160,16 @@
 
                 </div>
 
+            </div>
+            <div class="row mt-2">
+                <div class="col-md-3 mt-2"></div>
+                <div class="col-md-3 mt-2">
+                    <button class="btn btn-danger w-100 susyalanci " ><a href="" class="text-white" style="font-size: 35px; font-weight: bolder;">Çıkış Yap</a></button>
+                </div>
+                <div class="col-md-3 mt-2">
+                    <button class="btn btn-success w-100 susyalanci "><a href="" class="text-white" style="font-size: 35px; font-weight: bolder;">Bilgilerimi Değiştir</a></button>
+                </div>
+                <div class="col-md-3 mt-2"></div>
             </div>
 
         </form>

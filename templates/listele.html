@@ -11,39 +11,38 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+        integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
     <title>Listemiz</title>
 
-    <style>
-       
-    </style>
+
 </head>
 
 <script>
-    function inputlariYollucamBen(){
-        yazar_ismi=document.getElementById("real-yazar-isim").value
-        yazar_soyismi=document.getElementById("real-yazar-soyad").value
-        yazar_no=document.getElementById("real-yazar-no").value
-        yazar_ogretim_turu=document.getElementById("real-yazar-ogretim-turu").value
-  
-        teslim_tarihi=document.getElementById("real-teslim-donem").value
-        
-        ders_adi=  document.getElementById("real-ders-ad").value 
-        
-        proje_basligi=document.getElementById("real-proje-basligi").value
-        ozet=document.getElementById("real-ozet").value
-        anahtar_kelime=document.getElementById("real-anahtar_kelimeler").value
-        
-        document.getElementsByName("yazar_isim")[0].value=yazar_ismi
-        document.getElementsByName("yazar_soyad")[0].value=yazar_soyismi
-        document.getElementsByName("yazar_numarasi")[0].value=yazar_no
-        document.getElementsByName("yazar_ogretim_turu")[0].value=yazar_ogretim_turu
-        document.getElementsByName("teslim_donemi")[0].value=teslim_tarihi
-        document.getElementsByName("ders_adi")[0].value=ders_adi
-        document.getElementsByName("proje_basligi")[0].value=proje_basligi
-        document.getElementsByName("ozet")[0].value=ozet
-        document.getElementsByName("anahatar_kelimeler")[0].value=anahtar_kelime
-       
+    function inputlariYollucamBen() {
+        yazar_ismi = document.getElementById("real-yazar-isim").value
+        yazar_soyismi = document.getElementById("real-yazar-soyad").value
+        yazar_no = document.getElementById("real-yazar-no").value
+        yazar_ogretim_turu = document.getElementById("real-yazar-ogretim-turu").value
+
+        teslim_tarihi = document.getElementById("real-teslim-donem").value
+
+        ders_adi = document.getElementById("real-ders-ad").value
+
+        proje_basligi = document.getElementById("real-proje-basligi").value
+        ozet = document.getElementById("real-ozet").value
+        anahtar_kelime = document.getElementById("real-anahtar_kelimeler").value
+
+        document.getElementsByName("yazar_isim")[0].value = yazar_ismi
+        document.getElementsByName("yazar_soyad")[0].value = yazar_soyismi
+        document.getElementsByName("yazar_numarasi")[0].value = yazar_no
+        document.getElementsByName("yazar_ogretim_turu")[0].value = yazar_ogretim_turu
+        document.getElementsByName("teslim_donemi")[0].value = teslim_tarihi
+        document.getElementsByName("ders_adi")[0].value = ders_adi
+        document.getElementsByName("proje_basligi")[0].value = proje_basligi
+        document.getElementsByName("ozet")[0].value = ozet
+        document.getElementsByName("anahatar_kelimeler")[0].value = anahtar_kelime
+
 
         document.getElementById("gizliform").submit()
 
@@ -55,39 +54,54 @@
     #gizliform {
         display: none;
     }
+
+    body {
+        background-color: whitesmoke;
+    }
+
+    .container>label {
+        background-color: rgb(157, 66, 130);
+    }
+
+    .goksel {
+        font-size: 75px;
+        text-align: center;
+        width: 100%;
+    }
 </style>
+
 <body>
-<form  id ="gizliform" action="http://127.0.0.1:8000/content/listele" method="POST">
-    {%csrf_token%}
-    <!-- AGA YAZAR BURDA -->
-    <input type="text" name="yazar_isim">
-    <input type="text" name="yazar_soyad">
-    <input type="text" name="yazar_numarasi">
-    <input type="text" name="yazar_ogretim_turu">
-    <!-- AGA PROJE OZELLIKLERI BURDA -->
-    <input type="text" name="ozet">
-    <input type="text" name="proje_basligi">
-    <!-- Dersin İsmi BURDA -->
-    <input type="text" name="ders_adi">
-    <!-- Dönem BURDA -->
-    <input type="text" name="teslim_donemi">   
-    <!-- Anahtar Kelimeler  BURDA -->
-    <input type="text" name="anahatar_kelimeler">   
+    <form id="gizliform" action="http://127.0.0.1:8000/content/listele" method="POST">
+        {%csrf_token%}
+        <!-- AGA YAZAR BURDA -->
+        <input type="text" name="yazar_isim">
+        <input type="text" name="yazar_soyad">
+        <input type="text" name="yazar_numarasi">
+        <input type="text" name="yazar_ogretim_turu">
+        <!-- AGA PROJE OZELLIKLERI BURDA -->
+        <input type="text" name="ozet">
+        <input type="text" name="proje_basligi">
+        <!-- Dersin İsmi BURDA -->
+        <input type="text" name="ders_adi">
+        <!-- Dönem BURDA -->
+        <input type="text" name="teslim_donemi">
+        <!-- Anahtar Kelimeler  BURDA -->
+        <input type="text" name="anahatar_kelimeler">
 
 
 
 
 
-    <input type="submit">
+        <input type="submit">
 
 
 
 
-</form>
+    </form>
 
 
-    <div class="container-fluid">
-        <h1 class="text-center">Sorgu Ekranına Hoş Geldiniz</h1>
+    <div class="container-fluid" id="">
+        <h1 class="text-center mt-3">Sorgu Ekranına Hoş Geldiniz</h1>
         <div class="row mt-5">
             <div class="col-md-1"></div>
             <div class="col-md-2">
@@ -135,7 +149,7 @@
                                 </div>
                                 <div class="col-md-5 ">
                                     <label class="form-label ">Soyad :</label>
-                                    <input type="text" id="real-yazar-soyad"class="form-control">
+                                    <input type="text" id="real-yazar-soyad" class="form-control">
                                 </div>
                                 <div class="col-md-1"></div>
                             </div>
@@ -194,7 +208,7 @@
                                     <label class="form-label ">Dersin Adı: :</label>
                                     <input type="text" id="real-ders-ad" class="form-control">
                                 </div>
-                              
+
                                 <div class="col-md-3"></div>
                             </div>
                             <div class="row mb-3">
@@ -204,7 +218,7 @@
                             </div>
                             <div class="row mb-3">
                                 <div class="col-md-3"></div>
-                           
+
                                 <div class="col-md-3"></div>
                             </div>
 
@@ -245,16 +259,16 @@
                                     <label class="form-label ">Proje Baslığı :</label>
                                     <input type="text" id="real-proje-basligi" class="form-control">
                                 </div>
-                           
+
                                 <div class="col-md-3"></div>
                             </div>
-                        
+
                             <div class="row mb-3">
                                 <div class="col-md-3"></div>
                                 <div class="col-md-6 ">
                                     <label class="form-label ">Özet :</label>
-                                    <textarea id="real-ozet" class="form-control form-textarea" maxlength="500" rows="15"
-                                        style="overflow:auto; resize: none;"></textarea>
+                                    <textarea id="real-ozet" class="form-control form-textarea" maxlength="500"
+                                        rows="15" style="overflow:auto; resize: none;"></textarea>
                                 </div>
                                 <div class="col-md-3"></div>
                             </div>
@@ -266,7 +280,7 @@
                         <div class="row w-100">
                             <div class="col-sm-2"></div>
 
-                            <div class="col-sm-4"><button onclick=" inputlariYollucamBen(); ac() ;"  type="button"
+                            <div class="col-sm-4"><button onclick=" inputlariYollucamBen(); ac() ;" type="button"
                                     class="btn btn-primary w-100">Ara</button>
                             </div>
                             <div class="col-sm-4"> <button onclick="kapat()" type="button"
@@ -294,13 +308,13 @@
                                 <div class="col-md-3"></div>
                                 <div class="col-md-6 ">
                                     <label class="form-label ">Anahtar Kelimeler :</label>
-                                    <input id="real-anahtar_kelimeler"type="text" class="form-control">
+                                    <input id="real-anahtar_kelimeler" type="text" class="form-control">
                                 </div>
-                                
+
                                 <div class="col-md-3"></div>
                             </div>
-                         
-                        
+
+
 
                         </form>
                     </div>
@@ -337,7 +351,7 @@
                                 <div class="col-md-3"></div>
                                 <div class="col-md-6 ">
                                     <label class="form-label ">Dönemi girin :</label>
-                                    <input type="text"id="real-teslim-donem" class="form-control">
+                                    <input type="text" id="real-teslim-donem" class="form-control">
                                 </div>
 
                                 <div class="col-md-3"></div>
@@ -345,12 +359,12 @@
                             <div class="row mb-3">
                                 <div class="col-md-3"></div>
 
-                           
+
                                 <div class="col-md-3"></div>
                             </div>
                             <div class="row mb-3">
                                 <div class="col-md-3"></div>
-                               
+
                                 <div class="col-md-3"></div>
                             </div>
 
@@ -377,61 +391,293 @@
             </div>
         </div>
 
-        
 
 
-            {% for post  in posts %}
-            <hr>
-            <br>
-            <div>
-                <p> {{post.yazar_isim_list}}</p>
-                <p> {{post.yazar_soy_isim_list}}</p>
-                <p> {{post.yazar_no_list}}</p>
-                <p> {{post.yazar_ogretim_turu_list}}</p>
-                <p> {{post.ders_adi_list}}</p>
-                <p> {{post.proje_baslik_list}}</p>
-                <p> {{post.teslim_donem_list}}</p>
-                <p> {{post.ozet_list}}</p>
-                <p> {{post.danisman_isim_list}}</p>
-                <p> {{post.danisman_soyisim_list}}</p>
-                <p> {{post.danisman_unvan_list}}</p>
-                <p> {{post.anahtar_kelimeler_list}}</p>
-                
 
-                JURI1
-                <p> {{post.juri_isim_list.0}}</p>
-                <p> {{post.juri_soyisim_list.0}}</p>
-                <p> {{post.juri_unvan_list.0}}</p>
+        {% for post in posts %}
+        <hr>
+        <br>
+        <div class="container-fluid">
+            <div class="row">
 
-                JURI2
-                <p> {{post.juri_isim_list.1}}</p>
-                <p> {{post.juri_soyisim_list.1}}</p>
-                <p> {{post.juri_unvan_list.1}}</p>
+                <div class="col-md-1"></div>
+                <div class="col-md-10">
+                    <h3 class="mt-2">Yazar Bilgileri</h3>
+                    <div class="row mt-3">
+                        <div class="col-md-2 mt-2">
+                            <label for="" class="form-control">İsim :</label>
+                        </div>
+                        <div class="col-md-2 mt-2">
+                            <label for="" class="form-control"
+                                style="border: 3px dashed ; border-color: red yellow blue green">{{post.yazar_isim_list}}</label>
+                        </div>
+                        <div class="col-md-2 mt-2">
+                            <label for="" class="form-control">Soyisim :</label>
+                        </div>
+                        <div class="col-md-2 mt-2">
+                            <label for="" class="form-control"
+                                style="border: 3px dashed ;">{{post.yazar_soy_isim_list}}</label>
+                        </div>
+                        <div class="col-md-2 mt-2">
+                            <label for="" class="form-control">Öğrenci numarası :</label>
+                        </div>
+                        <div class="col-md-2 mt-2">
+                            <label for="" class="form-control"
+                                style="border: 3px dashed ;">{{post.yazar_no_list}}</label>
+                        </div>
+
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col-md-4"></div>
+                        <div class="col-md-4">
+
+                            <div class="col-md-5" style="float: left;"><label for="" class="form-control"
+                                    style="border: 3px dashed ;">Öğretim türü :</label>
+                            </div>
+
+                            <div class="col-md-5" style="float: left; margin-left: 55px;"><label for=""
+                                    class="form-control"
+                                    style="border: 3px dashed ;">{{post.yazar_ogretim_turu_list}}</label>
+
+
+
+                            </div>
+                            <div class="col-md-4"></div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-1"></div>
+                </div>
 
             </div>
-            <br>
-            <hr>
+            <div class="row mt-5">
+
+                <div class="col-md-1"></div>
+                <div class="col-md-10">
+                    <h3 class="mt-2">Ders Bilgisi</h3>
+                    <div class="row mt-3">
+                        <div class="col-md-2 mt-2">
+                            <label for="" class="form-control">Ders Adı :</label>
+                        </div>
+                        <div class="col-md-4 mt-2">
+                            <label for="" class="form-control"
+                                style="border: 3px dashed ; border-color: red yellow blue green">{{post.ders_adi_list}}</label>
+                        </div>
+                        <div class="col-md-8 mt-2">
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-1"></div>
+                </div>
+
+            </div>
+            <div class="row mt-5">
+
+                <div class="col-md-1"></div>
+                <div class="col-md-10">
+                    <h3 class="mt-2">Proje Bilgileri</h3>
+                    <div class="row mt-3">
+
+                        <div class="col-md-2 mt-2">
+                            <label for="" class="form-control">Proje başlık :</label>
+                        </div>
+                        <div class="col-md-2 mt-2">
+                            <label for="" class="form-control"
+                                style="border: 3px dashed ;">{{post.proje_baslik_list}}</label>
+                        </div>
+                        <div class="col-md-2 mt-2">
+                            <label for="" class="form-control">Özet :</label>
+                        </div>
+                        <div class="col-md-6 mt-2">
+                            <textarea class="form-control" rows="3" style="resize: none;">{{post.ozet_list}}</textarea>
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-1"></div>
+                </div>
+
+            </div>
+            <div class="row mt-5">
+
+                <div class="col-md-1"></div>
+                <div class="col-md-10">
+                    <h3 class="mt-2">Anahtar Kelime Bilgileri</h3>
+                    <div class="row mt-3">
+                        <div class="col-md-2 mt-2">
+                            <label for="" class="form-control">Anahtar Kelimeler :</label>
+                        </div>
+                        <div class="col-md-10 mt-2">
+                            <label for="" class="form-control"
+                                style="border: 3px dashed ; border-color: red yellow blue green">{{post.anahtar_kelimeler_list}}</label>
+                        </div>
+
+
+                    </div>
+
+                    <div class="col-md-1"></div>
+                </div>
+
+            </div>
+            <div class="row mt-5">
+
+                <div class="col-md-1"></div>
+                <div class="col-md-10">
+                    <h3 class="mt-2">Dönem Bilgileri</h3>
+                    <div class="row mt-3">
+                        <div class="col-md-2 mt-2">
+                            <label for="" class="form-control">Teslim tarihi :</label>
+                        </div>
+                        <div class="col-md-10 mt-2">
+                            <label for="" class="form-control"
+                                style="border: 3px dashed ; border-color: red yellow blue green">{{post.teslim_donem_list}}</label>
+                        </div>
+
+
+                    </div>
+
+                    <div class="col-md-1"></div>
+                </div>
+
+            </div>
+            <div class="row mt-5">
+
+                <div class="col-md-1"></div>
+                <div class="col-md-10">
+                    <h3 class="mt-2">Danışman Bilgileri</h3>
+                    <div class="row mt-3">
+                        <div class="col-md-2 mt-2">
+                            <label for="" class="form-control">Danışman Ad :</label>
+                        </div>
+                        <div class="col-md-2 mt-2">
+                            <label for="" class="form-control"
+                                style="border: 3px dashed ; border-color: red yellow blue green">{{post.danisman_isim_list}}</label>
+                        </div>
+                        <div class="col-md-2 mt-2">
+                            <label for="" class="form-control">Danışman Soyisim :</label>
+                        </div>
+                        <div class="col-md-2 mt-2">
+                            <label for="" class="form-control"
+                                style="border: 3px dashed ;">{{post.danisman_soyisim_list}}</label>
+                        </div>
+                        <div class="col-md-2 mt-2">
+                            <label for="" class="form-control">Danışman Unvan :</label>
+                        </div>
+                        <div class="col-md-2 mt-2">
+                            <label for="" class="form-control"
+                                style="border: 3px dashed ;">{{post.danisman_unvan_list}}</label>
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-1"></div>
+                </div>
+
+            </div>
+            <div class="row mt-5">
+                <div class="row">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-10">
+                        <h3 class="mt-2">Juri Bilgileri</h3>
+                        <div class="row mt-3">
+                            <div class="col-md-2 mt-2">
+                                <label for="" class="form-control">1.Jürinin Adı :</label>
+                            </div>
+                            <div class="col-md-2 mt-2">
+                                <label for="" class="form-control"
+                                    style="border: 3px dashed ; border-color: red yellow blue green">{{post.juri_isim_list.0}}</label>
+                            </div>
+                            <div class="col-md-2 mt-2">
+                                <label for="" class="form-control">1.Jürinin Soyisimi :</label>
+                            </div>
+                            <div class="col-md-2 mt-2">
+                                <label for="" class="form-control"
+                                    style="border: 3px dashed ;">{{post.juri_soyisim_list.0}}</label>
+                            </div>
+                            <div class="col-md-2 mt-2">
+                                <label for="" class="form-control">1.Jürinin Unvanı :</label>
+                            </div>
+                            <div class="col-md-2 mt-2">
+                                <label for="" class="form-control"
+                                    style="border: 3px dashed ;">{{post.juri_unvan_list.0}}</label>
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-1"></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-10">
+                        <div class="row mt-3">
+                            <div class="col-md-2 mt-2">
+                                <label for="" class="form-control">2.Jürinin Adı :</label>
+                            </div>
+                            <div class="col-md-2 mt-2">
+                                <label for="" class="form-control"
+                                    style="border: 3px dashed ; border-color: red yellow blue green">{{post.juri_isim_list.1}}</label>
+                            </div>
+                            <div class="col-md-2 mt-2">
+                                <label for="" class="form-control">2.Jürinin Soyisimi :</label>
+                            </div>
+                            <div class="col-md-2 mt-2">
+                                <label for="" class="form-control"
+                                    style="border: 3px dashed ;">{{post.juri_soyisim_list.1}}</label>
+                            </div>
+                            <div class="col-md-2 mt-2">
+                                <label for="" class="form-control">2.Jürinin Unvanı :</label>
+                            </div>
+                            <div class="col-md-2 mt-2">
+                                <label for="" class="form-control"
+                                    style="border: 3px dashed ;">{{post.juri_unvan_list.1}}</label>
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-1"></div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row mt-2">
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                    <button onclick="" class="btn btn-outline-info w-100"><a href="">Kullanıcı ekranına dön</a></button>
+                </div>
+                <div class="col-md-4"></div>
+            </div>
+
+            <div class="row mt-5">
+                <div class="col-md-3"> <i class="fas fa-times goksel"></i></div>
+                <div class="col-md-3"> <i class="fas fa-times goksel"></i></div>
+                <div class="col-md-3"> <i class="fas fa-times goksel"></i></div>
+                <div class="col-md-3"> <i class="fas fa-times goksel"></i></div>
+            </div>
+
             {% endfor %}
 
 
 
-        <div class="row bg-dark" id="gizli" style="display: hidden; height: 550px;">
-            BURA GIDDIP GELİO
-            dfafds
+            <div class="row bg-dark" id="gizli" style="display: hidden; height: 550px;">
+                BURA GIDDIP GELİO
+                dfafds
 
-        </div>
-        <div class="row">
-            <div class="col-md-4"></div>
-            <div class="col-md-4">
-                <button onclick="kapat()" class="btn btn-outline-info w-100" >İçeriği kapat</button>
             </div>
-            <div class="col-md-4"></div>
+            <div class="row">
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                    <button onclick="kapat()" class="btn btn-outline-info w-100">İçeriği kapat</button>
+                </div>
+                <div class="col-md-4"></div>
+            </div>
         </div>
-    </div>
     </div>
 
     </div>
-   
+
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
