@@ -1,0 +1,15 @@
+#icerik.active{
+    filter: blur(20px);
+    pointer-events: none;
+    user-select: none;
+}
+#yazar{
+    box-shadow: 0 5px 30px rgba(0, 0, 0, .30);
+    visibility: hidden;
+    opacity: 0;
+}
+#yazar.active{
+    visibility: visible;
+    opacity: 1;
+    transition: 0.5s;
+}
