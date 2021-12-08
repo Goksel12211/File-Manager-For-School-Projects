@@ -1,3 +1,4 @@
+from typing import Union
 from django import http
 from django.http.response import HttpResponse
 from django.shortcuts import redirect, render
@@ -10,11 +11,117 @@ import pdfminer.high_level
 import os
 
 from string import printable
+def intersection(lst1, lst2):
+    lst3 = [value for value in lst1 if value in lst2]
+    return lst3
+def yazara_gore_sorgula(files,yazar_ismi,yazar_soyismi,yazar_no):
+        if(yazar_ismi!=False):
+                queryfileid=Yazar.objects.filter(first_name=yazar_ismi).fileid
+                files.filter(fileid=queryfileid)
+        return files
 
+def getUserFiles(userid):
+        return File.objects.filter(userid=userid)
+
+def sorgulama_yapcam_ben(userid,yazar_ismi,yazar_soyismi,yazar_no,yazar_ogretim_turu,teslim_tarihi,ders_adi,proje_basligi,ozet,anahtar_kelime):
+                files=getUserFiles(userid)
+                file_id_list=[]
+                for file in files:
+                       file_id_list.append(file.id)
+                if yazar_ismi!="":
+                        yazarlar=Yazar.objects.filter(first_name=yazar_ismi)
+                        yazardan_file_id_list=[]
+                        for yazar in yazarlar:
+                                yazardan_file_id_list.append(yazar.file_id)
+                        file_id_list=intersection(file_id_list,yazardan_file_id_list)
+                if yazar_soyismi!="":
+                        yazarlar=Yazar.objects.filter(last_name=yazar_soyismi)
+                        yazardan_file_id_list=[]
+                        for yazar in yazarlar:
+                                yazardan_file_id_list.append(yazar.file_id)
+                        file_id_list=intersection(file_id_list,yazardan_file_id_list)
+                if yazar_no!="":
+                        yazarlar=Yazar.objects.filter(ogrenci_numarasi=yazar_no)
+                        yazardan_file_id_list=[]
+                        for yazar in yazarlar:
+                                yazardan_file_id_list.append(yazar.file_id)
+                        file_id_list=intersection(file_id_list,yazardan_file_id_list)                
+                if yazar_ogretim_turu!="":
+                        yazarlar=Yazar.objects.filter(ogretim_turu=yazar_ogretim_turu)
+                        yazardan_file_id_list=[]
+                        for yazar in yazarlar:
+                                yazardan_file_id_list.append(yazar.file_id)
+                        file_id_list=intersection(file_id_list,yazardan_file_id_list)
+                if ozet!="":
+                        proje_ayarlari=Proje_Ozellikleri.objects.filter(özet=ozet)
+                        proje_ayarindan_file_id_list=[]
+                        for proje_ayari in proje_ayarlari:
+                                proje_ayarindan_file_id_list.append(proje_ayari.file_id)
+                        file_id_list=intersection(file_id_list,proje_ayarindan_file_id_list)
+                
+                if ders_adi!="":
+                        proje_ayarlari=Proje_Ozellikleri.objects.filter(ders_adi=ders_adi)
+                        proje_ayarindan_file_id_list=[]
+                        for proje_ayari in proje_ayarlari:
+                                proje_ayarindan_file_id_list.append(proje_ayari.file_id)
+                        file_id_list=intersection(file_id_list,proje_ayarindan_file_id_list)
+                
+                if proje_basligi!="":
+                        proje_ayarlari=Proje_Ozellikleri.objects.filter(proje_basligi=proje_basligi)
+                        proje_ayarindan_file_id_list=[]
+                        for proje_ayari in proje_ayarlari:
+                                proje_ayarindan_file_id_list.append(proje_ayari.file_id)
+                        file_id_list=intersection(file_id_list,proje_ayarindan_file_id_list)
+                
+                if teslim_tarihi!="":
+                        
+                        proje_ayarlari=Proje_Ozellikleri.objects.filter(teslim_dönemi=teslim_tarihi)
+                        proje_ayarindan_file_id_list=[]
+                        for proje_ayari in proje_ayarlari:
+                                proje_ayarindan_file_id_list.append(proje_ayari.file_id)
+                        file_id_list=intersection(file_id_list,proje_ayarindan_file_id_list)
+                """if anahtar_kelime!="":
+                        nelergeldi=anahtar_kelime.split(",")
+                        anahtar_kelimeden_file_id_list=[]
+                        for negeldi in nelergeldi:
+                                proje_ayarlari=Anahtar_Kelimeler.objects.filter(anahtar_kelime=anahtar_kelime)
+                                proje_ayarindan_file_id_list=[]
+                                for proje_ayari in proje_ayarlari:
+                                        proje_ayarindan_file_id_list.append(proje_ayari.file_id)
+                        file_id_list=intersection(file_id_list,proje_ayarindan_file_id_list)
+                """
+                
+                
+                return file_id_list                  
+
+
+
+def verileri_al_ve_Sorgula(request,userid):
+        if request.method == 'GET':
+                yazar_ismi=request.GET.get("yazar_isim","")
+                yazar_soyismi=request.GET.get("yazar_soyad","")
+                yazar_no=request.GET.get("yazar_numarasi","")
+                yazar_ogretim_turu=request.GET.get("yazar_ogretim_turu","")
+                teslim_tarihi=request.GET.get("teslim_donemi","")
+                ders_adi=  request.GET.get("ders_adi","")
+                print(ders_adi)
+                proje_basligi=request.GET.get("proje_basligi","")
+                ozet=request.GET.get("ozet","")
+                anahtar_kelime=request.GET.get("anahatar_kelimeler","")
+                print(teslim_tarihi)
+                files_id_list=sorgulama_yapcam_ben(userid,yazar_ismi,yazar_soyismi,yazar_no,yazar_ogretim_turu,teslim_tarihi,ders_adi,proje_basligi,ozet,anahtar_kelime)
+                return files_id_list
+
+                
 def listele(request):
         userid=request.session["id"]
-        print(request.POST.get("yazar_ismi",False))
-        return render ( request, "listele.html",{"userid":userid})
+        file_id_list=verileri_al_ve_Sorgula(request,userid)
+        """
+        for file_id in file_id_list:
+                for yazar in Yazar.objects.filter(file_id=file_id):
+                        print(yazar.first_name)
+        """
+        return render ( request, "listele.html",{"file_id_list":file_id_list})
 
 import re
 def digestResume(resume,fileid): #resume is a pdf file (as str)
@@ -271,7 +378,7 @@ def digestResume(resume,fileid): #resume is a pdf file (as str)
         for kelime in keywords_listesi : 
                 Anahtar_Kelimeler.objects.create(file_id=fileid,anahtar_kelime=kelime)
 
-        Proje_Ozellikleri.objects.create(file_id=fileid,özet=ozetSatirlari[13:],teslim_dönemi=teslimDönemi,proje_basligi=proje_adi,ders_adi=ders_adi)
+        Proje_Ozellikleri.objects.create(file_id=fileid,özet=ozetSatirlari[13:],teslim_dönemi=teslimDönemi,proje_basligi=proje_adi[:-2],ders_adi=ders_adi[:-2])
         print()
   
      

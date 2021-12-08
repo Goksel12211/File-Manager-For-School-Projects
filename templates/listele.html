@@ -25,12 +25,14 @@
         yazar_soyismi=document.getElementById("real-yazar-soyad").value
         yazar_no=document.getElementById("real-yazar-no").value
         yazar_ogretim_turu=document.getElementById("real-yazar-ogretim-turu").value
+  
         teslim_tarihi=document.getElementById("real-teslim-donem").value
-        ders_adi=  document.getElementById("real-teslim-donem").value 
-        proje_basligi=document.getElementById("real-ders-ad").value
+        
+        ders_adi=  document.getElementById("real-ders-ad").value 
+        
+        proje_basligi=document.getElementById("real-proje-basligi").value
         ozet=document.getElementById("real-ozet").value
         anahtar_kelime=document.getElementById("real-anahtar_kelimeler").value
-        
         
         document.getElementsByName("yazar_isim")[0].value=yazar_ismi
         document.getElementsByName("yazar_soyad")[0].value=yazar_soyismi
@@ -41,7 +43,7 @@
         document.getElementsByName("proje_basligi")[0].value=proje_basligi
         document.getElementsByName("ozet")[0].value=ozet
         document.getElementsByName("anahatar_kelimeler")[0].value=anahtar_kelime
-      
+       
 
         document.getElementById("gizliform").submit()
 
@@ -212,7 +214,7 @@
                         <div class="row w-100">
                             <div class="col-sm-2"></div>
 
-                            <div class="col-sm-4"><button onclick="ac()" type="submit"
+                            <div class="col-sm-4"><button onclick="ac() , inputlariYollucamBen();" type="submit"
                                     class="btn btn-primary w-100">Ara</button>
                             </div>
                             <div class="col-sm-4"> <button onclick="kapat()" type="button" class="btn btn-danger w-100"
@@ -240,7 +242,7 @@
                                 <div class="col-md-3"></div>
                                 <div class="col-md-6 ">
                                     <label class="form-label ">Proje Baslığı :</label>
-                                    <input type="text" class="form-control">
+                                    <input type="text" id="real-proje-basligi" class="form-control">
                                 </div>
                            
                                 <div class="col-md-3"></div>
@@ -263,7 +265,7 @@
                         <div class="row w-100">
                             <div class="col-sm-2"></div>
 
-                            <div class="col-sm-4"><button onclick="ac()" type="button"
+                            <div class="col-sm-4"><button onclick=" inputlariYollucamBen(); ac() ;"  type="button"
                                     class="btn btn-primary w-100">Ara</button>
                             </div>
                             <div class="col-sm-4"> <button onclick="kapat()" type="button"
@@ -306,7 +308,7 @@
                         <div class="row w-100">
                             <div class="col-sm-2"></div>
 
-                            <div class="col-sm-4"><button onclick="ac()" type="button"
+                            <div class="col-sm-4"><button onclick="ac() ; inputlariYollucamBen () ;" type="button"
                                     class="btn btn-primary w-100">Ara</button>
                             </div>
                             <div class="col-sm-4"> <button onclick="kapat()" type="button" class="btn btn-danger w-100"
@@ -358,7 +360,7 @@
                         <div class="row w-100">
                             <div class="col-sm-2"></div>
 
-                            <div class="col-sm-4"><button onclick="ac()" type="button"
+                            <div class="col-sm-4"><button onclick="ac() ; inputlariYollucamBen() ; " type="button"
                                     class="btn btn-info w-100">Ara</button>
                             </div>
                             <div class="col-sm-4"> <button onclick="kapat()" type="button"
@@ -373,7 +375,20 @@
                 </div>
             </div>
         </div>
+
+
+
+        {%for file_id in file_id_list %}
+
+        <div>{{file_id}}</div>
+        <div></div>
+        
+        {%endfor%}
+        
+        
         <div class="row bg-dark" id="gizli" style="display: hidden; height: 550px;">
+            BURA GIDDIP GELİO
+            dfafds
 
         </div>
         <div class="row">
