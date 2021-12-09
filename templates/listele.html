@@ -14,6 +14,9 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
         integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
     <title>Listemiz</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=MonteCarlo&display=swap" rel="stylesheet">
 
 
 </head>
@@ -54,10 +57,26 @@
     #gizliform {
         display: none;
     }
+    *{
+        font-size: 20px;
+        font-weight: bolder;
+        box-sizing: border-box;
+        margin: 0px;
+    }
 
     body {
         background-color: whitesmoke;
+        font-family: 'MonteCarlo', cursive;
+        font-family: 'Roboto Slab', serif;
+        font-weight: bolder;
     }
+    h1{
+        font-size: 64px;
+    }
+    h3{
+        font-size: 36px;
+    }
+    
 
     .container>label {
         background-color: rgb(157, 66, 130);
@@ -206,7 +225,11 @@
                                 <div class="col-md-3"></div>
                                 <div class="col-md-6 ">
                                     <label class="form-label ">Dersin Adı: :</label>
-                                    <input type="text" id="real-ders-ad" class="form-control">
+                                    <select class="form-select form-select-lg mb-2" aria-label=".form-select-lg">
+                                        <option selected>Lütfen ders seçiniz</option>
+                                        <option value="ARAŞTIRMA PROBLEMLERİ">ARAŞTIRMA PROBLEMLERİ</option>
+                                        <option value="BİTİRME PROJESİ">BİTİRME PROJESİ</option>
+                                    </select>
                                 </div>
 
                                 <div class="col-md-3"></div>
@@ -395,8 +418,7 @@
 
 
         {% for post in posts %}
-        <hr>
-        <br>
+        <hr class="mt-5 mb-5">
         <div class="container-fluid">
             <div class="row">
 
@@ -405,25 +427,25 @@
                     <h3 class="mt-2">Yazar Bilgileri</h3>
                     <div class="row mt-3">
                         <div class="col-md-2 mt-2">
-                            <label for="" class="form-control">İsim :</label>
+                            <label for="" class="form-control" style="border: 3px dashed black; ">İsim :</label>
                         </div>
                         <div class="col-md-2 mt-2">
                             <label for="" class="form-control"
                                 style="border: 3px dashed ; border-color: red yellow blue green">{{post.yazar_isim_list}}</label>
                         </div>
                         <div class="col-md-2 mt-2">
-                            <label for="" class="form-control">Soyisim :</label>
+                            <label for="" class="form-control" style="border: 3px dashed black; "">Soyisim :</label>
+                        </div>
+                        <div class=" col-md-2 mt-2">
+                                <label for="" class="form-control"
+                                    style="border: 3px dashed ; border-color: red yellow blue green">{{post.yazar_soy_isim_list}}</label>
                         </div>
                         <div class="col-md-2 mt-2">
-                            <label for="" class="form-control"
-                                style="border: 3px dashed ;">{{post.yazar_soy_isim_list}}</label>
+                            <label for="" class="form-control" style="border: 3px dashed black; font-size: 18px;">Öğrenci numarası :</label>
                         </div>
-                        <div class="col-md-2 mt-2">
-                            <label for="" class="form-control">Öğrenci numarası :</label>
-                        </div>
-                        <div class="col-md-2 mt-2">
-                            <label for="" class="form-control"
-                                style="border: 3px dashed ;">{{post.yazar_no_list}}</label>
+                        <div class=" col-md-2 mt-2">
+                                <label for="" class="form-control"
+                                    style="border: 3px dashed ; border-color: red yellow blue green">{{post.yazar_no_list}}</label>
                         </div>
 
                     </div>
@@ -432,12 +454,12 @@
                         <div class="col-md-4">
 
                             <div class="col-md-5" style="float: left;"><label for="" class="form-control"
-                                    style="border: 3px dashed ;">Öğretim türü :</label>
+                                    style="border: 3px dashed black; ">Öğretim türü :</label>
                             </div>
 
                             <div class="col-md-5" style="float: left; margin-left: 55px;"><label for=""
                                     class="form-control"
-                                    style="border: 3px dashed ;">{{post.yazar_ogretim_turu_list}}</label>
+                                    style="border: 3px dashed ; border-color: red yellow blue green">{{post.yazar_ogretim_turu_list}}</label>
 
 
 
@@ -457,11 +479,11 @@
                     <h3 class="mt-2">Ders Bilgisi</h3>
                     <div class="row mt-3">
                         <div class="col-md-2 mt-2">
-                            <label for="" class="form-control">Ders Adı :</label>
+                            <label for="" class="form-control" style="border: 3px dashed black; "">Ders Adı :</label>
                         </div>
-                        <div class="col-md-4 mt-2">
-                            <label for="" class="form-control"
-                                style="border: 3px dashed ; border-color: red yellow blue green">{{post.ders_adi_list}}</label>
+                        <div class=" col-md-4 mt-2">
+                                <label for="" class="form-control"
+                                    style="border: 3px dashed ; border-color: red yellow blue green">{{post.ders_adi_list}}</label>
                         </div>
                         <div class="col-md-8 mt-2">
 
@@ -481,17 +503,18 @@
                     <div class="row mt-3">
 
                         <div class="col-md-2 mt-2">
-                            <label for="" class="form-control">Proje başlık :</label>
+                            <label for="" class="form-control" style="border: 3px dashed black; "">Proje başlık :</label>
+                        </div>
+                        <div class=" col-md-2 mt-2">
+                                <label for="" class="form-control"
+                                    style="border: 3px dashed ; border-color: red yellow blue green">{{post.proje_baslik_list}}</label>
                         </div>
                         <div class="col-md-2 mt-2">
-                            <label for="" class="form-control"
-                                style="border: 3px dashed ;">{{post.proje_baslik_list}}</label>
+                            <label for="" class="form-control" style="border: 3px dashed black; "">Özet :</label>
                         </div>
-                        <div class="col-md-2 mt-2">
-                            <label for="" class="form-control">Özet :</label>
-                        </div>
-                        <div class="col-md-6 mt-2">
-                            <textarea class="form-control" rows="3" style="resize: none;">{{post.ozet_list}}</textarea>
+                        <div class=" col-md-6 mt-2">
+                                <textarea class="form-control" rows="3" style="resize: none;"
+                                    style="border: 3px dashed black">{{post.ozet_list}}</textarea>
                         </div>
 
                     </div>
@@ -507,11 +530,11 @@
                     <h3 class="mt-2">Anahtar Kelime Bilgileri</h3>
                     <div class="row mt-3">
                         <div class="col-md-2 mt-2">
-                            <label for="" class="form-control">Anahtar Kelimeler :</label>
+                            <label for="" class="form-control" style="border: 3px dashed black; "">Anahtar Kelimeler :</label>
                         </div>
-                        <div class="col-md-10 mt-2">
-                            <label for="" class="form-control"
-                                style="border: 3px dashed ; border-color: red yellow blue green">{{post.anahtar_kelimeler_list}}</label>
+                        <div class=" col-md-10 mt-2">
+                                <label for="" class="form-control"
+                                    style="border: 3px dashed ; border-color: red yellow blue green">{{post.anahtar_kelimeler_list}}</label>
                         </div>
 
 
@@ -528,11 +551,11 @@
                     <h3 class="mt-2">Dönem Bilgileri</h3>
                     <div class="row mt-3">
                         <div class="col-md-2 mt-2">
-                            <label for="" class="form-control">Teslim tarihi :</label>
+                            <label for="" class="form-control" style="border: 3px dashed black; "">Teslim tarihi :</label>
                         </div>
-                        <div class="col-md-10 mt-2">
-                            <label for="" class="form-control"
-                                style="border: 3px dashed ; border-color: red yellow blue green">{{post.teslim_donem_list}}</label>
+                        <div class=" col-md-10 mt-2">
+                                <label for="" class="form-control"
+                                    style="border: 3px dashed ; border-color: red yellow blue green">{{post.teslim_donem_list}}</label>
                         </div>
 
 
@@ -549,25 +572,25 @@
                     <h3 class="mt-2">Danışman Bilgileri</h3>
                     <div class="row mt-3">
                         <div class="col-md-2 mt-2">
-                            <label for="" class="form-control">Danışman Ad :</label>
+                            <label for="" class="form-control" style="border: 3px dashed black; "">Danışman Ad :</label>
+                        </div>
+                        <div class=" col-md-2 mt-2">
+                                <label for="" class="form-control"
+                                    style="border: 3px dashed ; border-color: red yellow blue green">{{post.danisman_isim_list}}</label>
                         </div>
                         <div class="col-md-2 mt-2">
-                            <label for="" class="form-control"
-                                style="border: 3px dashed ; border-color: red yellow blue green">{{post.danisman_isim_list}}</label>
+                            <label for="" class="form-control" style="border: 3px dashed black; "">Danışman Soyisim :</label>
+                        </div>
+                        <div class=" col-md-2 mt-2">
+                                <label for="" class="form-control"
+                                    style="border: 3px dashed ; border-color: red yellow blue green">{{post.danisman_soyisim_list}}</label>
                         </div>
                         <div class="col-md-2 mt-2">
-                            <label for="" class="form-control">Danışman Soyisim :</label>
+                            <label for="" class="form-control" style="border: 3px dashed black; "">Danışman Unvan :</label>
                         </div>
-                        <div class="col-md-2 mt-2">
-                            <label for="" class="form-control"
-                                style="border: 3px dashed ;">{{post.danisman_soyisim_list}}</label>
-                        </div>
-                        <div class="col-md-2 mt-2">
-                            <label for="" class="form-control">Danışman Unvan :</label>
-                        </div>
-                        <div class="col-md-2 mt-2">
-                            <label for="" class="form-control"
-                                style="border: 3px dashed ;">{{post.danisman_unvan_list}}</label>
+                        <div class=" col-md-2 mt-2">
+                                <label for="" class="form-control"
+                                    style="border: 3px dashed ; border-color: red yellow blue green">{{post.danisman_unvan_list}}</label>
                         </div>
 
                     </div>
@@ -583,25 +606,28 @@
                         <h3 class="mt-2">Juri Bilgileri</h3>
                         <div class="row mt-3">
                             <div class="col-md-2 mt-2">
-                                <label for="" class="form-control">1.Jürinin Adı :</label>
+                                <label for="" class="form-control" style="border: 3px dashed black; ">1.Jürinin Adı
+                                    :</label>
                             </div>
                             <div class="col-md-2 mt-2">
                                 <label for="" class="form-control"
                                     style="border: 3px dashed ; border-color: red yellow blue green">{{post.juri_isim_list.0}}</label>
                             </div>
                             <div class="col-md-2 mt-2">
-                                <label for="" class="form-control">1.Jürinin Soyisimi :</label>
+                                <label for="" class="form-control" style="border: 3px dashed black; ">1.Jürinin Soyisimi
+                                    :</label>
                             </div>
                             <div class="col-md-2 mt-2">
                                 <label for="" class="form-control"
-                                    style="border: 3px dashed ;">{{post.juri_soyisim_list.0}}</label>
+                                    style="border: 3px dashed ; border-color: red yellow blue green">{{post.juri_soyisim_list.0}}</label>
                             </div>
                             <div class="col-md-2 mt-2">
-                                <label for="" class="form-control">1.Jürinin Unvanı :</label>
+                                <label for="" class="form-control" style="border: 3px dashed black; ">1.Jürinin Unvanı
+                                    :</label>
                             </div>
                             <div class="col-md-2 mt-2">
                                 <label for="" class="form-control"
-                                    style="border: 3px dashed ;">{{post.juri_unvan_list.0}}</label>
+                                    style="border: 3px dashed ; border-color: red yellow blue green">{{post.juri_unvan_list.0}}</label>
                             </div>
 
                         </div>
@@ -614,25 +640,25 @@
                     <div class="col-md-10">
                         <div class="row mt-3">
                             <div class="col-md-2 mt-2">
-                                <label for="" class="form-control">2.Jürinin Adı :</label>
+                                <label for="" class="form-control" style="border: 3px dashed black; "">2.Jürinin Adı :</label>
+                            </div>
+                            <div class=" col-md-2 mt-2">
+                                    <label for="" class="form-control"
+                                        style="border: 3px dashed ; border-color: red yellow blue green">{{post.juri_isim_list.1}}</label>
                             </div>
                             <div class="col-md-2 mt-2">
-                                <label for="" class="form-control"
-                                    style="border: 3px dashed ; border-color: red yellow blue green">{{post.juri_isim_list.1}}</label>
+                                <label for="" class="form-control" style="border: 3px dashed black; "">2.Jürinin Soyisimi :</label>
+                            </div>
+                            <div class=" col-md-2 mt-2">
+                                    <label for="" class="form-control"
+                                        style="border: 3px dashed ; border-color: red yellow blue green">{{post.juri_soyisim_list.1}}</label>
                             </div>
                             <div class="col-md-2 mt-2">
-                                <label for="" class="form-control">2.Jürinin Soyisimi :</label>
+                                <label for="" class="form-control" style="border: 3px dashed black; "">2.Jürinin Unvanı :</label>
                             </div>
-                            <div class="col-md-2 mt-2">
-                                <label for="" class="form-control"
-                                    style="border: 3px dashed ;">{{post.juri_soyisim_list.1}}</label>
-                            </div>
-                            <div class="col-md-2 mt-2">
-                                <label for="" class="form-control">2.Jürinin Unvanı :</label>
-                            </div>
-                            <div class="col-md-2 mt-2">
-                                <label for="" class="form-control"
-                                    style="border: 3px dashed ;">{{post.juri_unvan_list.1}}</label>
+                            <div class=" col-md-2 mt-2">
+                                    <label for="" class="form-control"
+                                        style="border: 3px dashed ; border-color: red yellow blue green">{{post.juri_unvan_list.1}}</label>
                             </div>
 
                         </div>
@@ -642,10 +668,12 @@
                 </div>
 
             </div>
-            <div class="row mt-2">
+            <div class="row mt-5">
                 <div class="col-md-4"></div>
                 <div class="col-md-4">
-                    <button onclick="" class="btn btn-outline-info w-100"><a href="">Kullanıcı ekranına dön</a></button>
+                    <button onclick="" class="btn btn-outline-info w-100"><a href=""
+                            style="text-decoration: none; color:black; font-size: 22px;">Kullanıcı ekranına
+                            dön</a></button>
                 </div>
                 <div class="col-md-4"></div>
             </div>
@@ -660,19 +688,6 @@
             {% endfor %}
 
 
-
-            <div class="row bg-dark" id="gizli" style="display: hidden; height: 550px;">
-                BURA GIDDIP GELİO
-                dfafds
-
-            </div>
-            <div class="row">
-                <div class="col-md-4"></div>
-                <div class="col-md-4">
-                    <button onclick="kapat()" class="btn btn-outline-info w-100">İçeriği kapat</button>
-                </div>
-                <div class="col-md-4"></div>
-            </div>
         </div>
     </div>
 
