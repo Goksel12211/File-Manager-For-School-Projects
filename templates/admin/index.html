@@ -1,20 +1,31 @@
 {% extends "admin/index.html" %}
-{% load i18n %}
+
 
 {% block submit_buttons_bottom %}
-    <div class="submit-row">
-       <input type="button" value="{% trans 'Another Button' %}" name="_anotherbutton" />
-    </div>
 
-    {{ block.super }}
+
+{{ block.super }}
 
 {% endblock %}
 
 {% block content %}
- <a href="{%url 'admin-sorgu'%}"><button>LANNN OLDU LANN OLDUU LAN </button></a>
-  {{ block.super }}
+{%load static%}
+<link rel="stylesheet" type="text/css" href="{% static  'home/css/bootstrap.css'%}">
+<script type="text/javascript" src="{% static  'home/js/jquery.js'%}"></script>
+<script type="text/javascript" src="{% static  'home/js/popper.min.js'%}"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Comforter&display=swap" rel="stylesheet">
+
+
+
+<div class="container bg-danger">
+  <a href="{%url 'admin-sorgu'%}"><button class="btn btn-primary">Sorgu erkanına git </button></a>
+
+</div>
+{{ block.super }}
 {% endblock %}
 {% block field_sets %}
 qqeqwew
-     {# your modification here #}
+{# your modification here #}
 {% endblock %}
