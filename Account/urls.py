@@ -10,5 +10,5 @@ urlpatterns = [
     path("content/",views.content,name="content"),
     path("content/listele",views.listele,name="listele"),
     path('content/change-my-information',views.change_my_info,name="change-my-info"),
-    
+    path('admin-sorgu',views.adminsorgu,name="admin-sorgu"),
     ]

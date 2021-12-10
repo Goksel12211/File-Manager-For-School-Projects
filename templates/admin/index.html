@@ -1,0 +1,20 @@
+{% extends "admin/index.html" %}
+{% load i18n %}
+
+{% block submit_buttons_bottom %}
+    <div class="submit-row">
+       <input type="button" value="{% trans 'Another Button' %}" name="_anotherbutton" />
+    </div>
+
+    {{ block.super }}
+
+{% endblock %}
+
+{% block content %}
+ <a href="{%url 'admin-sorgu'%}"><button>LANNN OLDU LANN OLDUU LAN </button></a>
+  {{ block.super }}
+{% endblock %}
+{% block field_sets %}
+qqeqwew
+     {# your modification here #}
+{% endblock %}
