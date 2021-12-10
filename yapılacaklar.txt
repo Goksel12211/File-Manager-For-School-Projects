@@ -1,3 +1,1 @@
-anahtar listesi elamanlarını aktarma duzenlenecek (front end),
-sorgu ekranı donem bilgileri select yapıacak,
-devamı sendeee knkkkk
+

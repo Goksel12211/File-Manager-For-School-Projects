@@ -1,49 +1,156 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="tr">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Bilgi Güncelle</title>
     <link rel="stylesheet" type="text/css" href="{% static  'home/css/bootstrap.css'%}">
     <script type="text/javascript" src="{% static  'home/js/jquery.js'%}"></script>
     <script type="text/javascript" src="{% static  'home/js/popper.min.js'%}"></script>
-</head>
-<body>
-    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Smooch&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: whitesmoke;
+        }
 
-    {% for message  in messages%}
+        * {
+            font-family: 'Smooch', cursive;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-weight: bolder;
+        }
+
+        h1 {
+            font-size: 110px;
+            color: black;
+        }
+
+        h2 {
+            font-size: 70px;
+            color: black;
+        }
+
+        h3 {
+            font-size: 65px;
+        }
+
+        form>* {
+            font-size: 45px;
+        }
+
+        .box {
+            border: 7px solid saddlebrown;
+            border-radius: 210px;
+        }
+
+        .row>* {
+            color: sandybrown;
+        }
+      
+    </style>
+</head>
+
+<body>
+
+
+    {% for message in messages%}
     <div>{{message}}</div>
     {% endfor%}
-    
-    <form action="http://127.0.0.1:8000/content/change-my-information" method="POST" >
-        {%csrf_token%}
-<div class="container">
-        <form>
-            <div class="form-group row">
-                <div class="form-group">
-                    <label for="exampleFormControlInput1">New Username</label>
-                    <input  name="new_user_name"type="text" class="form-control" id="exampleFormControlInput1" placeholder="username">
-                  </div>
-            </div>
-            <div class="form-group row">
-                <div class="form-group">
-                    <label for="exampleFormControlInput1">New password</label>
-                    <input name="new_password"type="password" class="form-control" id="exampleFormControlInput1" placeholder="password">
-                  </div>
-            </div>
-            <div class="form-group row">
-                <div class="form-group">
-                    <label for="exampleFormControlInput1">New email address</label>
-                    <input type="email" name="new_email"class="form-control" id="exampleFormControlInput1" placeholder="email">
-                  </div>
-            </div>
 
-            <input class="btn btn-primary" type="submit" placeholder="Update" >
-            <a href="{%url 'content'%}"><button type="button" class="btn btn-primary">Turn back</button>    </a>
-          </form>
+    <form action="http://127.0.0.1:8000/content/change-my-information" method="POST">
+        {%csrf_token%}
+        <div class="container-fluid">
+
+            <h1 class="text-center mt-3 mb-4">Bilgilerimi Güncelle </h1>
+            <form action="">
+                <div class="row mt-1 mb-3">
+
+                    <div class="col-md-2"></div>
+                    <div class="col-md-8 text-center">
+                        <h2 class="text-center" style="display: inline-block;">Hoş Geldin :
+                            <pre style="display: inline-block;"> </pre>
+                        </h2>
+                        <h3 class="text-center" style="display: inline-block;">{{isim}} {{soyisim}}</h3>
+                    </div>
+                    <div class="col-md-2"></div>
+
+
+                </div>
+            </form>
+
+            <form>
+                <div class="box p-5">
+                    <div class="form-group row ">
+                        <div class="form-group">
+                            <div class="row mt-5">
+                                <div class="col-md-4">
+                                    <label for="new_user_name" class="form-label">Yeni kullanıcı adını giriniz :</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input name="new_user_name" type="text" class="form-control w-100"
+                                        id="exampleFormControlInput1" placeholder="Kullanıcı adı" style="height: 60px;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="form-group">
+                            <div class="row mt-5">
+                                <div class="col-md-4">
+                                    <label for="new_password" class="form-label">Yeni şifreyi giriniz :</label>
+                                </div>
+                                <div class="col-md-8">
+
+                                    <input name="new_password" type="password" class="form-control"
+                                        id="exampleFormControlInput1" placeholder="Şifre" style="height: 60px;">
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <div class="form-group row mb-4">
+                        <div class="form-group">
+                            <div class="row mt-5">
+                                <div class="col-md-4">
+                                    <label for="new_email" class="form-label">Yeni E-mail adresininizi griniz :</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input type="email" name="new_email" class="form-control"
+                                        id="exampleFormControlInput1" placeholder="email" style="height: 60px;">
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-5">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-3"><input class="btn btn-success w-100" style="font-size: 35px;" type="submit"
+                            placeholder="Update" value="Değiştir">
+                    </div>
+                    <div class="col-md-3 ms-auto">
+                        <a href="{%url 'content'%}"><button type="button" class="btn btn-danger w-100"
+                                style="font-size: 35px;">Geri Dön</button>
+                        </a>
+                    </div>
+                    <div class="col-md-2"></div>
+                </div>
+
+            </form>
         </div>
-   
+
 </body>
+
 </html>

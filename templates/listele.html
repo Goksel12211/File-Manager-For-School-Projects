@@ -30,7 +30,9 @@
 
 
         teslim_tarihi = document.getElementById("real-teslim-donem").value
-
+        if (teslim_tarihi == "Lütfen dönemi seçiniz") {
+            teslim_tarihi = "";
+        }
         ders_adi = document.getElementById("real-ders-ad").value
         if (ders_adi == "Lütfen ders seçiniz") {
             ders_adi = "";
@@ -38,6 +40,7 @@
         proje_basligi = document.getElementById("real-proje-basligi").value
         ozet = document.getElementById("real-ozet").value
         anahtar_kelime = document.getElementById("real-anahtar_kelimeler").value
+        
         document.getElementsByName("yazar_isim")[0].value = yazar_ismi
         document.getElementsByName("yazar_soyad")[0].value = yazar_soyismi
         document.getElementsByName("yazar_numarasi")[0].value = yazar_no
@@ -53,6 +56,9 @@
 
 
     }
+</script>
+<script>
+    var liste=["2010"]
 </script>
 
 <style>
@@ -91,6 +97,21 @@
         font-size: 75px;
         text-align: center;
         width: 100%;
+    }
+
+    a {
+        text-decoration: none;
+        color: lightblue;
+        font-size: 25px;
+        font-weight: bolder;
+    }
+
+    a :visited {
+        color: white;
+    }
+
+    a:hover {
+        color: white;
     }
 </style>
 
@@ -155,6 +176,14 @@
             <div class=" col-md-1">
             </div>
 
+        </div>
+        <div class="row mt-5">
+            <div class="col-md-5 col-12"></div>
+            <div class="col-md-2 col-12">
+                <button type="" class="btn btn-outline-info w-100 py-1"><a class="w-100" href="{% url 'content' %}">
+                        Kullanıc ekranına dön</a></button>
+            </div>
+            <div class="col-md-5 col-12"></div>
         </div>
         <div class="modal" id="yazar">
             <div class="modal-dialog modal-lg">
@@ -380,7 +409,38 @@
                                 <div class="col-md-3"></div>
                                 <div class="col-md-6 ">
                                     <label class="form-label ">Dönemi girin :</label>
-                                    <input type="text" id="real-teslim-donem" class="form-control">
+                                    <select class="form-select form-select-lg mb-2" aria-label=".form-select-lg"
+                                        id="real-teslim-donem">
+                                        <option selected value="Lütfen dönemi seçiniz">Lütfen dönemi seçiniz</option>
+                                        <option value="Sonbahar Dönemi2010 -- 2011">Sonbahar dönemi 2010-2011</option>
+                                        <option value="İlkbahar Dönemi2010 -- 2011">İlkbahar dönemi  2010-2011</option>
+                                        <option value="Sonbahar Dönemi2011 -- 2012">Sonbahar dönemi 2011-2012</option>
+                                        <option value="İlkbahar Dönemi2011 -- 2012">İlkbahar dönemi  2011-2012</option>
+                                        <option value="Sonbahar Dönemi2012 -- 2013">Sonbahar dönemi 2012-2013</option>
+                                        <option value="İlkbahar Dönemi2012 -- 2013">İlkbahar dönemi 2012-2013</option>
+                                        <option value="Sonbahar Dönemi2013 -- 2014">Sonbahar dönemi 2013-2014</option>
+                                        <option value="İlkbahar Dönemi2013 -- 2014">İlkbahar dönemi  2013-2014</option>
+                                        <option value="Sonbahar Dönemi2014 -- 2015">Sonbahar dönemi 2014-2015</option>
+                                        <option value="İlkbahar Dönemi2014 -- 2015">İlkbahar dönemi  2014-2015</option>
+                                        <option value="Sonbahar Dönemi2015 -- 2016">Sonbahar dönemi 2015-2016</option>
+                                        <option value="İlkbahar Dönemi2015 -- 2016">İlkbahar dönemi  2015-2016</option>
+                                        <option value="Sonbahar Dönemi2016 -- 2017">Sonbahar dönemi 2016-2017</option>
+                                        <option value="İlkbahar Dönemi2016 -- 2017">İlkbahar dönemi  2016-2017</option>
+                                        <option value="Sonbahar Dönemi2017 -- 2018">Sonbahar dönemi 2017-2018</option>
+                                        <option value="İlkbahar Dönemi2017 -- 2018">İlkbahar dönemi  2017-2018</option>
+                                        <option value="Sonbahar Dönemi2018 -- 2019">Sonbahar dönemi 2018-2019</option>
+                                        <option value="İlkbahar Dönemi2018 -- 2019">İlkbahar dönemi  2018-2019</option>
+                                        <option value="Sonbahar Dönemi2019 -- 2020">Sonbahar dönemi 2019-2020</option>
+                                        <option value="İlkbahar Dönemi2019 -- 2020">İlkbahar dönemi  2019-2020</option>
+                                        <option value="Sonbahar Dönemi2020 -- 2021">Sonbahar dönemi 2020-2021</option>
+                                        <option value="İlkbahar Dönemi2020 -- 2021">İlkbahar dönemi  2020-2021</option>
+                                        <option value="Sonbahar Dönemi2021 -- 2022">Sonbahar dönemi 2021-2022</option>
+                                        <option value="İlkbahar Dönemi2021 -- 2022">İlkbahar dönemi  2021-2022</option>
+                                        <option value="Sonbahar Dönemi2022 -- 2023">Sonbahar dönemi 2022-2023</option>
+                                        <option value="İlkbahar Dönemi2022 -- 2023">İlkbahar dönemi  2022-2023</option>
+                                        <option value="Sonbahar Dönemi2023 -- 2024">Sonbahar dönemi 2023-2024</option>
+                                        <option value="İlkbahar Dönemi2023 -- 2024">İlkbahar dönemi  2023-2024</option>
+                                    </select>
                                 </div>
 
                                 <div class="col-md-3"></div>
@@ -540,8 +600,13 @@
                             <label for="" class="form-control" style="border: 3px dashed black; "">Anahtar Kelimeler :</label>
                         </div>
                         <div class=" col-md-10 mt-2">
+                            
                                 <label for="" class="form-control"
-                                    style="border: 3px dashed ; border-color: red yellow blue green">{{post.anahtar_kelimeler_list}}</label>
+                                    style="border: 3px dashed ; border-color: red yellow blue green">
+                                    {% for anahtarlar in post.anahtar_kelimeler_list %}
+                                    {{anahtarlar}} 
+                                    {% endfor %}
+                                </label>
                         </div>
 
 
@@ -678,7 +743,7 @@
             <div class="row mt-5">
                 <div class="col-md-4"></div>
                 <div class="col-md-4">
-                    <button onclick="" class="btn btn-outline-info w-100"><a href=""
+                    <button onclick="" class="btn btn-outline-info w-100"><a href="{% url 'content' %}"
                             style="text-decoration: none; color:black; font-size: 22px;">Kullanıcı ekranına
                             dön</a></button>
                 </div>
@@ -706,7 +771,7 @@
         integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
         crossorigin="anonymous"></script>
     <script>
-       
+
     </script>
 </body>
 
