@@ -11,6 +11,27 @@ import pdfminer.high_level
 import os
 
 from string import printable
+
+
+def change_my_info(request):
+        userid=request.session["id"]
+        new_user_name=request.POST.get("new_user_name",False)
+        new_password=request.POST.get("new_password",False)
+        new_email=request.POST.get("new_email",False)
+        currentUser=Kullanicilar.objects.filter(id=userid)
+        if not Kullanicilar.objects.filter(username=new_user_name):
+                if new_email:
+                        currentUser.update(email=new_email)
+                if new_user_name:
+                        currentUser.update(username=new_user_name)
+                if new_password:
+                        currentUser.update(password=new_password)
+        else:
+                messages.info(request,'Username Already Taken ! ')
+                
+        return render(request,"bilgilerUpdate.html")
+
+
 def intersection(lst1, lst2):
     lst3 = [value for value in lst1 if value in lst2]
     return lst3
@@ -514,6 +535,8 @@ def content(request):
         return render(request,"kullaniciEkrani.html")
         
 def secim(request):
+        isExited=request.GET.get("exit",False)
+        
         return render(request,'Anasayfa.html')
 
 

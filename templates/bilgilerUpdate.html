@@ -6,8 +6,44 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="{% static  'home/css/bootstrap.css'%}">
+    <script type="text/javascript" src="{% static  'home/js/jquery.js'%}"></script>
+    <script type="text/javascript" src="{% static  'home/js/popper.min.js'%}"></script>
 </head>
 <body>
     
+
+    {% for message  in messages%}
+    <div>{{message}}</div>
+    {% endfor%}
+    
+    <form action="http://127.0.0.1:8000/content/change-my-information" method="POST" >
+        {%csrf_token%}
+<div class="container">
+        <form>
+            <div class="form-group row">
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">New Username</label>
+                    <input  name="new_user_name"type="text" class="form-control" id="exampleFormControlInput1" placeholder="username">
+                  </div>
+            </div>
+            <div class="form-group row">
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">New password</label>
+                    <input name="new_password"type="password" class="form-control" id="exampleFormControlInput1" placeholder="password">
+                  </div>
+            </div>
+            <div class="form-group row">
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">New email address</label>
+                    <input type="email" name="new_email"class="form-control" id="exampleFormControlInput1" placeholder="email">
+                  </div>
+            </div>
+
+            <input class="btn btn-primary" type="submit" placeholder="Update" >
+            <a href="{%url 'content'%}"><button type="button" class="btn btn-primary">Turn back</button>    </a>
+          </form>
+        </div>
+   
 </body>
 </html>
