@@ -14,6 +14,10 @@ import os
 from string import printable
 
 
+def adminsorgu(request):
+        return render(request,"adminsorgu.html")
+
+
 def change_my_info(request):
     userid = request.session["id"]
     new_user_name = request.POST.get("new_user_name", False)
