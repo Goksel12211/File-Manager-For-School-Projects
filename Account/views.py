@@ -15,6 +15,10 @@ from string import printable
 
 
 def adminsorgu(request):
+        context = None
+
+        posts=[]
+        tum_kullanicilarin_fileID_listesi=[]
         if request.method == 'POST':
                 yazar_ismi = request.POST.get("yazar_isim", "")
                 yazar_soyismi = request.POST.get("yazar_soyad", "")
@@ -51,7 +55,7 @@ def adminsorgu(request):
                 if user_password != "":
                         Kullanicilar_listesi=Kullanicilar_listesi.filter(password=user_password)
             
-                tum_kullanicilarin_fileID_listesi=[]
+                
                 print("KAÇ KULLANICI DAHIL EDILDI",str(len(Kullanicilar_listesi)))
                 for kullanici in Kullanicilar_listesi:
                         
@@ -60,12 +64,105 @@ def adminsorgu(request):
                         for eleman in  sorgulama_yapcam_ben(userid, yazar_ismi, yazar_soyismi, yazar_no, yazar_ogretim_turu, teslim_tarihi, ders_adi, proje_basligi, ozet, anahtar_kelime):
                                 #print("Eleman " + str(eleman))
                                 tum_kullanicilarin_fileID_listesi.append(eleman)        
-        #GOSTERILCEK FILE IDLER
-        tum_kullanicilarin_fileID_listesi
-                   
+                #GOSTERILCEK FILE IDLER
+                sorgulanan_kullanici_isim=[]
+                sorgulanan_kullanici_soyisim=[]
+                sorgulanan_kullanici_username=[]
+                sorgulanan_kullanici_password=[]
+                sorgulanan_kullanici_email=[]
+                
+                
+                sorgulanan_yazar_isim_list = []
+                sorgulanan_yazar_soyisim_list = []
+                sorgulanan_yazar_no_list = []
+                sorgulanan_yazar_ogretim_turu = []
+                sorgulanan_ders_adi_list = []
+                sorgulanan_proje_baslik_list = []
+                sorgulanan_teslim_dönemi_list = []
+                sorgulanan_ozet_list = []
+                sorgulanan_danisman_isim_list = []
+                sorgulanan_danisman_soyisim_list = []
+                sorgulanan_danisman_unvan_list = []
+                sorgulanan_juri_isim_list = []
+                sorgulanan_juri_soyisim_list = []
+                sorgulanan_juri_unvan_list = []
+                sorgulanan_anahtar_kelimeler_list = []
+                
+                for file_id in tum_kullanicilarin_fileID_listesi:
+                        for yazar in Yazar.objects.filter(file_id=file_id):
+                                sorgulanan_yazar_isim_list.append(yazar.first_name)
+                                sorgulanan_yazar_soyisim_list.append(yazar.last_name)
+                                sorgulanan_yazar_ogretim_turu.append(yazar.ogretim_turu)
+                                sorgulanan_yazar_no_list.append(yazar.ogrenci_numarasi)
 
-        
-        return render(request,"adminsorgu.html")
+                        for ayar in Proje_Ozellikleri.objects.filter(file_id=file_id):
+                                sorgulanan_ders_adi_list.append(ayar.ders_adi)
+                                sorgulanan_proje_baslik_list.append(ayar.proje_basligi)
+                                sorgulanan_ozet_list.append(ayar.özet)
+                                sorgulanan_teslim_dönemi_list.append(ayar.teslim_dönemi)
+
+                        for danisman in Danisman.objects.filter(file_id=file_id):
+                                sorgulanan_danisman_isim_list.append(danisman.first_name)
+                                sorgulanan_danisman_soyisim_list.append(danisman.last_name)
+                                sorgulanan_danisman_unvan_list.append(danisman.unvan)
+
+                        temp_juri_ad = []
+                        temp_juri_soyad = []
+                        temp_juri_unvan = []
+                        for juri in Juri.objects.filter(file_id=file_id):
+                                temp_juri_ad.append(juri.first_name)
+                                temp_juri_soyad.append(juri.last_name)
+                                temp_juri_unvan.append(juri.unvan)
+                        sorgulanan_juri_isim_list.append(temp_juri_ad)
+                        sorgulanan_juri_soyisim_list.append(temp_juri_soyad)
+                        sorgulanan_juri_unvan_list.append(temp_juri_unvan)
+
+                        temp_anahtar_kelime_list = []
+                        for anahtar_kelime in Anahtar_Kelimeler.objects.filter(file_id=file_id):
+                                temp_anahtar_kelime_list.append(anahtar_kelime.anahtar_kelime)
+                        sorgulanan_anahtar_kelimeler_list.append(temp_anahtar_kelime_list)
+                        
+                        #KULLANICILAR
+                        userid=File.objects.filter(id=file_id)[0].userid
+                        sorgulalan_kullanici=Kullanicilar.objects.filter(id=userid)[0]   
+                        
+                        sorgulanan_kullanici_isim.append(sorgulalan_kullanici.first_name)
+                        sorgulanan_kullanici_soyisim.append(sorgulalan_kullanici.last_name)     
+                        print(sorgulanan_kullanici_email)
+                        sorgulanan_kullanici_email.append(sorgulalan_kullanici.email)     
+                        sorgulanan_kullanici_password.append(sorgulalan_kullanici.password)     
+                        sorgulanan_kullanici_username.append(sorgulalan_kullanici.username)
+                        print(sorgulanan_yazar_isim_list)
+                for count, value in enumerate(tum_kullanicilarin_fileID_listesi):
+                        post = {
+                                'yazar_isim_list': sorgulanan_yazar_isim_list[count],
+                                'yazar_soy_isim_list': sorgulanan_yazar_soyisim_list[count],
+                                'yazar_no_list': sorgulanan_yazar_no_list[count],
+                                'yazar_ogretim_turu_list': sorgulanan_yazar_ogretim_turu[count],
+                                'ders_adi_list': sorgulanan_ders_adi_list[count],
+                                'proje_baslik_list': sorgulanan_proje_baslik_list[count],
+                                'teslim_donem_list': sorgulanan_teslim_dönemi_list[count],
+                                'ozet_list': sorgulanan_ozet_list[count],
+                                'danisman_isim_list': sorgulanan_danisman_isim_list[count],
+                                'danisman_soyisim_list': sorgulanan_danisman_soyisim_list[count],
+                                'danisman_unvan_list': sorgulanan_danisman_unvan_list[count],
+                                'anahtar_kelimeler_list': sorgulanan_anahtar_kelimeler_list[count],
+                                'juri_isim_list': sorgulanan_juri_isim_list[count],
+                                'juri_soyisim_list': sorgulanan_juri_soyisim_list[count],
+                                'juri_unvan_list': sorgulanan_juri_unvan_list[count],
+                                'kullanici_ad_list': sorgulanan_kullanici_isim[count],
+                                'kullanici_soyad_list': sorgulanan_kullanici_soyisim[count],
+                                'kullanici_username_list': sorgulanan_kullanici_username[count],
+                                'kullanici_password_list': sorgulanan_kullanici_password[count],
+                                'kullanici_email_list': sorgulanan_kullanici_email[count],
+                        }
+                        posts.append(post)
+                        
+                context = {
+                "posts": posts
+                }
+                
+        return render(request,"adminsorgu.html",context=context)
 def change_my_info(request):
     userid = request.session["id"]
     new_user_name = request.POST.get("new_user_name", False)
