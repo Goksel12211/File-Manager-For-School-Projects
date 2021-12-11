@@ -23,6 +23,13 @@
 
 <script>
     function inputlariYollucamBen() {
+        user_ismi = document.getElementById("real-user-isim").value
+        user_soyismi = document.getElementById("real-user-soyad").value
+        user_name = document.getElementById("real-username").value
+        user_mail = document.getElementById("real-user-mail").value
+        user_password = document.getElementById("real-user-password").value
+
+
         yazar_ismi = document.getElementById("real-yazar-isim").value
         yazar_soyismi = document.getElementById("real-yazar-soyad").value
         yazar_no = document.getElementById("real-yazar-no").value
@@ -52,6 +59,14 @@
         document.getElementsByName("anahatar_kelimeler")[0].value = anahtar_kelime
 
 
+
+        document.getElementsByName("username")[0].value = user_name
+        document.getElementsByName("password")[0].value = user_password
+        document.getElementsByName("user-email")[0].value = user_mail
+        document.getElementsByName("user_first_name")[0].value = user_ismi
+        document.getElementsByName("user_last_name")[0].value = user_soyismi
+
+       
         document.getElementById("gizliform").submit()
 
 
@@ -140,8 +155,16 @@
 </style>
 
 <body>
-    <form id="gizliform" action="http://127.0.0.1:8000/content/listele" method="POST">
+    <form id="gizliform" action="{%url 'admin-sorgu'%}" method="POST">
         {%csrf_token%}
+         <!-- AGA user BURDA -->
+         <input type="text" name="username">
+         <input type="text" name="password">
+         <input type="text" name="user-email">
+         <input type="text" name="user_first_name">
+         <input type="text" name="user_last_name">
+
+
         <!-- AGA YAZAR BURDA -->
         <input type="text" name="yazar_isim">
         <input type="text" name="yazar_soyad">
@@ -239,11 +262,11 @@
                             <div class="col-md-1"></div>
                             <div class="col-md-5 ">
                                 <label class="form-label ">İsim :</label>
-                                <input type="text" id="real-yazar-isim" class="form-control">
+                                <input type="text" id="real-user-isim" class="form-control">
                             </div>
                             <div class="col-md-5 ">
                                 <label class="form-label ">Soyisim :</label>
-                                <input type="text" id="real-yazar-soyad" class="form-control">
+                                <input type="text" id="real-user-soyad" class="form-control">
                             </div>
                             <div class="col-md-1"></div>
                         </div>
@@ -251,11 +274,11 @@
                             <div class="col-md-1"></div>
                             <div class="col-md-5 ">
                                 <label class="form-label ">Username :</label>
-                                <input type="text" id="real-yazar-isim" class="form-control">
+                                <input type="text" id="real-username" class="form-control">
                             </div>
                             <div class="col-md-5 ">
                                 <label class="form-label ">Şifre :</label>
-                                <input type="text" id="real-yazar-soyad" class="form-control">
+                                <input type="text" id="real-user-password" class="form-control">
                             </div>
                             <div class="col-md-1"></div>
 
@@ -265,7 +288,7 @@
 
                             <div class="col-md-6 ">
                                 <label class="form-label ">Email :</label>
-                                <input type="text" id="real-yazar-no" class="form-control">
+                                <input type="text" id="real-user-mail" class="form-control">
                             </div>
                             <div class="col-md-3"></div>
                         </div>

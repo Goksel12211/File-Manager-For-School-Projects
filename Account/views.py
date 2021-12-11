@@ -15,9 +15,57 @@ from string import printable
 
 
 def adminsorgu(request):
+        if request.method == 'POST':
+                yazar_ismi = request.POST.get("yazar_isim", "")
+                yazar_soyismi = request.POST.get("yazar_soyad", "")
+                yazar_no = request.POST.get("yazar_numarasi", "")
+                yazar_ogretim_turu = request.POST.get("yazar_ogretim_turu", "")
+                teslim_tarihi = request.POST.get("teslim_donemi", "")
+                ders_adi = request.POST.get("ders_adi", "")
+
+                proje_basligi = request.POST.get("proje_basligi", "")
+                ozet = request.POST.get("ozet", "")
+                anahtar_kelime = request.POST.get("anahatar_kelimeler", "")
+                
+
+                
+                
+                
+                user_ismi = request.POST.get("user_first_name", "")
+                user_soyismi = request.POST.get("user_last_name", "")
+                user_email = request.POST.get("user-email", "")
+                user_username = request.POST.get("username", "")
+                user_password = request.POST.get("password", "")
+   
+
+        
+                Kullanicilar_listesi=Kullanicilar.objects.all()
+                if user_username != "":
+                        Kullanicilar_listesi=Kullanicilar_listesi.filter(username=user_username)
+                if user_ismi != "":
+                        Kullanicilar_listesi=Kullanicilar_listesi.filter(first_name=user_ismi)
+                if user_soyismi != "":
+                        Kullanicilar_listesi=Kullanicilar_listesi.filter(last_name=user_soyismi)
+                if user_email != "":
+                        Kullanicilar_listesi=Kullanicilar_listesi.filter(email=user_email)
+                if user_password != "":
+                        Kullanicilar_listesi=Kullanicilar_listesi.filter(password=user_password)
+            
+                tum_kullanicilarin_fileID_listesi=[]
+                print("KAÇ KULLANICI DAHIL EDILDI",str(len(Kullanicilar_listesi)))
+                for kullanici in Kullanicilar_listesi:
+                        
+                        userid=kullanici.id  
+                        print("user id : " + str(userid)) 
+                        for eleman in  sorgulama_yapcam_ben(userid, yazar_ismi, yazar_soyismi, yazar_no, yazar_ogretim_turu, teslim_tarihi, ders_adi, proje_basligi, ozet, anahtar_kelime):
+                                #print("Eleman " + str(eleman))
+                                tum_kullanicilarin_fileID_listesi.append(eleman)        
+        #GOSTERILCEK FILE IDLER
+        tum_kullanicilarin_fileID_listesi
+                   
+
+        
         return render(request,"adminsorgu.html")
-
-
 def change_my_info(request):
     userid = request.session["id"]
     new_user_name = request.POST.get("new_user_name", False)
@@ -144,14 +192,16 @@ def verileri_al_ve_Sorgula(request, userid):
         proje_basligi = request.POST.get("proje_basligi", "")
         ozet = request.POST.get("ozet", "")
         anahtar_kelime = request.POST.get("anahatar_kelimeler", "")
-        print(teslim_tarihi)
+       
         files_id_list = sorgulama_yapcam_ben(userid, yazar_ismi, yazar_soyismi, yazar_no,
                                              yazar_ogretim_turu, teslim_tarihi, ders_adi, proje_basligi, ozet, anahtar_kelime)
+ 
         return files_id_list
 
 
 def listele(request):
     userid = request.session["id"]
+    print(userid)
     file_id_list = verileri_al_ve_Sorgula(request, userid)
     sorgulanan_yazar_isim_list = []
     sorgulanan_yazar_soyisim_list = []
@@ -244,7 +294,6 @@ def listele(request):
         context = {
             "posts": posts
         }
-        print(context)
 
         # COK ONEMLI  JURI VE ANAHTAR KELIMELER  IC ICE  2D LİSTELER TEKRAR FOR AÇMALISIN HTML DE
         return render(request, "listele.html", context=context)
@@ -409,8 +458,7 @@ def digestResume(resume, fileid):  # resume is a pdf file (as str)
 
                     tempyazarismi = str(str(aldimknk)[13:])
 
-                    print("yazar ismi" + str(tempyazarismi))
-                    print("cümle" + str(content))
+                  
                     if content.__contains__(tempyazarismi):
                         xxxxxx = txtSatırlarım[i][12:]
                         ogrecinno = xxxxxx[:9]
@@ -505,7 +553,7 @@ def digestResume(resume, fileid):  # resume is a pdf file (as str)
 
     Proje_Ozellikleri.objects.create(
         file_id=fileid, özet=ozetSatirlari[13:], teslim_dönemi=teslimDönemi, proje_basligi=proje_adi[:-2], ders_adi=ders_adi[:-2])
-    print()
+
 
     Yazar.objects.create(file_id=fileid, first_name=yazar_ismi[:-2].rsplit(" ", 1)[
                          0], last_name=yazar_ismi[:-2].rsplit(" ", 1)[1], ogrenci_numarasi=ogrecinno, ogretim_turu=ogretimTuru)
