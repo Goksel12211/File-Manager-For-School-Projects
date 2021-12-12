@@ -5532,12 +5532,12 @@ Systems,
 
 Power 
 
-IEEE 
-
 on 
 
 Capacitors, 
 10.1109/TPWRS.1987.4335284. 
+
+IEEE 
 
 [56]  Kizilcay M., Teichmann K., Agdemir A., Lösing M., Neumann C., Blackstart 
 of  a  380-KV  Transmission  System  with  Unloaded  Transformers  After  a 

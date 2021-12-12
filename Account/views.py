@@ -353,25 +353,7 @@ def listele(request):
             for anahtar_kelime in Anahtar_Kelimeler.objects.filter(file_id=file_id):
                 temp_anahtar_kelime_list.append(anahtar_kelime.anahtar_kelime)
             sorgulanan_anahtar_kelimeler_list.append(temp_anahtar_kelime_list)
-            context = {
-                'file_path_list':sorgulalan_file_path_list,
-                'yazar_isim_list': sorgulanan_yazar_isim_list,
-                'yazar_soy_isim_list': sorgulanan_yazar_soyisim_list,
-                'yazar_no_list': sorgulanan_yazar_no_list,
-                'yazar_ogretim_turu_list': sorgulanan_yazar_ogretim_turu,
-                'ders_adi_list': sorgulanan_ders_adi_list,
-                'proje_baslik_list': sorgulanan_proje_baslik_list,
-                'teslim_donem_list': sorgulanan_teslim_dönemi_list,
-                'ozet_list': sorgulanan_ozet_list,
-                'danisman_isim_list': sorgulanan_danisman_isim_list,
-                'danisman_soyisim_list': sorgulanan_danisman_soyisim_list,
-                'danisman_unvan_list': sorgulanan_danisman_unvan_list,
-                'anahtar_kelimeler_list': sorgulanan_anahtar_kelimeler_list,
-                'juri_isim_list': sorgulanan_juri_isim_list,
-                'juri_soyisim_list': sorgulanan_juri_soyisim_list,
-                'juri_unvan_list': sorgulanan_juri_unvan_list,
-            }
-
+       
         for count, value in enumerate(file_id_list):
             post = {
                 'file_path_list':sorgulalan_file_path_list[count],
