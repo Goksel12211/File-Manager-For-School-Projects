@@ -51,7 +51,7 @@ LİSANS TEZİ
 PROJE ADI 
 
  
-Ali Osman Umut Göksel 
+ALİ EKEN 
 
 KOCAELİ 2018 
 
@@ -66,7 +66,7 @@ ARAŞTIRMA PROBLEMLERİ / BİTİRME PROJESİ
 PROJE BAŞLIĞI 
 
  
-Ali Osman Umut Göksel 
+ALİ EKEN 
 
  
 
@@ -145,7 +145,7 @@ ve mutluluklarımı paylaşan sevgili aileme teşekkürlerimi sunarım.
 
 Mayıs – 2018 
 
-Ali Osman Umut Göksel 
+Ali EKEN 
 
  
 
@@ -186,15 +186,15 @@ sunulmuştur. Ayrıca yine bu kurallar çerçevesinde kendime ait olmayan ve ken
 üretmediği  ve  başka  kaynaklardan  elde  edilen  bilgiler  ve  materyaller  (text,  resim, 
 şekil, tablo vb.) gerekli şekilde referans edilmiş ve dokümanda belirtilmiştir. 
 
-Öğrenci No: 190202031 
+Öğrenci No: …………………………… 
 
-Adı Soyadı: Ali Osman Umut Göksel  
+Adı Soyadı: ………………………….... 
 
 İmza:………………………………….. 
 
-Öğrenci No: 121312321
+Öğrenci No: …………………………… 
 
-Adı Soyadı: Göksel Kınalı.... 
+Adı Soyadı: ………………………….... 
 
 İmza:………………………………….. 
 
@@ -5532,12 +5532,12 @@ Systems,
 
 Power 
 
+IEEE 
+
 on 
 
 Capacitors, 
 10.1109/TPWRS.1987.4335284. 
-
-IEEE 
 
 [56]  Kizilcay M., Teichmann K., Agdemir A., Lösing M., Neumann C., Blackstart 
 of  a  380-KV  Transmission  System  with  Unloaded  Transformers  After  a 

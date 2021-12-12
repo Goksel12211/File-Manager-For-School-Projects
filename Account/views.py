@@ -374,6 +374,7 @@ def listele(request):
 
         for count, value in enumerate(file_id_list):
             post = {
+                'file_path_list':sorgulalan_file_path_list[count],
                 'yazar_isim_list': sorgulanan_yazar_isim_list[count],
                 'yazar_soy_isim_list': sorgulanan_yazar_soyisim_list[count],
                 'yazar_no_list': sorgulanan_yazar_no_list[count],
@@ -394,6 +395,7 @@ def listele(request):
         context = {
             "posts": posts
         }
+        print(sorgulanan_yazar_isim_list)
 
         # COK ONEMLI  JURI VE ANAHTAR KELIMELER  IC ICE  2D LİSTELER TEKRAR FOR AÇMALISIN HTML DE
         return render(request, "listele.html", context=context)
@@ -403,9 +405,9 @@ def listele(request):
 def digestResume(resume, fileid):  # resume is a pdf file (as str)
     text = pdfminer.high_level.extract_text(
         resume, codec='utf-8', caching=True)
-    #f = open("test.txt", "w",encoding="utf-8")
-    # f.write(text)
-   # f.close()
+    f = open("test.txt", "w",encoding="utf-8")
+    f.write(text)
+    f.close()
     txtSatırlarım = []
     aldimknk = str
     fread = open("test.txt", "r", encoding="utf-8")
