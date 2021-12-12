@@ -626,7 +626,9 @@ def digestResume(resume, fileid):  # resume is a pdf file (as str)
     Juri.objects.create(file_id=fileid, first_name=juriad,
                         last_name=jurisoyad, unvan=juri1ünvanı)
     Juri.objects.create(file_id=fileid, first_name=juri2ad,
-                        last_name=juri2soyad, unvan=juri2ünvanı)
+                        last_name=juri2soyad, unvan=danışmanadı)
+    Juri.objects.create(file_id=fileid, first_name=danışmanadı,
+                        last_name=danışmansoyad, unvan=danışmanünvanı)
     for kelime in anahtar_kelime_listesi:
         Anahtar_Kelimeler.objects.create(file_id=fileid, anahtar_kelime=kelime)
     for kelime in keywords_listesi:
