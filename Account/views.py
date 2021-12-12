@@ -56,11 +56,9 @@ def adminsorgu(request):
                         Kullanicilar_listesi=Kullanicilar_listesi.filter(password=user_password)
             
                 
-                print("KAÇ KULLANICI DAHIL EDILDI",str(len(Kullanicilar_listesi)))
                 for kullanici in Kullanicilar_listesi:
                         
                         userid=kullanici.id  
-                        print("user id : " + str(userid)) 
                         for eleman in  sorgulama_yapcam_ben(userid, yazar_ismi, yazar_soyismi, yazar_no, yazar_ogretim_turu, teslim_tarihi, ders_adi, proje_basligi, ozet, anahtar_kelime):
                                 #print("Eleman " + str(eleman))
                                 tum_kullanicilarin_fileID_listesi.append(eleman)        
@@ -87,8 +85,12 @@ def adminsorgu(request):
                 sorgulanan_juri_soyisim_list = []
                 sorgulanan_juri_unvan_list = []
                 sorgulanan_anahtar_kelimeler_list = []
+                sorgulalan_file_path_list=[]
                 
                 for file_id in tum_kullanicilarin_fileID_listesi:
+                        sorgulalan_file_path_list.append(File.objects.get(id=file_id).file)
+                        
+                       
                         for yazar in Yazar.objects.filter(file_id=file_id):
                                 sorgulanan_yazar_isim_list.append(yazar.first_name)
                                 sorgulanan_yazar_soyisim_list.append(yazar.last_name)
@@ -128,13 +130,12 @@ def adminsorgu(request):
                         
                         sorgulanan_kullanici_isim.append(sorgulalan_kullanici.first_name)
                         sorgulanan_kullanici_soyisim.append(sorgulalan_kullanici.last_name)     
-                        print(sorgulanan_kullanici_email)
                         sorgulanan_kullanici_email.append(sorgulalan_kullanici.email)     
                         sorgulanan_kullanici_password.append(sorgulalan_kullanici.password)     
                         sorgulanan_kullanici_username.append(sorgulalan_kullanici.username)
-                        print(sorgulanan_yazar_isim_list)
                 for count, value in enumerate(tum_kullanicilarin_fileID_listesi):
                         post = {
+                                'file_path_list': sorgulalan_file_path_list[count],
                                 'yazar_isim_list': sorgulanan_yazar_isim_list[count],
                                 'yazar_soy_isim_list': sorgulanan_yazar_soyisim_list[count],
                                 'yazar_no_list': sorgulanan_yazar_no_list[count],
@@ -298,7 +299,6 @@ def verileri_al_ve_Sorgula(request, userid):
 
 def listele(request):
     userid = request.session["id"]
-    print(userid)
     file_id_list = verileri_al_ve_Sorgula(request, userid)
     sorgulanan_yazar_isim_list = []
     sorgulanan_yazar_soyisim_list = []
@@ -315,10 +315,12 @@ def listele(request):
     sorgulanan_juri_soyisim_list = []
     sorgulanan_juri_unvan_list = []
     sorgulanan_anahtar_kelimeler_list = []
+    sorgulalan_file_path_list=[]
     context = None
     if request.method == "POST":
         posts = []
         for file_id in file_id_list:
+            sorgulalan_file_path_list.append(File.objects.get(id=file_id).file)
             for yazar in Yazar.objects.filter(file_id=file_id):
                 sorgulanan_yazar_isim_list.append(yazar.first_name)
                 sorgulanan_yazar_soyisim_list.append(yazar.last_name)
@@ -352,6 +354,7 @@ def listele(request):
                 temp_anahtar_kelime_list.append(anahtar_kelime.anahtar_kelime)
             sorgulanan_anahtar_kelimeler_list.append(temp_anahtar_kelime_list)
             context = {
+                'file_path_list':sorgulalan_file_path_list,
                 'yazar_isim_list': sorgulanan_yazar_isim_list,
                 'yazar_soy_isim_list': sorgulanan_yazar_soyisim_list,
                 'yazar_no_list': sorgulanan_yazar_no_list,
@@ -428,7 +431,6 @@ def digestResume(resume, fileid):  # resume is a pdf file (as str)
     ogrecinno = str
     ogretimTuru = str
     for i in range(0, len(txtSatırlarım)):
-        #print("  " + txtSatırlarım[i] + "  ")
         if txtSatırlarım[i].__contains__("LİSANS TEZİ"):
             for k in range(i+1, len(txtSatırlarım)):
                 if re.search('[a-zA-Z]+', txtSatırlarım[k]):
@@ -540,8 +542,7 @@ def digestResume(resume, fileid):  # resume is a pdf file (as str)
                     tempyazarismi = yazar_ismi[:-2]
 
                     tempyazarismi = tempyazarismi.lower()
-                    #print("Yazar ismi uzunluk:",len(tempyazarismi),"Bitiş")
-                    #print("Yazar ismi İçerik:"+str(tempyazarismi)+ "Bitiş")
+      
 
                     if(gökselinsayac == 1):
                         for key in tempyazarismi:
@@ -567,7 +568,6 @@ def digestResume(resume, fileid):  # resume is a pdf file (as str)
 
                     break
 
-                # print(len(yazar_ismi))
 
     # ANAHATAR
     for anahtarlar in anahtar_kelimeler[21:].split(","):
@@ -719,7 +719,6 @@ def register(request):
                 return redirect('http://127.0.0.1:8000/register')
 
             if Kullanicilar.objects.filter(username=username):
-                print(username)
                 messages.info(request, 'Username Already Has Taken ! ')
                 return redirect('http://127.0.0.1:8000/register')
 
