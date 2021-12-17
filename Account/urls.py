@@ -14,6 +14,7 @@ urlpatterns = [
     path("content/listele",views.listele,name="listele"),
     path('content/change-my-information',views.change_my_info,name="change-my-info"),
     path('admin-sorgu',views.adminsorgu,name="admin-sorgu"),
+    path('benisil/<int:fileid>/',views.sil,name="sil"),
     ]
 
 urlpatterns=urlpatterns + static    (settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

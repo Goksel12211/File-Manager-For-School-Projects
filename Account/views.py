@@ -13,6 +13,17 @@ import os
 
 from string import printable
 
+def sil(request, fileid):
+    
+    File.objects.filter(id=fileid).delete()
+    Juri.objects.filter(fileid=fileid).delete()
+    Yazar.objects.filter(fileid=fileid).delete()
+    Proje_Ozellikleri.objects.filter(fileid=fileid).delete()
+    Danisman.objects.filter(fileid=fileid).delete()
+    Anahtar_Kelimeler.objects.filter(fileid=fileid).delete()
+    
+    
+    return redirect("content")
 
 def adminsorgu(request):
     context = None
@@ -417,6 +428,7 @@ def listele(request):
            
         for count, value in enumerate(file_id_list):
             post = {
+                'file_id_list': file_id_list[count],
                 'file_path_list': sorgulalan_file_path_list[count],
                 'yazar_isim_list': sorgulanan_yazar_isim_list[count],
                 'yazar_soy_isim_list': sorgulanan_yazar_soyisim_list[count],
