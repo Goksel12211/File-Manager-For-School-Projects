@@ -13,17 +13,31 @@ import os
 
 from string import printable
 
-def sil(request, fileid):
+def silFromUser(request, fileid):
     
     File.objects.filter(id=fileid).delete()
-    Juri.objects.filter(fileid=fileid).delete()
-    Yazar.objects.filter(fileid=fileid).delete()
-    Proje_Ozellikleri.objects.filter(fileid=fileid).delete()
-    Danisman.objects.filter(fileid=fileid).delete()
-    Anahtar_Kelimeler.objects.filter(fileid=fileid).delete()
+    Juri.objects.filter(file_id=fileid).delete()
+    Yazar.objects.filter(file_id=fileid).delete()
+    Proje_Ozellikleri.objects.filter(file_id=fileid).delete()
+    Danisman.objects.filter(file_id=fileid).delete()
+    Anahtar_Kelimeler.objects.filter(file_id=fileid).delete()
     
     
-    return redirect("content")
+    return redirect("listele")
+
+def silFromAdmin(request, fileid):
+    
+    File.objects.filter(id=fileid).delete()
+    Juri.objects.filter(file_id=fileid).delete()
+    Yazar.objects.filter(file_id=fileid).delete()
+    Proje_Ozellikleri.objects.filter(file_id=fileid).delete()
+    Danisman.objects.filter(file_id=fileid).delete()
+    Anahtar_Kelimeler.objects.filter(file_id=fileid).delete()
+    
+    
+    return redirect("admin-sorgu")
+
+
 
 def adminsorgu(request):
     context = None
