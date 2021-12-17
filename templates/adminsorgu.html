@@ -136,7 +136,7 @@
         font-size: 75px;
         text-align: center;
         width: 100%;
-        
+
     }
 
     a {
@@ -154,7 +154,6 @@
     a:hover {
         color: white;
     }
-  
 </style>
 
 <body>
@@ -626,7 +625,8 @@
                 <div class="row">
                     <div class="col-4"></div>
                     <div class="col-4">
-                        <a class="btn btn-primary w-100" id="shadow"  href="  http://127.0.0.1:8000/{{post.file_path_list}}" target="_blank"> Dosya görüntüle </a>
+                        <a class="btn btn-primary w-100" id="shadow"
+                            href="  http://127.0.0.1:8000/{{post.file_path_list}}" target="_blank"> Dosya görüntüle </a>
 
                     </div>
                     <div class="col-4"></div>
@@ -690,21 +690,21 @@
 
         <div class="col-md-1"></div>
         <div class="col-md-10">
-            <h3 class="mt-2">Yazar Bilgileri</h3>
+            <h3 class="mt-2">1.Yazarın Bilgileri</h3>
             <div class="row mt-3">
                 <div class="col-md-2 mt-2">
                     <label for="" class="form-control" style="border: 3px dashed black; ">İsim :</label>
                 </div>
                 <div class="col-md-2 mt-2">
                     <label for="" class="form-control"
-                        style="border: 3px dashed ; border-color: red yellow blue green">{{post.yazar_isim_list}}</label>
+                        style="border: 3px dashed ; border-color: red yellow blue green">{{post.yazar_isim_list.0}}</label>
                 </div>
                 <div class="col-md-2 mt-2">
                     <label for="" class="form-control" style="border: 3px dashed black; "">Soyisim :</label>
                         </div>
                         <div class=" col-md-2 mt-2">
                         <label for="" class="form-control"
-                            style="border: 3px dashed ; border-color: red yellow blue green">{{post.yazar_soy_isim_list}}</label>
+                            style="border: 3px dashed ; border-color: red yellow blue green">{{post.yazar_soy_isim_list.0}}</label>
                 </div>
                 <div class="col-md-2 mt-2">
                     <label for="" class="form-control" style="border: 3px dashed black; font-size: 18px;">Öğrenci
@@ -712,7 +712,7 @@
                 </div>
                 <div class=" col-md-2 mt-2">
                     <label for="" class="form-control"
-                        style="border: 3px dashed ; border-color: red yellow blue green">{{post.yazar_no_list}}</label>
+                        style="border: 3px dashed ; border-color: red yellow blue green">{{post.yazar_no_list.0}}</label>
                 </div>
 
             </div>
@@ -725,7 +725,7 @@
                     </div>
 
                     <div class="col-md-5" style="float: left; margin-left: 55px;"><label for="" class="form-control"
-                            style="border: 3px dashed ; border-color: red yellow blue green">{{post.yazar_ogretim_turu_list}}</label>
+                            style="border: 3px dashed ; border-color: red yellow blue green">{{post.yazar_ogretim_turu_list.0}}</label>
 
 
 
@@ -734,8 +734,112 @@
                 </div>
 
             </div>
-            <div class="col-md-1"></div>
+
         </div>
+        <div class="col-md-1"></div>
+            {% if post.yazar_isim_list|length >= 2  %}
+            <div class="col-md-1"></div>
+            <div class="col-md-10">
+                <h3 class="mt-2">2.Yazarın Bilgileri</h3>
+                <div class="row mt-3">
+                    <div class="col-md-2 mt-2">
+                        <label for="" class="form-control" style="border: 3px dashed black; ">İsim :</label>
+                    </div>
+                    <div class="col-md-2 mt-2">
+                        <label for="" class="form-control"
+                            style="border: 3px dashed ; border-color: red yellow blue green">{{post.yazar_isim_list.1}}</label>
+                    </div>
+                    <div class="col-md-2 mt-2">
+                        <label for="" class="form-control" style="border: 3px dashed black; "">Soyisim :</label>
+                            </div>
+                            <div class=" col-md-2 mt-2">
+                            <label for="" class="form-control"
+                                style="border: 3px dashed ; border-color: red yellow blue green">{{post.yazar_soy_isim_list.1}}</label>
+                    </div>
+                    <div class="col-md-2 mt-2">
+                        <label for="" class="form-control" style="border: 3px dashed black; font-size: 18px;">Öğrenci
+                            numarası :</label>
+                    </div>
+                    <div class=" col-md-2 mt-2">
+                        <label for="" class="form-control"
+                            style="border: 3px dashed ; border-color: red yellow blue green">{{post.yazar_no_list.1}}</label>
+                    </div>
+    
+                </div>
+                <div class="row mt-4">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4">
+    
+                        <div class="col-md-5" style="float: left;"><label for="" class="form-control"
+                                style="border: 3px dashed black; ">Öğretim türü :</label>
+                        </div>
+    
+                        <div class="col-md-5" style="float: left; margin-left: 55px;"><label for="" class="form-control"
+                                style="border: 3px dashed ; border-color: red yellow blue green">{{post.yazar_ogretim_turu_list.1}}</label>
+    
+    
+    
+                        </div>
+                        <div class="col-md-4"></div>
+                    </div>
+    
+                </div>
+    
+            </div>
+            <div class="col-md-1"></div>
+                {% if post.yazar_isim_list|length == 3  %}
+                <div class="col-md-1"></div>
+                <div class="col-md-10">
+                <h3 class="mt-2">3.Yazarın Bilgileri</h3>
+                <div class="row mt-3">
+                    <div class="col-md-2 mt-2">
+                        <label for="" class="form-control" style="border: 3px dashed black; ">İsim :</label>
+                    </div>
+                    <div class="col-md-2 mt-2">
+                        <label for="" class="form-control"
+                            style="border: 3px dashed ; border-color: red yellow blue green">{{post.yazar_isim_list.2}}</label>
+                    </div>
+                    <div class="col-md-2 mt-2">
+                        <label for="" class="form-control" style="border: 3px dashed black; "">Soyisim :</label>
+                            </div>
+                            <div class=" col-md-2 mt-2">
+                            <label for="" class="form-control"
+                                style="border: 3px dashed ; border-color: red yellow blue green">{{post.yazar_soy_isim_list.2}}</label>
+                    </div>
+                    <div class="col-md-2 mt-2">
+                        <label for="" class="form-control" style="border: 3px dashed black; font-size: 18px;">Öğrenci
+                            numarası :</label>
+                    </div>
+                    <div class=" col-md-2 mt-2">
+                        <label for="" class="form-control"
+                            style="border: 3px dashed ; border-color: red yellow blue green">{{post.yazar_no_list.2}}</label>
+                    </div>
+    
+                </div>
+                <div class="row mt-4">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4">
+    
+                        <div class="col-md-5" style="float: left;"><label for="" class="form-control"
+                                style="border: 3px dashed black; ">Öğretim türü :</label>
+                        </div>
+    
+                        <div class="col-md-5" style="float: left; margin-left: 55px;"><label for="" class="form-control"
+                                style="border: 3px dashed ; border-color: red yellow blue green">{{post.yazar_ogretim_turu_list.2}}</label>
+    
+    
+    
+                        </div>
+                        <div class="col-md-4"></div>
+                    </div>
+    
+                </div>
+    
+                </div>
+                <div class="col-md-1"></div>
+                {% endif %}
+
+            {% endif %}
 
     </div>
     <div class="row mt-5">
@@ -934,7 +1038,7 @@
 
                 </div>
 
-               
+
             </div>
             <div class="col-md-1"></div>
         </div>
@@ -966,7 +1070,7 @@
 
                 </div>
 
-               
+
             </div>
             <div class="col-md-1"></div>
         </div>

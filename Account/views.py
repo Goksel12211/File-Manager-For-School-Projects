@@ -15,155 +15,192 @@ from string import printable
 
 
 def adminsorgu(request):
-        context = None
+    context = None
 
-        posts=[]
-        tum_kullanicilarin_fileID_listesi=[]
-        if request.method == 'POST':
-                yazar_ismi = request.POST.get("yazar_isim", "")
-                yazar_soyismi = request.POST.get("yazar_soyad", "")
-                yazar_no = request.POST.get("yazar_numarasi", "")
-                yazar_ogretim_turu = request.POST.get("yazar_ogretim_turu", "")
-                teslim_tarihi = request.POST.get("teslim_donemi", "")
-                ders_adi = request.POST.get("ders_adi", "")
+    posts = []
+    tum_kullanicilarin_fileID_listesi = []
+    if request.method == 'POST':
+        yazar_ismi = request.POST.get("yazar_isim", "")
+        yazar_soyismi = request.POST.get("yazar_soyad", "")
+        yazar_no = request.POST.get("yazar_numarasi", "")
+        yazar_ogretim_turu = request.POST.get("yazar_ogretim_turu", "")
+        teslim_tarihi = request.POST.get("teslim_donemi", "")
+        ders_adi = request.POST.get("ders_adi", "")
 
-                proje_basligi = request.POST.get("proje_basligi", "")
-                ozet = request.POST.get("ozet", "")
-                anahtar_kelime = request.POST.get("anahatar_kelimeler", "")
-                
+        proje_basligi = request.POST.get("proje_basligi", "")
+        ozet = request.POST.get("ozet", "")
+        anahtar_kelime = request.POST.get("anahatar_kelimeler", "")
 
-                
-                
-                
-                user_ismi = request.POST.get("user_first_name", "")
-                user_soyismi = request.POST.get("user_last_name", "")
-                user_email = request.POST.get("user-email", "")
-                user_username = request.POST.get("username", "")
-                user_password = request.POST.get("password", "")
-   
+        user_ismi = request.POST.get("user_first_name", "")
+        user_soyismi = request.POST.get("user_last_name", "")
+        user_email = request.POST.get("user-email", "")
+        user_username = request.POST.get("username", "")
+        user_password = request.POST.get("password", "")
 
+        Kullanicilar_listesi = Kullanicilar.objects.all()
+        if user_username != "":
+            Kullanicilar_listesi = Kullanicilar_listesi.filter(
+                username=user_username)
+        if user_ismi != "":
+            Kullanicilar_listesi = Kullanicilar_listesi.filter(
+                first_name=user_ismi)
+        if user_soyismi != "":
+            Kullanicilar_listesi = Kullanicilar_listesi.filter(
+                last_name=user_soyismi)
+        if user_email != "":
+            Kullanicilar_listesi = Kullanicilar_listesi.filter(
+                email=user_email)
+        if user_password != "":
+            Kullanicilar_listesi = Kullanicilar_listesi.filter(
+                password=user_password)
+
+        for kullanici in Kullanicilar_listesi:
+
+            userid = kullanici.id
+            for eleman in sorgulama_yapcam_ben(userid, yazar_ismi, yazar_soyismi, yazar_no, yazar_ogretim_turu, teslim_tarihi, ders_adi, proje_basligi, ozet, anahtar_kelime):
+                # print("Eleman " + str(eleman))
+                tum_kullanicilarin_fileID_listesi.append(
+                    eleman)
+        # GOSTERILCEK FILE IDLER
+        sorgulanan_kullanici_isim = []
+        sorgulanan_kullanici_soyisim = []
+        sorgulanan_kullanici_username = []
+        sorgulanan_kullanici_password = []
+        sorgulanan_kullanici_email = []
+
+        sorgulanan_yazar_isim_list = []
+        sorgulanan_yazar_soyisim_list = []
+        sorgulanan_yazar_no_list = []
+        sorgulanan_yazar_ogretim_turu = []
+        sorgulanan_ders_adi_list = []
+        sorgulanan_proje_baslik_list = []
+        sorgulanan_teslim_dönemi_list = []
+        sorgulanan_ozet_list = []
+        sorgulanan_danisman_isim_list = []
+        sorgulanan_danisman_soyisim_list = []
+        sorgulanan_danisman_unvan_list = []
+        sorgulanan_juri_isim_list = []
+        sorgulanan_juri_soyisim_list = []
+        sorgulanan_juri_unvan_list = []
+        sorgulanan_anahtar_kelimeler_list = []
+        sorgulalan_file_path_list = []
         
-                Kullanicilar_listesi=Kullanicilar.objects.all()
-                if user_username != "":
-                        Kullanicilar_listesi=Kullanicilar_listesi.filter(username=user_username)
-                if user_ismi != "":
-                        Kullanicilar_listesi=Kullanicilar_listesi.filter(first_name=user_ismi)
-                if user_soyismi != "":
-                        Kullanicilar_listesi=Kullanicilar_listesi.filter(last_name=user_soyismi)
-                if user_email != "":
-                        Kullanicilar_listesi=Kullanicilar_listesi.filter(email=user_email)
-                if user_password != "":
-                        Kullanicilar_listesi=Kullanicilar_listesi.filter(password=user_password)
-            
-                
-                for kullanici in Kullanicilar_listesi:
-                        
-                        userid=kullanici.id  
-                        for eleman in  sorgulama_yapcam_ben(userid, yazar_ismi, yazar_soyismi, yazar_no, yazar_ogretim_turu, teslim_tarihi, ders_adi, proje_basligi, ozet, anahtar_kelime):
-                                #print("Eleman " + str(eleman))
-                                tum_kullanicilarin_fileID_listesi.append(eleman)        
-                #GOSTERILCEK FILE IDLER
-                sorgulanan_kullanici_isim=[]
-                sorgulanan_kullanici_soyisim=[]
-                sorgulanan_kullanici_username=[]
-                sorgulanan_kullanici_password=[]
-                sorgulanan_kullanici_email=[]
-                
-                
-                sorgulanan_yazar_isim_list = []
-                sorgulanan_yazar_soyisim_list = []
-                sorgulanan_yazar_no_list = []
-                sorgulanan_yazar_ogretim_turu = []
-                sorgulanan_ders_adi_list = []
-                sorgulanan_proje_baslik_list = []
-                sorgulanan_teslim_dönemi_list = []
-                sorgulanan_ozet_list = []
-                sorgulanan_danisman_isim_list = []
-                sorgulanan_danisman_soyisim_list = []
-                sorgulanan_danisman_unvan_list = []
-                sorgulanan_juri_isim_list = []
-                sorgulanan_juri_soyisim_list = []
-                sorgulanan_juri_unvan_list = []
-                sorgulanan_anahtar_kelimeler_list = []
-                sorgulalan_file_path_list=[]
-                
-                for file_id in tum_kullanicilarin_fileID_listesi:
-                        sorgulalan_file_path_list.append(File.objects.get(id=file_id).file)
-                        
-                       
-                        for yazar in Yazar.objects.filter(file_id=file_id):
-                                sorgulanan_yazar_isim_list.append(yazar.first_name)
-                                sorgulanan_yazar_soyisim_list.append(yazar.last_name)
-                                sorgulanan_yazar_ogretim_turu.append(yazar.ogretim_turu)
-                                sorgulanan_yazar_no_list.append(yazar.ogrenci_numarasi)
 
-                        for ayar in Proje_Ozellikleri.objects.filter(file_id=file_id):
-                                sorgulanan_ders_adi_list.append(ayar.ders_adi)
-                                sorgulanan_proje_baslik_list.append(ayar.proje_basligi)
-                                sorgulanan_ozet_list.append(ayar.özet)
-                                sorgulanan_teslim_dönemi_list.append(ayar.teslim_dönemi)
+        for file_id in tum_kullanicilarin_fileID_listesi:
+            sorgulalan_file_path_list.append(
+                File.objects.get(id=file_id).file)
+            temp_yazar_isim_list = []
+            temp_yazar_soyisim_list = []
+            temp_yazar_ogretim_turu = []
+            temp_yazar_no = []
+            temp_yazar_boyut=[]
+            sorgulanan_yazar_boyut=[]
+            sayac=0
+            for yazar in Yazar.objects.filter(file_id=file_id):
+                sayac+=1
+                temp_yazar_isim_list.append(yazar.first_name)
+                temp_yazar_soyisim_list.append(yazar.last_name)
+                temp_yazar_ogretim_turu.append(yazar.ogretim_turu)
+                temp_yazar_no.append(yazar.ogrenci_numarasi)
+            temp_yazar_boyut.append(sayac)
+            sayac=0
+            sorgulanan_yazar_isim_list.append(temp_yazar_isim_list)
+            sorgulanan_yazar_soyisim_list.append(temp_yazar_soyisim_list)
+            sorgulanan_yazar_ogretim_turu.append(temp_yazar_ogretim_turu)
+            sorgulanan_yazar_no_list.append(temp_yazar_no)
+            sorgulanan_yazar_boyut.append(temp_yazar_boyut)
+            print("sorgulanan yazarlar :")
+            print("ad : ",sorgulanan_yazar_isim_list)
+            print("soyad : ",sorgulanan_yazar_soyisim_list)
+            print("ogretım turu : ",sorgulanan_yazar_ogretim_turu)
+            print("no liste : ",sorgulanan_yazar_no_list)
+            print("boyut : ",sorgulanan_yazar_boyut)
 
-                        for danisman in Danisman.objects.filter(file_id=file_id):
-                                sorgulanan_danisman_isim_list.append(danisman.first_name)
-                                sorgulanan_danisman_soyisim_list.append(danisman.last_name)
-                                sorgulanan_danisman_unvan_list.append(danisman.unvan)
 
-                        temp_juri_ad = []
-                        temp_juri_soyad = []
-                        temp_juri_unvan = []
-                        for juri in Juri.objects.filter(file_id=file_id):
-                                temp_juri_ad.append(juri.first_name)
-                                temp_juri_soyad.append(juri.last_name)
-                                temp_juri_unvan.append(juri.unvan)
-                        sorgulanan_juri_isim_list.append(temp_juri_ad)
-                        sorgulanan_juri_soyisim_list.append(temp_juri_soyad)
-                        sorgulanan_juri_unvan_list.append(temp_juri_unvan)
 
-                        temp_anahtar_kelime_list = []
-                        for anahtar_kelime in Anahtar_Kelimeler.objects.filter(file_id=file_id):
-                                temp_anahtar_kelime_list.append(anahtar_kelime.anahtar_kelime)
-                        sorgulanan_anahtar_kelimeler_list.append(temp_anahtar_kelime_list)
-                        
-                        #KULLANICILAR
-                        userid=File.objects.filter(id=file_id)[0].userid
-                        sorgulalan_kullanici=Kullanicilar.objects.filter(id=userid)[0]   
-                        
-                        sorgulanan_kullanici_isim.append(sorgulalan_kullanici.first_name)
-                        sorgulanan_kullanici_soyisim.append(sorgulalan_kullanici.last_name)     
-                        sorgulanan_kullanici_email.append(sorgulalan_kullanici.email)     
-                        sorgulanan_kullanici_password.append(sorgulalan_kullanici.password)     
-                        sorgulanan_kullanici_username.append(sorgulalan_kullanici.username)
-                for count, value in enumerate(tum_kullanicilarin_fileID_listesi):
-                        post = {
-                                'file_path_list': sorgulalan_file_path_list[count],
-                                'yazar_isim_list': sorgulanan_yazar_isim_list[count],
-                                'yazar_soy_isim_list': sorgulanan_yazar_soyisim_list[count],
-                                'yazar_no_list': sorgulanan_yazar_no_list[count],
-                                'yazar_ogretim_turu_list': sorgulanan_yazar_ogretim_turu[count],
-                                'ders_adi_list': sorgulanan_ders_adi_list[count],
-                                'proje_baslik_list': sorgulanan_proje_baslik_list[count],
-                                'teslim_donem_list': sorgulanan_teslim_dönemi_list[count],
-                                'ozet_list': sorgulanan_ozet_list[count],
-                                'danisman_isim_list': sorgulanan_danisman_isim_list[count],
-                                'danisman_soyisim_list': sorgulanan_danisman_soyisim_list[count],
-                                'danisman_unvan_list': sorgulanan_danisman_unvan_list[count],
-                                'anahtar_kelimeler_list': sorgulanan_anahtar_kelimeler_list[count],
-                                'juri_isim_list': sorgulanan_juri_isim_list[count],
-                                'juri_soyisim_list': sorgulanan_juri_soyisim_list[count],
-                                'juri_unvan_list': sorgulanan_juri_unvan_list[count],
-                                'kullanici_ad_list': sorgulanan_kullanici_isim[count],
-                                'kullanici_soyad_list': sorgulanan_kullanici_soyisim[count],
-                                'kullanici_username_list': sorgulanan_kullanici_username[count],
-                                'kullanici_password_list': sorgulanan_kullanici_password[count],
-                                'kullanici_email_list': sorgulanan_kullanici_email[count],
-                        }
-                        posts.append(post)
-                        
-                context = {
-                "posts": posts
-                }
+            for ayar in Proje_Ozellikleri.objects.filter(file_id=file_id):
+                sorgulanan_ders_adi_list.append(ayar.ders_adi)
+                sorgulanan_proje_baslik_list.append(
+                    ayar.proje_basligi)
+                sorgulanan_ozet_list.append(ayar.özet)
+                sorgulanan_teslim_dönemi_list.append(
+                    ayar.teslim_dönemi)
+
+            for danisman in Danisman.objects.filter(file_id=file_id):
+                sorgulanan_danisman_isim_list.append(
+                    danisman.first_name)
+                sorgulanan_danisman_soyisim_list.append(
+                    danisman.last_name)
+                sorgulanan_danisman_unvan_list.append(
+                    danisman.unvan)
+
+            temp_juri_ad = []
+            temp_juri_soyad = []
+            temp_juri_unvan = []
+            for juri in Juri.objects.filter(file_id=file_id):
+                temp_juri_ad.append(juri.first_name)
+                temp_juri_soyad.append(juri.last_name)
+                temp_juri_unvan.append(juri.unvan)
+            sorgulanan_juri_isim_list.append(temp_juri_ad)
+            sorgulanan_juri_soyisim_list.append(temp_juri_soyad)
+            sorgulanan_juri_unvan_list.append(temp_juri_unvan)
+
+            temp_anahtar_kelime_list = []
+            for anahtar_kelime in Anahtar_Kelimeler.objects.filter(file_id=file_id):
+                temp_anahtar_kelime_list.append(
+                    anahtar_kelime.anahtar_kelime)
+            sorgulanan_anahtar_kelimeler_list.append(
+                temp_anahtar_kelime_list)
+
+            # KULLANICILAR
+            userid = File.objects.filter(id=file_id)[0].userid
+            sorgulalan_kullanici = Kullanicilar.objects.filter(id=userid)[
+                0]
+
+            sorgulanan_kullanici_isim.append(
+                sorgulalan_kullanici.first_name)
+            sorgulanan_kullanici_soyisim.append(
+                sorgulalan_kullanici.last_name)
+            sorgulanan_kullanici_email.append(
+                sorgulalan_kullanici.email)
+            sorgulanan_kullanici_password.append(
+                sorgulalan_kullanici.password)
+            sorgulanan_kullanici_username.append(
+                sorgulalan_kullanici.username)
+        for count, value in enumerate(tum_kullanicilarin_fileID_listesi):
+            post = {
+                'file_path_list': sorgulalan_file_path_list[count],
+                'yazar_isim_list': sorgulanan_yazar_isim_list[count],
+                'yazar_soy_isim_list': sorgulanan_yazar_soyisim_list[count],
+                'yazar_no_list': sorgulanan_yazar_no_list[count],
+                'yazar_ogretim_turu_list': sorgulanan_yazar_ogretim_turu[count],
+                'ders_adi_list': sorgulanan_ders_adi_list[count],
+                'proje_baslik_list': sorgulanan_proje_baslik_list[count],
+                'teslim_donem_list': sorgulanan_teslim_dönemi_list[count],
+                'ozet_list': sorgulanan_ozet_list[count],
+                'danisman_isim_list': sorgulanan_danisman_isim_list[count],
+                'danisman_soyisim_list': sorgulanan_danisman_soyisim_list[count],
+                'danisman_unvan_list': sorgulanan_danisman_unvan_list[count],
+                'anahtar_kelimeler_list': sorgulanan_anahtar_kelimeler_list[count],
+                'juri_isim_list': sorgulanan_juri_isim_list[count],
+                'juri_soyisim_list': sorgulanan_juri_soyisim_list[count],
+                'juri_unvan_list': sorgulanan_juri_unvan_list[count],
+                'kullanici_ad_list': sorgulanan_kullanici_isim[count],
+                'kullanici_soyad_list': sorgulanan_kullanici_soyisim[count],
+                'kullanici_username_list': sorgulanan_kullanici_username[count],
+                'kullanici_password_list': sorgulanan_kullanici_password[count],
+                'kullanici_email_list': sorgulanan_kullanici_email[count],
                 
-        return render(request,"adminsorgu.html",context=context)
+            }
+            posts.append(post)
+
+        context = {
+            "posts": posts
+        }
+
+    return render(request, "adminsorgu.html", context=context)
+
+
 def change_my_info(request):
     userid = request.session["id"]
     new_user_name = request.POST.get("new_user_name", False)
@@ -290,10 +327,10 @@ def verileri_al_ve_Sorgula(request, userid):
         proje_basligi = request.POST.get("proje_basligi", "")
         ozet = request.POST.get("ozet", "")
         anahtar_kelime = request.POST.get("anahatar_kelimeler", "")
-       
+
         files_id_list = sorgulama_yapcam_ben(userid, yazar_ismi, yazar_soyismi, yazar_no,
                                              yazar_ogretim_turu, teslim_tarihi, ders_adi, proje_basligi, ozet, anahtar_kelime)
- 
+
         return files_id_list
 
 
@@ -315,18 +352,42 @@ def listele(request):
     sorgulanan_juri_soyisim_list = []
     sorgulanan_juri_unvan_list = []
     sorgulanan_anahtar_kelimeler_list = []
-    sorgulalan_file_path_list=[]
+    sorgulalan_file_path_list = []
     context = None
     if request.method == "POST":
         posts = []
         for file_id in file_id_list:
             sorgulalan_file_path_list.append(File.objects.get(id=file_id).file)
+            temp_yazar_isim_list = []
+            temp_yazar_soyisim_list = []
+            temp_yazar_ogretim_turu = []
+            temp_yazar_no = []
+            temp_yazar_boyut=[]
+            sorgulanan_yazar_boyut=[]
+            sayac1=0
+           
             for yazar in Yazar.objects.filter(file_id=file_id):
-                sorgulanan_yazar_isim_list.append(yazar.first_name)
-                sorgulanan_yazar_soyisim_list.append(yazar.last_name)
-                sorgulanan_yazar_ogretim_turu.append(yazar.ogretim_turu)
-                sorgulanan_yazar_no_list.append(yazar.ogrenci_numarasi)
-
+                sayac1+=1
+                print("wooowww")
+                temp_yazar_isim_list.append(yazar.first_name)
+                temp_yazar_soyisim_list.append(yazar.last_name)
+                temp_yazar_ogretim_turu.append(yazar.ogretim_turu)
+                temp_yazar_no.append(yazar.ogrenci_numarasi)
+                temp_yazar_boyut.append(sayac1)
+            sorgulanan_yazar_isim_list.append(temp_yazar_isim_list)
+            sorgulanan_yazar_soyisim_list.append(temp_yazar_soyisim_list)
+            sorgulanan_yazar_ogretim_turu.append(temp_yazar_ogretim_turu)
+            sorgulanan_yazar_no_list.append(temp_yazar_no)
+            sorgulanan_yazar_boyut.append(temp_yazar_boyut)
+            print("sorgulanan yazarlar :")
+            print("ad : ",sorgulanan_yazar_isim_list)
+            print("soyad : ",sorgulanan_yazar_soyisim_list)
+            print("ogretım turu : ",sorgulanan_yazar_ogretim_turu)
+            print("no liste : ",sorgulanan_yazar_no_list)
+            print("boyut : ",sorgulanan_yazar_boyut)
+            print("sayac : ",sayac1)
+            print("yenı deneme : ",sorgulanan_yazar_boyut)
+            sayac1=0
             for ayar in Proje_Ozellikleri.objects.filter(file_id=file_id):
                 sorgulanan_ders_adi_list.append(ayar.ders_adi)
                 sorgulanan_proje_baslik_list.append(ayar.proje_basligi)
@@ -353,10 +414,10 @@ def listele(request):
             for anahtar_kelime in Anahtar_Kelimeler.objects.filter(file_id=file_id):
                 temp_anahtar_kelime_list.append(anahtar_kelime.anahtar_kelime)
             sorgulanan_anahtar_kelimeler_list.append(temp_anahtar_kelime_list)
-       
+           
         for count, value in enumerate(file_id_list):
             post = {
-                'file_path_list':sorgulalan_file_path_list[count],
+                'file_path_list': sorgulalan_file_path_list[count],
                 'yazar_isim_list': sorgulanan_yazar_isim_list[count],
                 'yazar_soy_isim_list': sorgulanan_yazar_soyisim_list[count],
                 'yazar_no_list': sorgulanan_yazar_no_list[count],
@@ -372,6 +433,7 @@ def listele(request):
                 'juri_isim_list': sorgulanan_juri_isim_list[count],
                 'juri_soyisim_list': sorgulanan_juri_soyisim_list[count],
                 'juri_unvan_list': sorgulanan_juri_unvan_list[count],
+                
             }
             posts.append(post)
         context = {
@@ -387,7 +449,7 @@ def listele(request):
 def digestResume(resume, fileid):  # resume is a pdf file (as str)
     text = pdfminer.high_level.extract_text(
         resume, codec='utf-8', caching=True)
-    f = open("test.txt", "w",encoding="utf-8")
+    f = open("test.txt", "w", encoding="utf-8")
     f.write(text)
     f.close()
     txtSatırlarım = []
@@ -414,6 +476,10 @@ def digestResume(resume, fileid):  # resume is a pdf file (as str)
     gökselinsayac = 0
     ogrecinno = str
     ogretimTuru = str
+    yazarlar_fullname_list = []
+    yazarlar_first_name_list = []
+    yazarlar_last_name_list = []
+    yazarlar_no_list = []
     for i in range(0, len(txtSatırlarım)):
         if txtSatırlarım[i].__contains__("LİSANS TEZİ"):
             for k in range(i+1, len(txtSatırlarım)):
@@ -425,21 +491,51 @@ def digestResume(resume, fileid):  # resume is a pdf file (as str)
                             yazar_ismi = txtSatırlarım[t]
                             break
                     break
+        if txtSatırlarım[i].__contains__("Öğrenci No:"):
+            gökselinsayac += 1
 
+            for k in range(i, len(txtSatırlarım)):
+
+                if re.search('[a-zA-Z]+', txtSatırlarım[k]):
+                    print(txtSatırlarım[k])
+                    yazarlar_fullname_list.append(txtSatırlarım[k+2][12:-2])
+                    yazarlar_first_name_list.append(
+                        txtSatırlarım[k+2][12:-2].rsplit(" ")[0])
+                    yazarlar_last_name_list.append(
+                        txtSatırlarım[k+2][12:-2].rsplit(" ")[1])
+
+                    yazarlar_no_list.append(txtSatırlarım[k][12:-2])
+                    break         
         if txtSatırlarım[i].__contains__("BİLGİSAYAR MÜHENDİSLİĞİ BÖLÜMÜ"):
             bilgisayar_mühendisliği_sayac += 1
-            if bilgisayar_mühendisliği_sayac == 2:
+            if bilgisayar_mühendisliği_sayac == 1:
                 for k in range(i+1, len(txtSatırlarım)):
                     if re.search('[a-zA-Z]+', txtSatırlarım[k]):
-                        ders_adi = txtSatırlarım[k]
                         for t in range(k+2, len(txtSatırlarım)):
                             if re.search('[a-zA-Z]+', txtSatırlarım[t]):
 
                                 proje_adi = txtSatırlarım[t]
+                                if(re.search('[a-zA-Z]+', txtSatırlarım[t+1]) ):
+                                    for o in range(len(yazarlar_first_name_list)):
+                                       if yazarlar_first_name_list[o].__contains__(txtSatırlarım[t+1]):
+                                         proje_adi = proje_adi + txtSatırlarım[t+1]
+                                if(re.search('[a-zA-Z]+', txtSatırlarım[t+2])):
+                                    for o in range( len(yazarlar_first_name_list)):
+                                       if yazarlar_first_name_list[o].__contains__(txtSatırlarım[t+2]):
+                                         proje_adi = proje_adi + txtSatırlarım[t+2]
+                                   
+                                    print("agaga : ",proje_adi)
                                 break
 
                         break
-
+            if bilgisayar_mühendisliği_sayac == 2:
+                for k in range(i+1, len(txtSatırlarım)):
+                    if re.search('[a-zA-Z]+', txtSatırlarım[k]):
+                        print("bune agagagag : ",txtSatırlarım[k])
+                        ders_adi = txtSatırlarım[k]
+                        break
+                   
+                        
         if txtSatırlarım[i].__contains__("ÖNSÖZ VE TEŞEKKÜR"):
             for k in range(i-1, 0, -1):
                 if re.search('[a-zA-Z]+', txtSatırlarım[k]):
@@ -495,63 +591,26 @@ def digestResume(resume, fileid):  # resume is a pdf file (as str)
                 if re.search('[a-zA-Z]+', txtSatırlarım[k]):
                     if danışman_sayaci == 1:
                         danışmanünvanı = txtSatırlarım[k]
-                        break
-        if txtSatırlarım[i].__contains__("Danışman"):
-            danışman_sayaci += 1
-            for k in range(i-1, 0, -1):
-                if re.search('[a-zA-Z]+', txtSatırlarım[k]):
-                    if danışman_sayaci == 1:
-                        danışmanünvanı = txtSatırlarım[k]
-
+                        for t in range(i+1, len(txtSatırlarım)):
+                            if re.search('[a-zA-Z]+', txtSatırlarım[t]):
+                                juri1ünvanı = txtSatırlarım[t]
+                                break
                         break
 
         if txtSatırlarım[i].__contains__("Jüri Üyesi"):
             juri_sayaci += 1
             for k in range(i-1, 0, -1):
                 if re.search('[a-zA-Z]+', txtSatırlarım[k]):
-                    if juri_sayaci == 1:
-                        juri1ünvanı = txtSatırlarım[k]
-                        break
-
-                    if juri_sayaci == 2:
-                        juri2ünvanı = txtSatırlarım[k]
-                        break
-        if txtSatırlarım[i].__contains__("Öğrenci No:"):
-            gökselinsayac += 1
-
-            for k in range(i + 1, len(txtSatırlarım)):
-                if re.search('[a-zA-Z]+', txtSatırlarım[k]):
-                    content = txtSatırlarım[k][11:]
-                    content = content.lower()
-                    tempyazarismi = yazar_ismi[:-2]
-
-                    tempyazarismi = tempyazarismi.lower()
       
+                    if juri_sayaci == 2:
+                        for t in range(i-1, 0, -1):
+                            if re.search('[a-zA-Z]+', txtSatırlarım[t]) and (not txtSatırlarım[t].__contains__(".......")) and (not txtSatırlarım[t].__contains__("Jüri Üyesi, Kocaeli Üniv.")):
+                                juri2ünvanı = txtSatırlarım[t]
+                                print(txtSatırlarım[t])
+                                break
 
-                    if(gökselinsayac == 1):
-                        for key in tempyazarismi:
-                            if not (key == "ç" or key == "ğ" or key == "ö" or key == "ü" or key == "ş" or key == "ı"):
-
-                                if not set(key).difference(printable):
-                                    aldimknk = str(aldimknk) + str(key)
-                            else:
-                                aldimknk = str(aldimknk) + str(key)
-                    tempyazarismi = aldimknk
-
-                    tempyazarismi = str(str(aldimknk)[13:])
-
-                  
-                    if content.__contains__(tempyazarismi):
-                        xxxxxx = txtSatırlarım[i][12:]
-                        ogrecinno = xxxxxx[:9]
-                        if int(ogrecinno[5]) == 1:
-                            ogretimTuru = "1.Ogretim"
-
-                        else:
-                            ogretimTuru = "2.Ogretim"
-
-                    break
-
+                        break
+        
 
     # ANAHATAR
     for anahtarlar in anahtar_kelimeler[21:].split(","):
@@ -637,9 +696,13 @@ def digestResume(resume, fileid):  # resume is a pdf file (as str)
     Proje_Ozellikleri.objects.create(
         file_id=fileid, özet=ozetSatirlari[13:], teslim_dönemi=teslimDönemi, proje_basligi=proje_adi[:-2], ders_adi=ders_adi[:-2])
 
-
-    Yazar.objects.create(file_id=fileid, first_name=yazar_ismi[:-2].rsplit(" ", 1)[
-                         0], last_name=yazar_ismi[:-2].rsplit(" ", 1)[1], ogrenci_numarasi=ogrecinno, ogretim_turu=ogretimTuru)
+    for i in range(len(yazarlar_first_name_list)):
+        if yazarlar_no_list[i][5] == "1":
+            Yazar.objects.create(
+                file_id=fileid, first_name=yazarlar_first_name_list[i], last_name=yazarlar_last_name_list[i], ogrenci_numarasi=yazarlar_no_list[i], ogretim_turu="1.Öğretim")
+        else:
+            Yazar.objects.create(
+                file_id=fileid, first_name=yazarlar_first_name_list[i], last_name=yazarlar_last_name_list[i], ogrenci_numarasi=yazarlar_no_list[i], ogretim_turu="2.Öğretim")
 
 
 def tarihtenDöneme(cümle):
