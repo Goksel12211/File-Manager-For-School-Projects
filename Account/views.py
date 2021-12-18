@@ -190,6 +190,7 @@ def adminsorgu(request):
                 sorgulalan_kullanici.username)
         for count, value in enumerate(tum_kullanicilarin_fileID_listesi):
             post = {
+                'file_id_list':tum_kullanicilarin_fileID_listesi[count],
                 'file_path_list': sorgulalan_file_path_list[count],
                 'yazar_isim_list': sorgulanan_yazar_isim_list[count],
                 'yazar_soy_isim_list': sorgulanan_yazar_soyisim_list[count],
