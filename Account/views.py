@@ -13,30 +13,29 @@ import os
 
 from string import printable
 
+
 def silFromUser(request, fileid):
-    
+
     File.objects.filter(id=fileid).delete()
     Juri.objects.filter(file_id=fileid).delete()
     Yazar.objects.filter(file_id=fileid).delete()
     Proje_Ozellikleri.objects.filter(file_id=fileid).delete()
     Danisman.objects.filter(file_id=fileid).delete()
     Anahtar_Kelimeler.objects.filter(file_id=fileid).delete()
-    
-    
+
     return redirect("listele")
 
+
 def silFromAdmin(request, fileid):
-    
+
     File.objects.filter(id=fileid).delete()
     Juri.objects.filter(file_id=fileid).delete()
     Yazar.objects.filter(file_id=fileid).delete()
     Proje_Ozellikleri.objects.filter(file_id=fileid).delete()
     Danisman.objects.filter(file_id=fileid).delete()
     Anahtar_Kelimeler.objects.filter(file_id=fileid).delete()
-    
-    
-    return redirect("admin-sorgu")
 
+    return redirect("admin-sorgu")
 
 
 def adminsorgu(request):
@@ -109,7 +108,6 @@ def adminsorgu(request):
         sorgulanan_juri_unvan_list = []
         sorgulanan_anahtar_kelimeler_list = []
         sorgulalan_file_path_list = []
-        
 
         for file_id in tum_kullanicilarin_fileID_listesi:
             sorgulalan_file_path_list.append(
@@ -118,30 +116,28 @@ def adminsorgu(request):
             temp_yazar_soyisim_list = []
             temp_yazar_ogretim_turu = []
             temp_yazar_no = []
-            temp_yazar_boyut=[]
-            sorgulanan_yazar_boyut=[]
-            sayac=0
+            temp_yazar_boyut = []
+            sorgulanan_yazar_boyut = []
+            sayac = 0
             for yazar in Yazar.objects.filter(file_id=file_id):
-                sayac+=1
+                sayac += 1
                 temp_yazar_isim_list.append(yazar.first_name)
                 temp_yazar_soyisim_list.append(yazar.last_name)
                 temp_yazar_ogretim_turu.append(yazar.ogretim_turu)
                 temp_yazar_no.append(yazar.ogrenci_numarasi)
             temp_yazar_boyut.append(sayac)
-            sayac=0
+            sayac = 0
             sorgulanan_yazar_isim_list.append(temp_yazar_isim_list)
             sorgulanan_yazar_soyisim_list.append(temp_yazar_soyisim_list)
             sorgulanan_yazar_ogretim_turu.append(temp_yazar_ogretim_turu)
             sorgulanan_yazar_no_list.append(temp_yazar_no)
             sorgulanan_yazar_boyut.append(temp_yazar_boyut)
             print("sorgulanan yazarlar :")
-            print("ad : ",sorgulanan_yazar_isim_list)
-            print("soyad : ",sorgulanan_yazar_soyisim_list)
-            print("ogretım turu : ",sorgulanan_yazar_ogretim_turu)
-            print("no liste : ",sorgulanan_yazar_no_list)
-            print("boyut : ",sorgulanan_yazar_boyut)
-
-
+            print("ad : ", sorgulanan_yazar_isim_list)
+            print("soyad : ", sorgulanan_yazar_soyisim_list)
+            print("ogretım turu : ", sorgulanan_yazar_ogretim_turu)
+            print("no liste : ", sorgulanan_yazar_no_list)
+            print("boyut : ", sorgulanan_yazar_boyut)
 
             for ayar in Proje_Ozellikleri.objects.filter(file_id=file_id):
                 sorgulanan_ders_adi_list.append(ayar.ders_adi)
@@ -215,7 +211,7 @@ def adminsorgu(request):
                 'kullanici_username_list': sorgulanan_kullanici_username[count],
                 'kullanici_password_list': sorgulanan_kullanici_password[count],
                 'kullanici_email_list': sorgulanan_kullanici_email[count],
-                
+
             }
             posts.append(post)
 
@@ -387,12 +383,12 @@ def listele(request):
             temp_yazar_soyisim_list = []
             temp_yazar_ogretim_turu = []
             temp_yazar_no = []
-            temp_yazar_boyut=[]
-            sorgulanan_yazar_boyut=[]
-            sayac1=0
-           
+            temp_yazar_boyut = []
+            sorgulanan_yazar_boyut = []
+            sayac1 = 0
+
             for yazar in Yazar.objects.filter(file_id=file_id):
-                sayac1+=1
+                sayac1 += 1
                 print("wooowww")
                 temp_yazar_isim_list.append(yazar.first_name)
                 temp_yazar_soyisim_list.append(yazar.last_name)
@@ -405,14 +401,14 @@ def listele(request):
             sorgulanan_yazar_no_list.append(temp_yazar_no)
             sorgulanan_yazar_boyut.append(temp_yazar_boyut)
             print("sorgulanan yazarlar :")
-            print("ad : ",sorgulanan_yazar_isim_list)
-            print("soyad : ",sorgulanan_yazar_soyisim_list)
-            print("ogretım turu : ",sorgulanan_yazar_ogretim_turu)
-            print("no liste : ",sorgulanan_yazar_no_list)
-            print("boyut : ",sorgulanan_yazar_boyut)
-            print("sayac : ",sayac1)
-            print("yenı deneme : ",sorgulanan_yazar_boyut)
-            sayac1=0
+            print("ad : ", sorgulanan_yazar_isim_list)
+            print("soyad : ", sorgulanan_yazar_soyisim_list)
+            print("ogretım turu : ", sorgulanan_yazar_ogretim_turu)
+            print("no liste : ", sorgulanan_yazar_no_list)
+            print("boyut : ", sorgulanan_yazar_boyut)
+            print("sayac : ", sayac1)
+            print("yenı deneme : ", sorgulanan_yazar_boyut)
+            sayac1 = 0
             for ayar in Proje_Ozellikleri.objects.filter(file_id=file_id):
                 sorgulanan_ders_adi_list.append(ayar.ders_adi)
                 sorgulanan_proje_baslik_list.append(ayar.proje_basligi)
@@ -439,7 +435,7 @@ def listele(request):
             for anahtar_kelime in Anahtar_Kelimeler.objects.filter(file_id=file_id):
                 temp_anahtar_kelime_list.append(anahtar_kelime.anahtar_kelime)
             sorgulanan_anahtar_kelimeler_list.append(temp_anahtar_kelime_list)
-           
+
         for count, value in enumerate(file_id_list):
             post = {
                 'file_id_list': file_id_list[count],
@@ -459,7 +455,7 @@ def listele(request):
                 'juri_isim_list': sorgulanan_juri_isim_list[count],
                 'juri_soyisim_list': sorgulanan_juri_soyisim_list[count],
                 'juri_unvan_list': sorgulanan_juri_unvan_list[count],
-                
+
             }
             posts.append(post)
         context = {
@@ -529,39 +525,9 @@ def digestResume(resume, fileid):  # resume is a pdf file (as str)
                         txtSatırlarım[k+2][12:-2].rsplit(" ")[0])
                     yazarlar_last_name_list.append(
                         txtSatırlarım[k+2][12:-2].rsplit(" ")[1])
-
                     yazarlar_no_list.append(txtSatırlarım[k][12:-2])
-                    break         
-        if txtSatırlarım[i].__contains__("BİLGİSAYAR MÜHENDİSLİĞİ BÖLÜMÜ"):
-            bilgisayar_mühendisliği_sayac += 1
-            if bilgisayar_mühendisliği_sayac == 1:
-                for k in range(i+1, len(txtSatırlarım)):
-                    if re.search('[a-zA-Z]+', txtSatırlarım[k]):
-                        for t in range(k+2, len(txtSatırlarım)):
-                            if re.search('[a-zA-Z]+', txtSatırlarım[t]):
+                    break
 
-                                proje_adi = txtSatırlarım[t]
-                                if(re.search('[a-zA-Z]+', txtSatırlarım[t+1]) ):
-                                    for o in range(len(yazarlar_first_name_list)):
-                                       if yazarlar_first_name_list[o].__contains__(txtSatırlarım[t+1]):
-                                         proje_adi = proje_adi + txtSatırlarım[t+1]
-                                if(re.search('[a-zA-Z]+', txtSatırlarım[t+2])):
-                                    for o in range( len(yazarlar_first_name_list)):
-                                       if yazarlar_first_name_list[o].__contains__(txtSatırlarım[t+2]):
-                                         proje_adi = proje_adi + txtSatırlarım[t+2]
-                                   
-                                    print("agaga : ",proje_adi)
-                                break
-
-                        break
-            if bilgisayar_mühendisliği_sayac == 2:
-                for k in range(i+1, len(txtSatırlarım)):
-                    if re.search('[a-zA-Z]+', txtSatırlarım[k]):
-                        print("bune agagagag : ",txtSatırlarım[k])
-                        ders_adi = txtSatırlarım[k]
-                        break
-                   
-                        
         if txtSatırlarım[i].__contains__("ÖNSÖZ VE TEŞEKKÜR"):
             for k in range(i-1, 0, -1):
                 if re.search('[a-zA-Z]+', txtSatırlarım[k]):
@@ -627,7 +593,7 @@ def digestResume(resume, fileid):  # resume is a pdf file (as str)
             juri_sayaci += 1
             for k in range(i-1, 0, -1):
                 if re.search('[a-zA-Z]+', txtSatırlarım[k]):
-      
+
                     if juri_sayaci == 2:
                         for t in range(i-1, 0, -1):
                             if re.search('[a-zA-Z]+', txtSatırlarım[t]) and (not txtSatırlarım[t].__contains__(".......")) and (not txtSatırlarım[t].__contains__("Jüri Üyesi, Kocaeli Üniv.")):
@@ -636,8 +602,42 @@ def digestResume(resume, fileid):  # resume is a pdf file (as str)
                                 break
 
                         break
-        
+    for i in range(0, len(txtSatırlarım)):
+        if txtSatırlarım[i].__contains__("BİLGİSAYAR MÜHENDİSLİĞİ BÖLÜMÜ"):
+            bilgisayar_mühendisliği_sayac += 1
+            if bilgisayar_mühendisliği_sayac == 1:
+                for k in range(i+1, len(txtSatırlarım)):
+                    if re.search('[a-zA-Z]+', txtSatırlarım[k]):
+                        for t in range(k+2, len(txtSatırlarım)):
+                            if re.search('[a-zA-Z]+', txtSatırlarım[t]):
 
+                                proje_adi = txtSatırlarım[t]
+                                print("yazar sayısı ", len(
+                                    yazarlar_first_name_list))
+                                print("yazarlar : ", yazarlar_first_name_list)
+                                if(re.search('[a-zA-Z]+', txtSatırlarım[t+1])):
+                                    for o in range(len(yazarlar_first_name_list)):
+                                        if not yazarlar_first_name_list[o].__contains__(txtSatırlarım[t+1]):
+                                            print("asfnasufhjasfasf")
+                                            proje_adi = proje_adi + \
+                                                txtSatırlarım[t+1]
+
+                                if(re.search('[a-zA-Z]+', txtSatırlarım[t+2])):
+                                    for o in range(len(yazarlar_first_name_list)):
+                                        if not yazarlar_first_name_list[o].__contains__(txtSatırlarım[t+2]):
+                                            proje_adi = proje_adi + \
+                                                txtSatırlarım[t+2]
+
+                                    print("agaga : ", proje_adi)
+                                break
+
+                        break
+            if bilgisayar_mühendisliği_sayac == 2:
+                for k in range(i+1, len(txtSatırlarım)):
+                    if re.search('[a-zA-Z]+', txtSatırlarım[k]):
+                        print("bune agagagag : ", txtSatırlarım[k])
+                        ders_adi = txtSatırlarım[k]
+                        break
     # ANAHATAR
     for anahtarlar in anahtar_kelimeler[21:].split(","):
         y = anahtarlar[2:]

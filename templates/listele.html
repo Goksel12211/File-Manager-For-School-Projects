@@ -98,6 +98,21 @@
         text-align: center;
         width: 100%;
     }
+    .renk{
+        border-color: brown;
+        background-color: brown;
+        font-size: 23px;
+        color: white;
+
+    }
+    .yazı{
+        font-size: 23px;
+    }
+    .renk:hover{
+        background-color: rgba(165, 42, 42,0.9);
+        color: white;
+        
+    }
 
     a {
         text-decoration: none;
@@ -486,17 +501,18 @@
 
         {% for post in posts %}
         <hr class="mt-5 mb-5">
-        <a href="http://127.0.0.1:8000/benisil/{{post.file_id_list}}/">BENI SIL AĞABEY</a>
+     
  
         <div class="container-fluid" id="icerik">
             
             <div class="row">
                 <div class="col-md-2"></div>
-                <div class="col-md-8 align-content-center text-center">
+                <div class="col-md-8 align-content-left text-center">
                     <h2 class="mt-2" style="display: inline-block;">Yüklenen Dosya :</h2>
 
-                    <a class="btn btn-primary w-25" style="margin-left: 70px; display: inline-block;" id="shadow"
+                    <a class="btn btn-primary w-25 yazı" style="margin-left: 70px; display: inline-block;" id="shadow"
                         href="  http://127.0.0.1:8000/{{post.file_path_list}}" target="_blank"> Dosya görüntüle </a>
+                    <a class="btn renk  w-25 " style="margin-left: 3%;" href="http://127.0.0.1:8000/benisil/{{post.file_id_list}}/">Sil</a>
 
                     <div class="col-md-2"></div>
 
