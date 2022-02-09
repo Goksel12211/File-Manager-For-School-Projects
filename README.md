@@ -38,8 +38,8 @@ To run this app, you will need to follow these 3 steps:
 #### Contributors
   <table>
   <tr>
-    <td align="center"><a href="https://www.linkedin.com/in/merveekeceli/"><img src="https://avatars.githubusercontent.com/Goksel12211?v=4" width="100px;" alt=""/><br /><sub><b>Göksel Kınalı</b></sub></a><br /></td>
-    <td align="center"><a href="https://www.linkedin.com/in/suleaktas1/"><img src="https://avatars.githubusercontent.com/Umut-Kilic?v=4s=100" width="100px;" alt=""/><br /><sub><b>Umut Kılıç </b></sub></a><br /></td>
+    <td align="center"><a href="https://github.com/Goksel12211"><img src="https://avatars.githubusercontent.com/Goksel12211?v=4" width="100px;" alt=""/><br /><sub><b>Göksel Kınalı</b></sub></a><br /></td>
+    <td align="center"><a href="https://github.com/Umut-Kilic"><img src="https://avatars.githubusercontent.com/Umut-Kilic?v=4s=100" width="100px;" alt=""/><br /><sub><b>Umut Kılıç </b></sub></a><br /></td>
 
   </tr>
   
