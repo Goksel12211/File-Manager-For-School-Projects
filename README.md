@@ -34,6 +34,10 @@ To run this app, you will need to follow these 3 steps:
   
   # Activate the Pipenv shell
   $ pipenv shell
+ 
+  # Run server
+  $ python manage.py runserver
+ 
   ```
 #### Contributors
   <table>
